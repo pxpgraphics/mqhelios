@@ -1,0 +1,428 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ADEB42DB1958D0960095AB50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42DA1958D0960095AB50 /* main.m */; };
+		ADEB42DE1958D0960095AB50 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42DD1958D0960095AB50 /* AppDelegate.m */; };
+		ADEB42E01958D0960095AB50 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADEB42DF1958D0960095AB50 /* Images.xcassets */; };
+		ADEB42EC1958D0960095AB50 /* MQHeliosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42EB1958D0960095AB50 /* MQHeliosTests.m */; };
+		ADEB42F71958D0E00095AB50 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADEB42F61958D0E00095AB50 /* PassKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ADEB42E61958D0960095AB50 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ADEB42CD1958D0960095AB50 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ADEB42D41958D0960095AB50;
+			remoteInfo = MQHelios;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		ADEB42D51958D0960095AB50 /* MQHelios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MQHelios.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADEB42D91958D0960095AB50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADEB42DA1958D0960095AB50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ADEB42DC1958D0960095AB50 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		ADEB42DD1958D0960095AB50 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		ADEB42DF1958D0960095AB50 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		ADEB42E51958D0960095AB50 /* MQHeliosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MQHeliosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADEB42EA1958D0960095AB50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADEB42EB1958D0960095AB50 /* MQHeliosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MQHeliosTests.m; sourceTree = "<group>"; };
+		ADEB42F51958D0E00095AB50 /* MQHelios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = MQHelios.entitlements; sourceTree = "<group>"; };
+		ADEB42F61958D0E00095AB50 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ADEB42D21958D0960095AB50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADEB42F71958D0E00095AB50 /* PassKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADEB42E21958D0960095AB50 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ADEB42CC1958D0960095AB50 = {
+			isa = PBXGroup;
+			children = (
+				ADEB42D71958D0960095AB50 /* MQHelios */,
+				ADEB42E81958D0960095AB50 /* MQHeliosTests */,
+				ADEB42F81958D1330095AB50 /* Frameworks */,
+				ADEB42D61958D0960095AB50 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ADEB42D61958D0960095AB50 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ADEB42D51958D0960095AB50 /* MQHelios.app */,
+				ADEB42E51958D0960095AB50 /* MQHeliosTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ADEB42D71958D0960095AB50 /* MQHelios */ = {
+			isa = PBXGroup;
+			children = (
+				ADEB42F51958D0E00095AB50 /* MQHelios.entitlements */,
+				ADEB42DC1958D0960095AB50 /* AppDelegate.h */,
+				ADEB42DD1958D0960095AB50 /* AppDelegate.m */,
+				ADEB42DF1958D0960095AB50 /* Images.xcassets */,
+				ADEB42D81958D0960095AB50 /* Supporting Files */,
+			);
+			path = MQHelios;
+			sourceTree = "<group>";
+		};
+		ADEB42D81958D0960095AB50 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ADEB42D91958D0960095AB50 /* Info.plist */,
+				ADEB42DA1958D0960095AB50 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ADEB42E81958D0960095AB50 /* MQHeliosTests */ = {
+			isa = PBXGroup;
+			children = (
+				ADEB42EB1958D0960095AB50 /* MQHeliosTests.m */,
+				ADEB42E91958D0960095AB50 /* Supporting Files */,
+			);
+			path = MQHeliosTests;
+			sourceTree = "<group>";
+		};
+		ADEB42E91958D0960095AB50 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ADEB42EA1958D0960095AB50 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ADEB42F81958D1330095AB50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ADEB42F61958D0E00095AB50 /* PassKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ADEB42D41958D0960095AB50 /* MQHelios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADEB42EF1958D0960095AB50 /* Build configuration list for PBXNativeTarget "MQHelios" */;
+			buildPhases = (
+				ADEB42D11958D0960095AB50 /* Sources */,
+				ADEB42D21958D0960095AB50 /* Frameworks */,
+				ADEB42D31958D0960095AB50 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MQHelios;
+			productName = MQHelios;
+			productReference = ADEB42D51958D0960095AB50 /* MQHelios.app */;
+			productType = "com.apple.product-type.application";
+		};
+		ADEB42E41958D0960095AB50 /* MQHeliosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADEB42F21958D0960095AB50 /* Build configuration list for PBXNativeTarget "MQHeliosTests" */;
+			buildPhases = (
+				ADEB42E11958D0960095AB50 /* Sources */,
+				ADEB42E21958D0960095AB50 /* Frameworks */,
+				ADEB42E31958D0960095AB50 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ADEB42E71958D0960095AB50 /* PBXTargetDependency */,
+			);
+			name = MQHeliosTests;
+			productName = MQHeliosTests;
+			productReference = ADEB42E51958D0960095AB50 /* MQHeliosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ADEB42CD1958D0960095AB50 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0600;
+				ORGANIZATIONNAME = "Marqeta, Inc.";
+				TargetAttributes = {
+					ADEB42D41958D0960095AB50 = {
+						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = 4RA9TRQ7CL;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Passbook = {
+								enabled = 1;
+							};
+						};
+					};
+					ADEB42E41958D0960095AB50 = {
+						CreatedOnToolsVersion = 6.0;
+						TestTargetID = ADEB42D41958D0960095AB50;
+					};
+				};
+			};
+			buildConfigurationList = ADEB42D01958D0960095AB50 /* Build configuration list for PBXProject "MQHelios" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = ADEB42CC1958D0960095AB50;
+			productRefGroup = ADEB42D61958D0960095AB50 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ADEB42D41958D0960095AB50 /* MQHelios */,
+				ADEB42E41958D0960095AB50 /* MQHeliosTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ADEB42D31958D0960095AB50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADEB42E01958D0960095AB50 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADEB42E31958D0960095AB50 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ADEB42D11958D0960095AB50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADEB42DE1958D0960095AB50 /* AppDelegate.m in Sources */,
+				ADEB42DB1958D0960095AB50 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADEB42E11958D0960095AB50 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADEB42EC1958D0960095AB50 /* MQHeliosTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ADEB42E71958D0960095AB50 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ADEB42D41958D0960095AB50 /* MQHelios */;
+			targetProxy = ADEB42E61958D0960095AB50 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		ADEB42ED1958D0960095AB50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ADEB42EE1958D0960095AB50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				METAL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ADEB42F01958D0960095AB50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = MQHelios/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		ADEB42F11958D0960095AB50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				INFOPLIST_FILE = MQHelios/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+		ADEB42F31958D0960095AB50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MQHelios.app/MQHelios";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MQHeliosTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Debug;
+		};
+		ADEB42F41958D0960095AB50 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/MQHelios.app/MQHelios";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = MQHeliosTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ADEB42D01958D0960095AB50 /* Build configuration list for PBXProject "MQHelios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADEB42ED1958D0960095AB50 /* Debug */,
+				ADEB42EE1958D0960095AB50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADEB42EF1958D0960095AB50 /* Build configuration list for PBXNativeTarget "MQHelios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADEB42F01958D0960095AB50 /* Debug */,
+				ADEB42F11958D0960095AB50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		ADEB42F21958D0960095AB50 /* Build configuration list for PBXNativeTarget "MQHeliosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADEB42F31958D0960095AB50 /* Debug */,
+				ADEB42F41958D0960095AB50 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ADEB42CD1958D0960095AB50 /* Project object */;
+}
