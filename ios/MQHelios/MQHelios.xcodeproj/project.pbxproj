@@ -43,6 +43,7 @@
 		ADEB42F61958D0E00095AB50 /* PassKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PassKit.framework; path = System/Library/Frameworks/PassKit.framework; sourceTree = SDKROOT; };
 		ADEB42F91958D1E70095AB50 /* MQHAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQHAppManager.h; sourceTree = "<group>"; };
 		ADEB42FA1958D1E70095AB50 /* MQHAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQHAppManager.m; sourceTree = "<group>"; };
+		ADEB42FE1958DD440095AB50 /* MQHelios-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MQHelios-Prefix.pch"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +103,7 @@
 		ADEB42D81958D0960095AB50 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				ADEB42FE1958DD440095AB50 /* MQHelios-Prefix.pch */,
 				ADEB42D91958D0960095AB50 /* Info.plist */,
 				ADEB42DA1958D0960095AB50 /* main.m */,
 			);
@@ -389,6 +391,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				EXECUTABLE_PREFIX = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MQHelios-Prefix.pch";
 				INFOPLIST_FILE = MQHelios/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -404,6 +409,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				EXECUTABLE_PREFIX = "";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MQHelios-Prefix.pch";
 				INFOPLIST_FILE = MQHelios/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";

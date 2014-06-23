@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <PassKit/PassKit.h>
+#import <Parse/Parse.h>
 
 extern NSString * const kParseApplicationIDKey;
 extern NSString * const kParseClientKey;
