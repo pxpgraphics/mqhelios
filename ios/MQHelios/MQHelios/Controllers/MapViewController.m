@@ -7,7 +7,18 @@
 //
 
 #import "MapViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation MapViewController
+
+- (void)panMapViewToCurrentLocation
+{
+
+}
+
+- (void)zoomMapViewToCurrentLocation
+{
+	
+}
 
 @end

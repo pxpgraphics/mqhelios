@@ -1,16 +1,89 @@
 PODS:
+  - AFNetworking (2.0.0):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+    - AFNetworking/UIKit
+  - AFNetworking/NSURLConnection (2.0.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.0.0):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.0.0)
+  - AFNetworking/Security (2.0.0)
+  - AFNetworking/Serialization (2.0.0)
+  - AFNetworking/UIKit (2.0.0):
+    - AFNetworking/NSURLConnection
   - Bolts (1.1.0)
+  - CocoaLumberjack (1.8.1):
+    - CocoaLumberjack/Extensions
+  - CocoaLumberjack/Core (1.8.1)
+  - CocoaLumberjack/Extensions (1.8.1):
+    - CocoaLumberjack/Core
   - Facebook-iOS-SDK (3.15.0):
     - Bolts
+  - MQApollo (1.0.0):
+    - AFNetworking (= 2.0.0)
+    - CocoaLumberjack (= 1.8.1)
+    - MQApollo/Categories
+    - MQApollo/Core
+    - MQApollo/Models
+    - TestFlightSDK (= 3.0.0)
+  - MQApollo/Categories (1.0.0):
+    - AFNetworking (= 2.0.0)
+    - CocoaLumberjack (= 1.8.1)
+    - MQApollo/Core
+    - TestFlightSDK (= 3.0.0)
+  - MQApollo/Core (1.0.0):
+    - AFNetworking (= 2.0.0)
+    - CocoaLumberjack (= 1.8.1)
+    - TestFlightSDK (= 3.0.0)
+  - MQApollo/Models (1.0.0):
+    - AFNetworking (= 2.0.0)
+    - CocoaLumberjack (= 1.8.1)
+    - MQApollo/Categories
+    - MQApollo/Core
+    - TestFlightSDK (= 3.0.0)
+  - MQTextField (1.0.0):
+    - MQTextField/Core
+  - MQTextField/Core (1.0.0)
   - Parse-iOS-SDK (1.2.19):
     - Facebook-iOS-SDK (~> 3.7)
+  - SDWebImage (3.6):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.6)
+  - SVProgressHUD (1.0)
+  - TestFlightSDK (3.0.0)
 
 DEPENDENCIES:
+  - AFNetworking (= 2.0)
+  - MQApollo (from `git@github.com:marqeta/mqapollo.git`)
+  - MQTextField (from `git@github.com:marqeta/mqtextfield.git`)
   - Parse-iOS-SDK (~> 1.2)
+  - SDWebImage (~> 3.6)
+  - SVProgressHUD (~> 1.0)
+
+EXTERNAL SOURCES:
+  MQApollo:
+    :git: git@github.com:marqeta/mqapollo.git
+  MQTextField:
+    :git: git@github.com:marqeta/mqtextfield.git
 
 SPEC CHECKSUMS:
+  AFNetworking: 6d4a33f2a7edf1d394455c543b446fdfae6b4082
   Bolts: 91c2af8eae1d44e1dd75946a5b0ae04a43ea43e4
+  CocoaLumberjack: 9d198d6e19909b3b113a38c5f06f7bb8eedd0427
   Facebook-iOS-SDK: d67a9aa373f28b581e00cefdfd5a1ab8f883ac14
+  MQApollo: abf04a1eec501242a15187d7a6d7fc78b1d057aa
+  MQTextField: 7298ea664ecf6243f116777e8def81b6b39c27d3
   Parse-iOS-SDK: 5e1f7e649a02f1cc19e73cc95bd43d7778848314
+  SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
+  SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
+  TestFlightSDK: 36b8a207c5a119a3144aa2e6d24973eb9d5e0d0a
 
 COCOAPODS: 0.33.1

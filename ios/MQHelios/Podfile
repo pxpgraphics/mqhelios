@@ -6,4 +6,9 @@ xcodeproj 'MQHelios.xcodeproj'
 
 link_with 'MQHelios', 'MQHelios'
 
+pod 'AFNetworking', '2.0'
+pod 'MQApollo', :git => 'git@github.com:marqeta/mqapollo.git'
+pod 'MQTextField', :git => 'git@github.com:marqeta/mqtextfield.git'
 pod 'Parse-iOS-SDK', '~> 1.2'
+pod "SDWebImage", '~> 3.6'
+pod "SVProgressHUD", '~> 1.0'
