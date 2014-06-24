@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7D602B211EA94C3FB15DCC8C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 626538F3CA1E493B83A012D0 /* libPods.a */; };
+		ADA54939195A23A600ECD0F5 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA54938195A23A600ECD0F5 /* MapViewController.m */; };
+		ADA5493C195A23C800ECD0F5 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA5493B195A23C800ECD0F5 /* UserManager.m */; };
+		ADA5493E195A23F400ECD0F5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA5493D195A23F400ECD0F5 /* MapKit.framework */; };
+		ADA54941195A240800ECD0F5 /* MapView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA54940195A240800ECD0F5 /* MapView.m */; };
 		ADEB42DB1958D0960095AB50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42DA1958D0960095AB50 /* main.m */; };
 		ADEB42DE1958D0960095AB50 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42DD1958D0960095AB50 /* AppDelegate.m */; };
 		ADEB42E01958D0960095AB50 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADEB42DF1958D0960095AB50 /* Images.xcassets */; };
@@ -30,6 +34,13 @@
 /* Begin PBXFileReference section */
 		46616DFC0047448A8DBD776F /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		626538F3CA1E493B83A012D0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADA54937195A23A600ECD0F5 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = Controllers/MapViewController.h; sourceTree = "<group>"; };
+		ADA54938195A23A600ECD0F5 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = Controllers/MapViewController.m; sourceTree = "<group>"; };
+		ADA5493A195A23C800ECD0F5 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserManager.h; path = Models/UserManager.h; sourceTree = "<group>"; };
+		ADA5493B195A23C800ECD0F5 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserManager.m; path = Models/UserManager.m; sourceTree = "<group>"; };
+		ADA5493D195A23F400ECD0F5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		ADA5493F195A240800ECD0F5 /* MapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapView.h; path = Views/MapView.h; sourceTree = "<group>"; };
+		ADA54940195A240800ECD0F5 /* MapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapView.m; path = Views/MapView.m; sourceTree = "<group>"; };
 		ADEB42D51958D0960095AB50 /* MQHelios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MQHelios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADEB42D91958D0960095AB50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADEB42DA1958D0960095AB50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -51,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA5493E195A23F400ECD0F5 /* MapKit.framework in Frameworks */,
 				ADEB42F71958D0E00095AB50 /* PassKit.framework in Frameworks */,
 				7D602B211EA94C3FB15DCC8C /* libPods.a in Frameworks */,
 			);
@@ -66,6 +78,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ADA54934195A232E00ECD0F5 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				ADA54937195A23A600ECD0F5 /* MapViewController.h */,
+				ADA54938195A23A600ECD0F5 /* MapViewController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		ADA54935195A233900ECD0F5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				ADA5493F195A240800ECD0F5 /* MapView.h */,
+				ADA54940195A240800ECD0F5 /* MapView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		ADA54936195A234300ECD0F5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				ADA5493A195A23C800ECD0F5 /* UserManager.h */,
+				ADA5493B195A23C800ECD0F5 /* UserManager.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		ADEB42CC1958D0960095AB50 = {
 			isa = PBXGroup;
 			children = (
@@ -89,13 +128,14 @@
 		ADEB42D71958D0960095AB50 /* MQHelios */ = {
 			isa = PBXGroup;
 			children = (
-				ADEB42F51958D0E00095AB50 /* MQHelios.entitlements */,
 				ADEB42DC1958D0960095AB50 /* AppDelegate.h */,
 				ADEB42DD1958D0960095AB50 /* AppDelegate.m */,
+				ADA54934195A232E00ECD0F5 /* Controllers */,
+				ADA54936195A234300ECD0F5 /* Models */,
 				ADEB42F91958D1E70095AB50 /* MQHAppManager.h */,
 				ADEB42FA1958D1E70095AB50 /* MQHAppManager.m */,
-				ADEB42DF1958D0960095AB50 /* Images.xcassets */,
 				ADEB42D81958D0960095AB50 /* Supporting Files */,
+				ADA54935195A233900ECD0F5 /* Views */,
 			);
 			path = MQHelios;
 			sourceTree = "<group>";
@@ -103,9 +143,11 @@
 		ADEB42D81958D0960095AB50 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				ADEB42FE1958DD440095AB50 /* MQHelios-Prefix.pch */,
+				ADEB42DF1958D0960095AB50 /* Images.xcassets */,
 				ADEB42D91958D0960095AB50 /* Info.plist */,
 				ADEB42DA1958D0960095AB50 /* main.m */,
+				ADEB42FE1958DD440095AB50 /* MQHelios-Prefix.pch */,
+				ADEB42F51958D0E00095AB50 /* MQHelios.entitlements */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -130,6 +172,7 @@
 		ADEB42F81958D1330095AB50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				ADA5493D195A23F400ECD0F5 /* MapKit.framework */,
 				ADEB42F61958D0E00095AB50 /* PassKit.framework */,
 				626538F3CA1E493B83A012D0 /* libPods.a */,
 			);
@@ -278,8 +321,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADEB42FB1958D1E70095AB50 /* MQHAppManager.m in Sources */,
+				ADA54941195A240800ECD0F5 /* MapView.m in Sources */,
 				ADEB42DE1958D0960095AB50 /* AppDelegate.m in Sources */,
+				ADA5493C195A23C800ECD0F5 /* UserManager.m in Sources */,
 				ADEB42DB1958D0960095AB50 /* main.m in Sources */,
+				ADA54939195A23A600ECD0F5 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
