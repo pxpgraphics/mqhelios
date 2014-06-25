@@ -9,7 +9,8 @@
 /* Begin PBXBuildFile section */
 		761080EF195A4EE2009BBDE3 /* MQPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 761080EE195A4EE2009BBDE3 /* MQPUser.m */; };
 		7D602B211EA94C3FB15DCC8C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 626538F3CA1E493B83A012D0 /* libPods.a */; };
-		ADA54939195A23A600ECD0F5 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA54938195A23A600ECD0F5 /* MapViewController.m */; };
+		AD16AC31195A536C00FAD7F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD16AC33195A536C00FAD7F0 /* Main.storyboard */; };
+		AD16AC36195A555A00FAD7F0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD16AC35195A555A00FAD7F0 /* MainViewController.m */; };
 		ADA5493C195A23C800ECD0F5 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA5493B195A23C800ECD0F5 /* UserManager.m */; };
 		ADA5493E195A23F400ECD0F5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA5493D195A23F400ECD0F5 /* MapKit.framework */; };
 		ADEB42DB1958D0960095AB50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42DA1958D0960095AB50 /* main.m */; };
@@ -19,6 +20,10 @@
 		ADEB42F71958D0E00095AB50 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADEB42F61958D0E00095AB50 /* PassKit.framework */; };
 		ADEB42FB1958D1E70095AB50 /* MQHAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42FA1958D1E70095AB50 /* MQHAppManager.m */; };
 		ADEB42FC1958D1E70095AB50 /* MQHAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42FA1958D1E70095AB50 /* MQHAppManager.m */; };
+		ADFBC5DB195A852900B6C126 /* NSObject+UIPopoverAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFBC5DA195A852900B6C126 /* NSObject+UIPopoverAdditions.m */; };
+		ADFBC5E7195AA15800B6C126 /* PayView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFBC5E6195AA15800B6C126 /* PayView.m */; };
+		ADFBC5EA195AA16100B6C126 /* GiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFBC5E9195AA16100B6C126 /* GiftView.m */; };
+		ADFBC5ED195AA16A00B6C126 /* StoresView.m in Sources */ = {isa = PBXBuildFile; fileRef = ADFBC5EC195AA16A00B6C126 /* StoresView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +41,9 @@
 		626538F3CA1E493B83A012D0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		761080ED195A4EE2009BBDE3 /* MQPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQPUser.h; sourceTree = "<group>"; };
 		761080EE195A4EE2009BBDE3 /* MQPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQPUser.m; sourceTree = "<group>"; };
-		ADA54937195A23A600ECD0F5 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = Controllers/MapViewController.h; sourceTree = "<group>"; };
-		ADA54938195A23A600ECD0F5 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = Controllers/MapViewController.m; sourceTree = "<group>"; };
+		AD16AC32195A536C00FAD7F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		AD16AC34195A555A00FAD7F0 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Controllers/MainViewController.h; sourceTree = "<group>"; };
+		AD16AC35195A555A00FAD7F0 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Controllers/MainViewController.m; sourceTree = "<group>"; };
 		ADA5493A195A23C800ECD0F5 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserManager.h; path = Models/UserManager.h; sourceTree = "<group>"; };
 		ADA5493B195A23C800ECD0F5 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserManager.m; path = Models/UserManager.m; sourceTree = "<group>"; };
 		ADA5493D195A23F400ECD0F5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -55,6 +61,14 @@
 		ADEB42F91958D1E70095AB50 /* MQHAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQHAppManager.h; sourceTree = "<group>"; };
 		ADEB42FA1958D1E70095AB50 /* MQHAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQHAppManager.m; sourceTree = "<group>"; };
 		ADEB42FE1958DD440095AB50 /* MQHelios-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MQHelios-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		ADFBC5D9195A852900B6C126 /* NSObject+UIPopoverAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSObject+UIPopoverAdditions.h"; path = "Categories/NSObject+UIPopoverAdditions.h"; sourceTree = "<group>"; };
+		ADFBC5DA195A852900B6C126 /* NSObject+UIPopoverAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSObject+UIPopoverAdditions.m"; path = "Categories/NSObject+UIPopoverAdditions.m"; sourceTree = "<group>"; };
+		ADFBC5E5195AA15800B6C126 /* PayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayView.h; path = Views/PayView.h; sourceTree = "<group>"; };
+		ADFBC5E6195AA15800B6C126 /* PayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PayView.m; path = Views/PayView.m; sourceTree = "<group>"; };
+		ADFBC5E8195AA16100B6C126 /* GiftView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GiftView.h; path = Views/GiftView.h; sourceTree = "<group>"; };
+		ADFBC5E9195AA16100B6C126 /* GiftView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GiftView.m; path = Views/GiftView.m; sourceTree = "<group>"; };
+		ADFBC5EB195AA16A00B6C126 /* StoresView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoresView.h; path = Views/StoresView.h; sourceTree = "<group>"; };
+		ADFBC5EC195AA16A00B6C126 /* StoresView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoresView.m; path = Views/StoresView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,11 +92,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		ADA15977195A841B0071CE64 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				ADFBC5D9195A852900B6C126 /* NSObject+UIPopoverAdditions.h */,
+				ADFBC5DA195A852900B6C126 /* NSObject+UIPopoverAdditions.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		ADA54934195A232E00ECD0F5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				ADA54937195A23A600ECD0F5 /* MapViewController.h */,
-				ADA54938195A23A600ECD0F5 /* MapViewController.m */,
+				AD16AC34195A555A00FAD7F0 /* MainViewController.h */,
+				AD16AC35195A555A00FAD7F0 /* MainViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -90,6 +113,12 @@
 		ADA54935195A233900ECD0F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				ADFBC5E8195AA16100B6C126 /* GiftView.h */,
+				ADFBC5E9195AA16100B6C126 /* GiftView.m */,
+				ADFBC5E5195AA15800B6C126 /* PayView.h */,
+				ADFBC5E6195AA15800B6C126 /* PayView.m */,
+				ADFBC5EB195AA16A00B6C126 /* StoresView.h */,
+				ADFBC5EC195AA16A00B6C126 /* StoresView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -130,6 +159,7 @@
 			children = (
 				ADEB42DC1958D0960095AB50 /* AppDelegate.h */,
 				ADEB42DD1958D0960095AB50 /* AppDelegate.m */,
+				ADA15977195A841B0071CE64 /* Categories */,
 				ADA54934195A232E00ECD0F5 /* Controllers */,
 				ADA54936195A234300ECD0F5 /* Models */,
 				ADEB42F91958D1E70095AB50 /* MQHAppManager.h */,
@@ -148,6 +178,7 @@
 				ADEB42DA1958D0960095AB50 /* main.m */,
 				ADEB42FE1958DD440095AB50 /* MQHelios-Prefix.pch */,
 				ADEB42F51958D0E00095AB50 /* MQHelios.entitlements */,
+				AD16AC33195A536C00FAD7F0 /* Main.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -270,6 +301,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADEB42E01958D0960095AB50 /* Images.xcassets in Resources */,
+				AD16AC31195A536C00FAD7F0 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,12 +352,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADFBC5DB195A852900B6C126 /* NSObject+UIPopoverAdditions.m in Sources */,
+				ADFBC5E7195AA15800B6C126 /* PayView.m in Sources */,
 				ADEB42FB1958D1E70095AB50 /* MQHAppManager.m in Sources */,
+				AD16AC36195A555A00FAD7F0 /* MainViewController.m in Sources */,
 				ADEB42DE1958D0960095AB50 /* AppDelegate.m in Sources */,
+				ADFBC5EA195AA16100B6C126 /* GiftView.m in Sources */,
+				ADFBC5ED195AA16A00B6C126 /* StoresView.m in Sources */,
 				761080EF195A4EE2009BBDE3 /* MQPUser.m in Sources */,
 				ADA5493C195A23C800ECD0F5 /* UserManager.m in Sources */,
 				ADEB42DB1958D0960095AB50 /* main.m in Sources */,
-				ADA54939195A23A600ECD0F5 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +383,17 @@
 			targetProxy = ADEB42E61958D0960095AB50 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		AD16AC33195A536C00FAD7F0 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				AD16AC32195A536C00FAD7F0 /* en */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		ADEB42ED1958D0960095AB50 /* Debug */ = {
