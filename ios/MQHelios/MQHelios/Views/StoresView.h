@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface StoresView : UIView
+
+@property (nonatomic, readonly, strong) MKMapView *mapView;
+@property (nonatomic, readonly, strong) UITableView *tableView;
 
 @end

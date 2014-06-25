@@ -21,6 +21,9 @@
 	[self setupParseWithLaunchOptions:launchOptions];
 	[self setupParsePushNotificationsForApplication:application];
 
+	// Request user permissions.
+	[LocationManager sharedManager];
+
 	/* 
 	 // Removed for storyboards.
 	 self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

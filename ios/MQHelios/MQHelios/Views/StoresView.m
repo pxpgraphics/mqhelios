@@ -10,7 +10,8 @@
 
 @interface StoresView ()
 
-
+@property (nonatomic, readwrite, strong) MKMapView *mapView;
+@property (nonatomic, readwrite, strong) UITableView *tableView;
 
 @end
 
@@ -19,7 +20,12 @@
 - (instancetype)init
 {
 	if (self = [super init]) {
-		self.backgroundColor = [UIColor yellowColor];
+		_mapView = [[MKMapView alloc] init];
+		_mapView.userTrackingMode = MKUserTrackingModeFollow;
+
+		_tableView = [[UITableView alloc] init];
+		_tableView.tableHeaderView = _mapView;
+		[self addSubview:_tableView];
 	}
 	return self;
 }
@@ -33,13 +39,14 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)layoutSubviews
 {
-    // Drawing code
+	[super layoutSubviews];
+
+	CGRect bounds = self.bounds;
+
+	_mapView.frame = CGRectMake(0.0f, 0.0f, bounds.size.width, 200.0f);
+	_tableView.frame = self.layer.mask.bounds;
 }
-*/
 
 @end
