@@ -11,6 +11,7 @@
 @interface PayView : UIView
 
 @property (nonatomic, readwrite) CGFloat padding;
+@property (nonatomic, readwrite) CGFloat buttonHeight;
 
 @property (nonatomic, readonly, strong) UIButton *signInButton;
 @property (nonatomic, readonly, strong) UIButton *signUpButton;

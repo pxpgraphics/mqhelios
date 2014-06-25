@@ -27,6 +27,7 @@
 {
 	if (self = [super init]) {
 		_padding = 5.0f;
+		_buttonHeight = 50.0f;
 
 		_imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Gift"]];
 		_imageView.contentMode = UIViewContentModeScaleAspectFill;
@@ -51,14 +52,22 @@
 
 		_signUpButton = [UIButton buttonWithType:UIButtonTypeSystem];
 		[_signUpButton setTitle:@"SIGN UP" forState:UIControlStateNormal];
+		[_signUpButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
 		[_signUpButton setBackgroundColor:[UIColor colorWithRed:0.904 green:0.798 blue:0.495 alpha:1.000]];
 		_signUpButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:22.0];
+		_signUpButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+		_signUpButton.layer.cornerRadius = 8.0f;
+		_signUpButton.layer.masksToBounds = YES;
 		[self addSubview:_signUpButton];
 
 		_signInButton = [UIButton buttonWithType:UIButtonTypeSystem];
 		[_signInButton setTitle:@"SIGN IN" forState:UIControlStateNormal];
+		[_signInButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
 		[_signInButton setBackgroundColor:[UIColor whiteColor]];
-		_signInButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:22.0];
+		_signInButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:22.0];
+		_signInButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+		_signInButton.layer.cornerRadius = 8.0f;
+		_signInButton.layer.masksToBounds = YES;
 		[self addSubview:_signInButton];
 	}
 	return self;
@@ -94,6 +103,14 @@
 
 	CGFloat bodyLabelHeight = [_bodyLabel.text sizeWithAttributes:@{ NSFontAttributeName: _bodyLabel.font }].height * 4.0f;
 	_bodyLabel.frame = CGRectMake(xOrigin, yOrigin, insetBounds.size.width, bodyLabelHeight);
+
+	yOrigin = insetBounds.origin.y + insetBounds.size.height - (_buttonHeight * 2.0f) - (_padding * 2.0f);
+
+	_signUpButton.frame = CGRectMake(xOrigin, yOrigin, insetBounds.size.width, _buttonHeight);
+
+	yOrigin += _buttonHeight + (_padding * 2.0f);
+
+	_signInButton.frame = CGRectMake(xOrigin, yOrigin, insetBounds.size.width, _buttonHeight);
 }
 
 @end
