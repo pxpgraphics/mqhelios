@@ -10,4 +10,10 @@
 
 @interface PayView : UIView
 
+@property (nonatomic, readonly, strong) UIButton *signInButton;
+@property (nonatomic, readonly, strong) UIButton *signUpButton;
+@property (nonatomic, readonly, strong) UIImageView *imageView;
+@property (nonatomic, readonly, strong) UILabel *bodyLabel;
+@property (nonatomic, readonly, strong) UILabel *headlineLabel;
+
 @end

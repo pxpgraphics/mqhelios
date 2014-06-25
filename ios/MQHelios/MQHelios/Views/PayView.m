@@ -10,7 +10,11 @@
 
 @interface PayView ()
 
-
+@property (nonatomic, readwrite, strong) UIButton *signInButton;
+@property (nonatomic, readwrite, strong) UIButton *signUpButton;
+@property (nonatomic, readwrite, strong) UIImageView *imageView;
+@property (nonatomic, readwrite, strong) UILabel *bodyLabel;
+@property (nonatomic, readwrite, strong) UILabel *headlineLabel;
 
 @end
 
@@ -19,7 +23,9 @@
 - (instancetype)init
 {
 	if (self = [super init]) {
-		self.backgroundColor = [UIColor purpleColor];
+		_imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pay"]];
+		_imageView.contentMode = UIViewContentModeScaleAspectFill;
+		[self addSubview:_imageView];
 	}
 	return self;
 }
@@ -33,13 +39,13 @@
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+- (void)layoutSubviews
 {
-    // Drawing code
+	[super layoutSubviews];
+
+	CGRect bounds = self.bounds;
+
+	_imageView.frame = bounds;
 }
-*/
 
 @end
