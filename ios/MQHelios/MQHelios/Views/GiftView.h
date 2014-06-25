@@ -10,6 +10,8 @@
 
 @interface GiftView : UIView
 
+@property (nonatomic, readwrite) CGFloat padding;
+
 @property (nonatomic, readonly, strong) UIButton *signInButton;
 @property (nonatomic, readonly, strong) UIButton *signUpButton;
 @property (nonatomic, readonly, strong) UIImageView *imageView;
