@@ -58,6 +58,26 @@
     // Pass the selected object to the new view controller.
 }
 
+- (void)presentSignInViewController
+{
+	if (!self.signInVC) {
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		self.signInVC = (SignInViewController *)[storyboard instantiateViewControllerWithIdentifier:@"SignInViewControllerIdentifier"];
+	}
+
+	[self.navigationController presentViewController:self.signInVC animated:YES completion:nil];
+}
+
+- (void)presentSignUpViewController
+{
+	if (!self.signUpNavController) {
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		self.signUpNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"SignUpNavControllerIdentifier"];
+	}
+
+	[self.navigationController presentViewController:self.signUpNavController animated:YES completion:nil];
+}
+
 - (IBAction)presentPayPopoverController:(id)sender
 {
 	if (!self.payView) {
@@ -122,6 +142,7 @@
 	popoverView.alpha = 0.0f;
 	[self.view addSubview:popoverView];
 
+	// Dismiss popover when the sender is tapped again.
 	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPopoverView:)];
 	[sender addGestureRecognizer:tap];
 
@@ -134,7 +155,22 @@
 						 popoverView.alpha = 1.0f;
 						 popoverView.center = CGPointMake(popoverView.center.x, self.view.center.y + (offsetHeight / 2.0f));
 						 self.previousPopoverView = popoverView;
-					 } completion:nil];
+					 } completion:^(BOOL finished) {
+						 [self addActionsForButtonsInPopoverView:popoverView];
+					 }];
+}
+
+- (void)addActionsForButtonsInPopoverView:(UIView *)popoverView
+{
+	if ([popoverView isEqual:self.payView]) {
+		// PayView.
+		[self.payView.signInButton addTarget:self action:@selector(presentSignInViewController) forControlEvents:UIControlEventTouchUpInside];
+		[self.payView.signUpButton addTarget:self action:@selector(presentSignUpViewController) forControlEvents:UIControlEventTouchUpInside];
+	} else if ([popoverView isEqual:self.giftView])	{
+		// GiftView.
+		[self.giftView.signInButton addTarget:self action:@selector(presentSignInViewController) forControlEvents:UIControlEventTouchUpInside];
+		[self.giftView.signUpButton addTarget:self action:@selector(presentSignUpViewController) forControlEvents:UIControlEventTouchUpInside];
+	}
 }
 
 - (void)dismissViewsForPresentedPopoverView:(UIView *)popoverView
