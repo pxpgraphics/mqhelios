@@ -94,6 +94,9 @@
 
 - (void)presentPopoverView:(UIView *)popoverView forSender:(id)sender
 {
+	// Dismiss any other popover views.
+	[self dismissViewsForPresentedPopoverView:popoverView];
+
 	// Presents rounded view as popover with custom animation.
 	CGSize viewSize = self.view.frame.size;
 	CGFloat offsetHeight = 100.0f;
@@ -118,9 +121,6 @@
 	// Hide rounded view before adding to view controller.
 	popoverView.alpha = 0.0f;
 	[self.view addSubview:popoverView];
-
-	// Dismiss any other popover views.
-	[self dismissViewsForPresentedPopoverView:popoverView];
 
 	UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissPopoverView:)];
 	[sender addGestureRecognizer:tap];
