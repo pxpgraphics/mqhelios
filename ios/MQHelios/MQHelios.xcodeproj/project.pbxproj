@@ -14,6 +14,9 @@
 		ADA5493C195A23C800ECD0F5 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA5493B195A23C800ECD0F5 /* UserManager.m */; };
 		ADA5493E195A23F400ECD0F5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA5493D195A23F400ECD0F5 /* MapKit.framework */; };
 		ADBB80F1195B4CFE00B436C0 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB80F0195B4CFE00B436C0 /* LocationManager.m */; };
+		ADBB80F4195B5EE300B436C0 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB80F3195B5EE300B436C0 /* SignUpViewController.m */; };
+		ADBB80F7195B5EEF00B436C0 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB80F6195B5EEF00B436C0 /* SignInViewController.m */; };
+		ADBB80FA195B66A000B436C0 /* DimissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB80F9195B66A000B436C0 /* DimissSegue.m */; };
 		ADEB42DB1958D0960095AB50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42DA1958D0960095AB50 /* main.m */; };
 		ADEB42DE1958D0960095AB50 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42DD1958D0960095AB50 /* AppDelegate.m */; };
 		ADEB42E01958D0960095AB50 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADEB42DF1958D0960095AB50 /* Images.xcassets */; };
@@ -50,6 +53,12 @@
 		ADA5493D195A23F400ECD0F5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		ADBB80EF195B4CFE00B436C0 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationManager.h; path = Models/LocationManager.h; sourceTree = "<group>"; };
 		ADBB80F0195B4CFE00B436C0 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationManager.m; path = Models/LocationManager.m; sourceTree = "<group>"; };
+		ADBB80F2195B5EE300B436C0 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpViewController.h; path = Controllers/SignUpViewController.h; sourceTree = "<group>"; };
+		ADBB80F3195B5EE300B436C0 /* SignUpViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignUpViewController.m; path = Controllers/SignUpViewController.m; sourceTree = "<group>"; };
+		ADBB80F5195B5EEF00B436C0 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignInViewController.h; path = Controllers/SignInViewController.h; sourceTree = "<group>"; };
+		ADBB80F6195B5EEF00B436C0 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignInViewController.m; path = Controllers/SignInViewController.m; sourceTree = "<group>"; };
+		ADBB80F8195B66A000B436C0 /* DimissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DimissSegue.h; sourceTree = "<group>"; };
+		ADBB80F9195B66A000B436C0 /* DimissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DimissSegue.m; sourceTree = "<group>"; };
 		ADEB42D51958D0960095AB50 /* MQHelios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MQHelios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADEB42D91958D0960095AB50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADEB42DA1958D0960095AB50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -109,6 +118,10 @@
 			children = (
 				AD16AC34195A555A00FAD7F0 /* MainViewController.h */,
 				AD16AC35195A555A00FAD7F0 /* MainViewController.m */,
+				ADBB80F2195B5EE300B436C0 /* SignUpViewController.h */,
+				ADBB80F3195B5EE300B436C0 /* SignUpViewController.m */,
+				ADBB80F5195B5EEF00B436C0 /* SignInViewController.h */,
+				ADBB80F6195B5EEF00B436C0 /* SignInViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -171,6 +184,8 @@
 				ADEB42FA1958D1E70095AB50 /* MQHAppManager.m */,
 				ADEB42D81958D0960095AB50 /* Supporting Files */,
 				ADA54935195A233900ECD0F5 /* Views */,
+				ADBB80F8195B66A000B436C0 /* DimissSegue.h */,
+				ADBB80F9195B66A000B436C0 /* DimissSegue.m */,
 			);
 			path = MQHelios;
 			sourceTree = "<group>";
@@ -359,10 +374,13 @@
 			files = (
 				ADFBC5DB195A852900B6C126 /* NSObject+UIPopoverAdditions.m in Sources */,
 				ADFBC5E7195AA15800B6C126 /* PayView.m in Sources */,
+				ADBB80F4195B5EE300B436C0 /* SignUpViewController.m in Sources */,
 				ADEB42FB1958D1E70095AB50 /* MQHAppManager.m in Sources */,
+				ADBB80F7195B5EEF00B436C0 /* SignInViewController.m in Sources */,
 				ADBB80F1195B4CFE00B436C0 /* LocationManager.m in Sources */,
 				AD16AC36195A555A00FAD7F0 /* MainViewController.m in Sources */,
 				ADEB42DE1958D0960095AB50 /* AppDelegate.m in Sources */,
+				ADBB80FA195B66A000B436C0 /* DimissSegue.m in Sources */,
 				ADFBC5EA195AA16100B6C126 /* GiftView.m in Sources */,
 				ADFBC5ED195AA16A00B6C126 /* StoresView.m in Sources */,
 				761080EF195A4EE2009BBDE3 /* MQPUser.m in Sources */,
