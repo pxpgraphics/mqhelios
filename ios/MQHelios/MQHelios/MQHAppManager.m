@@ -17,4 +17,28 @@ NSString * const kParseMasterKey = @"Pc5WlcXgXToIYfienQNfGdcJ3zpiwWxg6KATtd5g";
 
 @implementation MQHAppManager
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        
+        _userCreatePOSTURLString = @"http://localhost:3000/api/mqhelios/customers";
+        _paymentProfilePOSTURLString = @"http://localhost:3000/api/mqhelios/paryment_profiles";
+        _marqetaCardPOSTURLString = @"http://localhost:3000/api/mqhelios/marqeta_cards";
+        _gpaFundsPOSTURLString = @"http://localhost:3000/api/mqhelios/marqeta_cards";
+        _purchaseOrdersPOSTURLString = @"http://localhost:3000/api/mqhelios/purchase_orders";
+    }
+    return self;
+}
+
++ (MQHAppManager *)sharedManager
+{
+    static MQHAppManager *sharedManager = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedManager = [[MQHAppManager alloc] init];
+    });
+    return sharedManager;
+}
+
 @end
