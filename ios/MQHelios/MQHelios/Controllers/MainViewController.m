@@ -193,7 +193,7 @@
 	CGSize viewSize = self.view.frame.size;
 	CGFloat offsetHeight = 100.0f;
 	CGRect offScreenFrame = CGRectMake(self.view.frame.origin.x,
-									   viewSize.height,
+									   viewSize.height + (offsetHeight / 2.0f),
 									   viewSize.width,
 									   viewSize.height - offsetHeight);
 
