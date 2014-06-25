@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="KyI-la-lE6">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6154.21" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="zQW-6x-FZd">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6153.13"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="8pu-Mp-HDt">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="zQW-6x-FZd" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="SLg-cf-8DT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="KyI-la-lE6" kind="relationship" relationship="rootViewController" id="ICg-BJ-GGt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aIQ-5q-aaM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-150" y="681"/>
+        </scene>
         <!--Main View Controller-->
         <scene sceneID="Zhy-3Q-om5">
             <objects>
@@ -133,6 +149,7 @@
                         </subviews>
                         <color key="backgroundColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.098039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
+                    <navigationItem key="navigationItem" id="scf-jw-WMm"/>
                     <connections>
                         <outlet property="aboutLabel" destination="Z0l-6F-eMc" id="KZs-Av-ZWq"/>
                         <outlet property="giftButton" destination="uky-WY-13h" id="xL3-Lh-Bbw"/>
@@ -153,7 +170,7 @@
         <!--Navigation Controller-->
         <scene sceneID="h1n-F5-jxM">
             <objects>
-                <navigationController id="S4D-aO-x1X" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="SignUpNavControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="S4D-aO-x1X" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="CyN-mw-A5u">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -278,7 +295,7 @@
         <!--Sign In View Controller-->
         <scene sceneID="7Ue-nG-4Eb">
             <objects>
-                <viewController id="u0b-13-bVc" customClass="SignInViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SignInViewControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="u0b-13-bVc" customClass="SignInViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2K1-YI-1kc"/>
                         <viewControllerLayoutGuide type="bottom" id="cmu-tw-M8e"/>

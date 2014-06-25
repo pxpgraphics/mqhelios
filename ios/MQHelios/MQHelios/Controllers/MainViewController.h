@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SignInViewController.h"
 #import "GiftView.h"
 #import "PayView.h"
 #import "StoresView.h"
@@ -24,6 +25,8 @@
 @property (nonatomic, weak) IBOutlet UILabel * notificationLabel;
 @property (nonatomic, weak) IBOutlet UILabel * welcomeLabel;
 
+@property (nonatomic, weak) SignInViewController * signInVC;
+@property (nonatomic, weak) UINavigationController *signUpNavController;
 @property (nonatomic, strong, readonly) GiftView * giftView;
 @property (nonatomic, strong, readonly) PayView * payView;
 @property (nonatomic, strong, readonly) StoresView * storesView;
