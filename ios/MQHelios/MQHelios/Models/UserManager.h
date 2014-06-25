@@ -7,7 +7,34 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "MQPUser.h"
+
+typedef void (^MQHUserManagerSuccessBlock)();
+typedef void (^MQHUserManagerFailureBlock)(NSError *error);
 
 @interface UserManager : NSObject
+
+@property (nonatomic, strong) MQPUser *user;
+
+- (void)registerUserWithUserInfo:(NSDictionary *)userInfo
+                    successBlock:(MQHUserManagerSuccessBlock)successBlock
+                    failureBlock:(MQHUserManagerFailureBlock)failureBlock;
+
+- (void)createPaymentProfileWithUserInfo:(NSDictionary *)userInfo
+                            successBlock:(MQHUserManagerSuccessBlock)successBlock
+                            failureBlock:(MQHUserManagerFailureBlock)failureBlock;
+
+- (void)createMarqetaCardWithSuccessBlock:(MQHUserManagerSuccessBlock)successBlock
+                             failureBlock:(MQHUserManagerFailureBlock)failureBlock;
+
+- (void)addGPAFundsWithUserInfo:(NSDictionary *)userInfo
+                   successBlock:(MQHUserManagerSuccessBlock)successBlock
+                   failureBlock:(MQHUserManagerFailureBlock)failureBlock;
+
+- (void)purchaseOrdersWithUserInfo:(NSDictionary *)userInfo
+                      successBlock:(MQHUserManagerSuccessBlock)successBlock
+                      failureBlock:(MQHUserManagerFailureBlock)failureBlock;
+
++ (UserManager *)sharedManager;
 
 @end

@@ -19,4 +19,12 @@ extern NSString * const kParseMasterKey;
 
 @interface MQHAppManager : NSObject
 
+@property (nonatomic, strong) NSString *userCreatePOSTURLString;
+@property (nonatomic, strong) NSString *paymentProfilePOSTURLString;
+@property (nonatomic, strong) NSString *marqetaCardPOSTURLString;
+@property (nonatomic, strong) NSString *gpaFundsPOSTURLString;
+@property (nonatomic, strong) NSString *purchaseOrdersPOSTURLString;
+
++ (MQHAppManager *)sharedManager;
+
 @end
