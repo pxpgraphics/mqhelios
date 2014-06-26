@@ -30,7 +30,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-		self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//		self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         self.backgroundColor = [MQColor grayColor];
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
 

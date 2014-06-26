@@ -20,7 +20,9 @@
 - (instancetype)init
 {
 	if (self = [super init]) {
-		_mapView = [[MKMapView alloc] init];
+		_tableHeaderHeight = 200.0f;
+
+		_mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 0.0f, _tableHeaderHeight)];
 		_mapView.userTrackingMode = MKUserTrackingModeFollow;
 		_mapView.scrollEnabled = NO;
 		_mapView.zoomEnabled = YES;
@@ -58,8 +60,6 @@
 
 	CGRect bounds = self.bounds;
 
-	CGFloat tableHeaderHeight = 200.0f;
-	_mapView.frame = CGRectMake(0.0f, 0.0f, bounds.size.width, tableHeaderHeight);
 	_tableView.frame = bounds;
 
 	CGFloat radius = 10.0f;
