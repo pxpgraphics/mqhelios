@@ -10,6 +10,7 @@
 #import <PassKit/PassKit.h>
 #import <Parse/Parse.h>
 #import "LocationManager.h"
+#import "MQColor.h"
 
 extern NSString * const kParseApplicationIDKey;
 extern NSString * const kParseClientKey;

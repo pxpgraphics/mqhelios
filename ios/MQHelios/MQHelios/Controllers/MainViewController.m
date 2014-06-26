@@ -9,7 +9,7 @@
 #import "MainViewController.h"
 #import "UserManager.h"
 
-@interface MainViewController ()
+@interface MainViewController () <MKMapViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong, readwrite) GiftView * giftView;
 @property (nonatomic, strong, readwrite) PayView * payView;
@@ -19,6 +19,9 @@
 @end
 
 @implementation MainViewController
+{
+	BOOL storesIsDismissing;
+}
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -49,6 +52,65 @@
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
 	return UIStatusBarStyleLightContent;
+}
+
+#pragma mark - Scroll view delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+	if (![scrollView isEqual:self.storesView.tableView] || storesIsDismissing) {
+		return;
+	}
+
+	CGFloat minYPosition = -scrollView.contentOffset.y;
+	CGFloat offsetHeight = 100.0f;
+	if (-minYPosition > 200) {
+		// Make storesView fullscreen.
+		
+	} else if (minYPosition > 0) {
+		// Retain mask and rounded edges on top.
+		self.storesView.center = CGPointMake(self.storesView.center.x, self.view.center.y + minYPosition + (offsetHeight / 2.0f));
+		[self addMaskLayerToPopoverView:self.storesView];
+	} else {
+		// Reset to origin frames.
+		self.storesView.center = CGPointMake(self.storesView.center.x, self.view.center.y + (offsetHeight / 2.0f));
+		[self addMaskLayerToPopoverView:self.storesView];
+	}
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+	CGFloat minYPosition = -scrollView.contentOffset.y;
+	CGFloat dragHeight = 60.0f;
+	if (minYPosition > dragHeight) {
+		[self dismissPopoverView:self.storesView forSender:self.storesButton];
+		storesIsDismissing = YES;
+	}
+}
+
+#pragma mark - Table view data source
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+	return 10;
+}
+
+#pragma mark - Table view delegate
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	MQMerchantCell *cell = [tableView dequeueReusableCellWithIdentifier:@"merchantCell" forIndexPath:indexPath];
+
+	cell.brandNameLabel.text = @"Farley's Coffee"; // self.merchant.name;
+	cell.storeAddressLabel.text = @"123 Easy Street"; // self.store.address ?: @"";
+	cell.dealCountLabel.attributedText = [[NSAttributedString alloc] initWithString:@"3 offers"]; // dealCountStr;
+	cell.storeCountLabel.attributedText = [[NSAttributedString alloc] initWithString:@"3 stores"];  // storeCountStr;
+	cell.categoryLabel.text = @"Dining"; // self.merchant.category;
+	cell.distanceLabel.text = @"0.4 mi"; // distanceStr ?: @"";
+
+	return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return [MQMerchantCell height];
 }
 
 #pragma mark - Navigation
@@ -91,6 +153,12 @@
 {
 	if (!self.storesView) {
 		self.storesView = [[StoresView alloc] init];
+		self.storesView.mapView.delegate = self;
+		self.storesView.tableView.dataSource = self;
+		self.storesView.tableView.delegate = self;
+
+		[self.storesView.tableView registerClass:[MQMerchantCell class]
+						  forCellReuseIdentifier:@"merchantCell"];
 	}
 	[self presentPopoverView:self.storesView forSender:sender];
 }
@@ -168,18 +236,7 @@
 									   viewSize.width,
 									   viewSize.height - offsetHeight);
 	popoverView.frame = offScreenFrame;
-
-	// Add rounded corners to top of view.
-	CGFloat radius = 10.0f;
-	CGRect maskFrame = popoverView.bounds;
-	maskFrame.size.height += radius;
-
-	CALayer *maskLayer = [CALayer layer];
-	maskLayer.backgroundColor = [UIColor blackColor].CGColor;
-	maskLayer.cornerRadius = radius;
-	maskLayer.frame = maskFrame;
-
-	popoverView.layer.mask = maskLayer;
+	[self addMaskLayerToPopoverView:popoverView];
 
 	// Hide rounded view before adding to view controller.
 	popoverView.alpha = 0.0f;
@@ -201,6 +258,21 @@
 					 } completion:^(BOOL finished) {
 						 [self addActionsForButtonsInPopoverView:popoverView];
 					 }];
+}
+
+- (void)addMaskLayerToPopoverView:(UIView*)popoverView
+{
+	// Add rounded corners to top of view.
+	CGFloat radius = 10.0f;
+	CGRect maskFrame = popoverView.bounds;
+	maskFrame.size.height += radius;
+
+	CALayer *maskLayer = [CALayer layer];
+	maskLayer.backgroundColor = [UIColor blackColor].CGColor;
+	maskLayer.cornerRadius = radius;
+	maskLayer.frame = maskFrame;
+
+	popoverView.layer.mask = maskLayer;
 }
 
 - (void)addActionsForButtonsInPopoverView:(UIView *)popoverView
@@ -259,7 +331,7 @@
 
 - (void)dismissPopoverView:(UIView *)popoverView forSender:(id)sender
 {
-	if (! popoverView || ![sender isKindOfClass:[UIButton class]]) {
+	if (!popoverView || ![sender isKindOfClass:[UIButton class]]) {
 		return;
 	}
 
@@ -291,6 +363,9 @@
 
 - (void)deallocPopoverView:(UIView *)popoverView
 {
+	if ([popoverView isEqual:self.storesView]) {
+		storesIsDismissing = NO;
+	}
 	popoverView = nil;
 }
 

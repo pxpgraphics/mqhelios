@@ -26,6 +26,7 @@
 @property (nonatomic, weak) id<LocationManagerDelegate>delegate;
 @property (nonatomic, readwrite, strong) CLLocationManager *locationManager;
 @property (nonatomic, readwrite, strong) CLLocation *location;
+@property (nonatomic) double distanceBeforeUpdate;
 
 + (LocationManager *)sharedManager;
 
