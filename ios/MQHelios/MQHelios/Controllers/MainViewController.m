@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "UserManager.h"
 #import "MQMerchantCell.h"
 
 @interface MainViewController () <MKMapViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -165,15 +166,56 @@
 
 - (IBAction)presentGiftPopoverController:(id)sender
 {
-	if (!self.giftView) {
-		self.giftView = [[GiftView alloc] init];
-	}
-	[self presentPopoverView:self.giftView forSender:sender];
+    if (!self.giftView) {
+        self.giftView = [[GiftView alloc] init];
+    }
+    [self presentPopoverView:self.giftView forSender:sender];
 }
 
 - (IBAction)pushToSettingsViewController:(id)sender
 {
-
+    [[UserManager sharedManager] createPassWithSuccessBlock:^{
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        
+        //2
+        NSString* passFile = [documentsDirectory stringByAppendingPathComponent:@"test.pkpass"];
+        
+        //3
+        NSData *passData = [NSData dataWithContentsOfFile:passFile];
+        //4
+        NSError* error = nil;
+        PKPass *newPass = [[PKPass alloc] initWithData:passData
+                                                 error:&error];
+        
+        NSLog(@"newpass %@ error %@", newPass, error);
+        
+        //5
+        if (error!=nil) {
+            [[[UIAlertView alloc] initWithTitle:@"Error"
+                                        message:[error
+                                                 localizedDescription]
+                                       delegate:nil
+                              cancelButtonTitle:@"Okay"
+                              otherButtonTitles: nil] show];
+            return;
+        }
+        
+        NSLog(@"newpass = %@", newPass);
+        //6
+        PKAddPassesViewController *addController =
+        [[PKAddPassesViewController alloc] initWithPass:newPass];
+        
+        [self presentViewController:addController
+                           animated:YES
+                         completion:nil];
+        
+        
+    } failureBlock:^(NSError *error) {
+        
+        
+    }];
 }
 
 - (IBAction)pushToNotificationsViewController:(id)sender
