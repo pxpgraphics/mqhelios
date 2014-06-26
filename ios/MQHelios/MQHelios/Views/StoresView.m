@@ -22,6 +22,17 @@
 	if (self = [super init]) {
 		_mapView = [[MKMapView alloc] init];
 		_mapView.userTrackingMode = MKUserTrackingModeFollow;
+		_mapView.scrollEnabled = NO;
+		_mapView.zoomEnabled = YES;
+
+		MKCoordinateRegion region;
+		region.center = [LocationManager sharedManager].location.coordinate;
+		MKCoordinateSpan span;
+		span.latitudeDelta = 0.04;
+		span.longitudeDelta = 0.04;
+		region.span = span;
+		[_mapView setRegion:region animated:YES];
+		[_mapView regionThatFits:region];
 
 		_tableView = [[UITableView alloc] init];
 		_tableView.tableHeaderView = _mapView;
@@ -47,6 +58,17 @@
 
 	_mapView.frame = CGRectMake(0.0f, 0.0f, bounds.size.width, 200.0f);
 	_tableView.frame = self.layer.mask.bounds;
+
+	CGFloat radius = 10.0f;
+	CGRect maskFrame = bounds;
+	maskFrame.size.height += radius;
+
+	CALayer *maskLayer = [CALayer layer];
+	maskLayer.backgroundColor = [UIColor blackColor].CGColor;
+	maskLayer.cornerRadius = radius;
+	maskLayer.frame = maskFrame;
+
+	_tableView.layer.mask = maskLayer;
 }
 
 @end
