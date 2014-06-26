@@ -327,7 +327,7 @@
               NSError *error;
               NSLog(@"path = %@", path);
               [responseObject writeToFile:path options:NSDataWritingAtomic error:&error];
-
+              weakSelf.loading = NO;
               successBlock();
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
