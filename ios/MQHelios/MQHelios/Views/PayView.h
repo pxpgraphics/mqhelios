@@ -15,13 +15,20 @@
 
 @property (nonatomic, readwrite) CGFloat padding;
 @property (nonatomic, readwrite) CGFloat buttonHeight;
+@property (nonatomic, readwrite) CGFloat cardHeight;
 
+// Logged out.
 @property (nonatomic, readonly, strong) UIButton *signInButton;
 @property (nonatomic, readonly, strong) UIButton *signUpButton;
 @property (nonatomic, readonly, strong) UIImageView *imageView;
 @property (nonatomic, readonly, strong) UILabel *bodyLabel;
 @property (nonatomic, readonly, strong) UILabel *headlineLabel;
 
+// Logged in.
+@property (nonatomic, readonly, strong) UIScrollView *scrollView;
+@property (nonatomic, readonly, strong) UIPageControl *pageControl;
+@property (nonatomic, readonly, strong) UIImageView *cardBackView;
+@property (nonatomic, readonly, strong) UIImageView *cardFrontView;
 @property (nonatomic, readonly, strong) UIButton *payButton;
 @property (nonatomic, readonly, strong) UIButton *reloadButton;
 @property (nonatomic, readonly, strong) UIButton *manageButton;
