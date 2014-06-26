@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+#define LOGGED_IN_TAG 600
+#define LOGGED_OUT_TAG 601
+
 @interface PayView : UIView
 
 @property (nonatomic, readwrite) CGFloat padding;
@@ -18,5 +21,9 @@
 @property (nonatomic, readonly, strong) UIImageView *imageView;
 @property (nonatomic, readonly, strong) UILabel *bodyLabel;
 @property (nonatomic, readonly, strong) UILabel *headlineLabel;
+
+@property (nonatomic, readonly, strong) UIButton *payButton;
+@property (nonatomic, readonly, strong) UIButton *reloadButton;
+@property (nonatomic, readonly, strong) UIButton *manageButton;
 
 @end

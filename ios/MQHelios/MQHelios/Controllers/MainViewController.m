@@ -41,6 +41,17 @@
 	[self setNeedsStatusBarAppearanceUpdate];
 }
 
+- (void)viewWillLayoutSubviews
+{
+	[super viewWillLayoutSubviews];
+
+	if ([UserManager sharedManager].user) {
+		self.profileView.hidden = NO;
+	} else {
+//		self.profileView.hidden = YES;
+	}
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -313,6 +324,7 @@
 						options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
 					 animations:^{
 						 popoverView.frame = offScreenFrame;
+
 					 } completion:^(BOOL finished) {
 						 [popoverView removeFromSuperview];
 						 [self deallocPopoverView:popoverView];
