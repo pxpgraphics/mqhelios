@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "MQMerchantCell.h"
 
 @interface MainViewController () <MKMapViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
@@ -61,14 +62,16 @@
 	}
 
 	CGFloat minYPosition = -scrollView.contentOffset.y;
-	CGPoint origin = CGPointMake(scrollView.contentOffset.x, scrollView.contentOffset.y);
 	CGFloat offsetHeight = 100.0f;
-
-	if (minYPosition > 0) {
+	if (-minYPosition > 200) {
+		// Make storesView fullscreen.
+		
+	} else if (minYPosition > 0) {
+		// Retain mask and rounded edges on top.
 		self.storesView.center = CGPointMake(self.storesView.center.x, self.view.center.y + minYPosition + (offsetHeight / 2.0f));
 		[self addMaskLayerToPopoverView:self.storesView];
 	} else {
-		self.storesView.mapView.bounds = CGRectMake(origin.x, origin.y, scrollView.frame.size.width, 200.0f);
+		// Reset to origin frames.
 		self.storesView.center = CGPointMake(self.storesView.center.x, self.view.center.y + (offsetHeight / 2.0f));
 		[self addMaskLayerToPopoverView:self.storesView];
 	}
@@ -85,17 +88,29 @@
 }
 
 #pragma mark - Table view data source
-
-
-#pragma mark - Table view delegate
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-	return self.storesView.mapView.frame.size.height;
+	return 10;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+#pragma mark - Table view delegate
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return [[UIView alloc] init];
+	MQMerchantCell *cell = [tableView dequeueReusableCellWithIdentifier:@"merchantCell" forIndexPath:indexPath];
+
+	cell.brandNameLabel.text = @"Farley's Coffee"; // self.merchant.name;
+	cell.storeAddressLabel.text = @"123 Easy Street"; // self.store.address ?: @"";
+	cell.dealCountLabel.attributedText = [[NSAttributedString alloc] initWithString:@"3 offers"]; // dealCountStr;
+	cell.storeCountLabel.attributedText = [[NSAttributedString alloc] initWithString:@"3 stores"];  // storeCountStr;
+	cell.categoryLabel.text = @"Dining"; // self.merchant.category;
+	cell.distanceLabel.text = @"0.4 mi"; // distanceStr ?: @"";
+
+	return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return [MQMerchantCell height];
 }
 
 #pragma mark - Navigation
@@ -139,8 +154,11 @@
 	if (!self.storesView) {
 		self.storesView = [[StoresView alloc] init];
 		self.storesView.mapView.delegate = self;
-//		self.storesView.tableView.dataSource = self;
+		self.storesView.tableView.dataSource = self;
 		self.storesView.tableView.delegate = self;
+
+		[self.storesView.tableView registerClass:[MQMerchantCell class]
+						  forCellReuseIdentifier:@"merchantCell"];
 	}
 	[self presentPopoverView:self.storesView forSender:sender];
 }

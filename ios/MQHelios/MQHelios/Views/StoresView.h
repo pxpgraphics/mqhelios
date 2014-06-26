@@ -11,6 +11,7 @@
 
 @interface StoresView : UIView
 
+@property (nonatomic, readwrite) CGFloat tableHeaderHeight;
 @property (nonatomic, readonly, strong) MKMapView *mapView;
 @property (nonatomic, readonly, strong) UITableView *tableView;
 
