@@ -35,6 +35,8 @@
 		[_mapView regionThatFits:region];
 
 		_tableView = [[UITableView alloc] init];
+		_tableView.backgroundColor = [MQColor grayColor];
+		_tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 		_tableView.tableHeaderView = _mapView;
 		[self addSubview:_tableView];
 	}
@@ -56,12 +58,13 @@
 
 	CGRect bounds = self.bounds;
 
-	_mapView.frame = CGRectMake(0.0f, 0.0f, bounds.size.width, 200.0f);
-	_tableView.frame = self.layer.mask.bounds;
+	CGFloat tableHeaderHeight = 200.0f;
+	_mapView.frame = CGRectMake(0.0f, 0.0f, bounds.size.width, tableHeaderHeight);
+	_tableView.frame = bounds;
 
 	CGFloat radius = 10.0f;
-	CGRect maskFrame = bounds;
-	maskFrame.size.height += radius;
+	CGRect maskFrame = self.superview.bounds;
+	maskFrame.size.height += _tableView.contentSize.height + radius;
 
 	CALayer *maskLayer = [CALayer layer];
 	maskLayer.backgroundColor = [UIColor blackColor].CGColor;
