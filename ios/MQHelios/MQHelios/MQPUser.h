@@ -11,6 +11,7 @@
 @interface MQPUser : NSObject
 
 @property (nonatomic, strong) NSString *authenticationToken;
+@property (nonatomic, strong) NSString *userID;
 
 @property (nonatomic, strong) NSString *salutation;
 @property (nonatomic, strong) NSString *firstName;

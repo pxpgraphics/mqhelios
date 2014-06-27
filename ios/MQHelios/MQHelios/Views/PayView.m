@@ -64,26 +64,6 @@
 
 - (void)addViewsForLoggedInUser
 {
-	_scrollView = [[UIScrollView alloc] init];
-	_scrollView.pagingEnabled = YES;
-	_scrollView.showsHorizontalScrollIndicator = NO;
-	_scrollView.showsVerticalScrollIndicator = NO;
-	[self addSubview:_scrollView];
-
-	_pageControl = [[UIPageControl alloc] init];
-	_pageControl.numberOfPages = 2;
-	[self addSubview:_pageControl];
-
-	_cardFrontView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CardFront"]];
-	_cardFrontView.contentMode = UIViewContentModeScaleAspectFit;
-	_cardFrontView.tag = LOGGED_IN_TAG;
-	[_scrollView addSubview:_cardFrontView];
-
-	_cardBackView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CardBack"]];
-	_cardBackView.contentMode = UIViewContentModeScaleAspectFit;
-	_cardBackView.tag = LOGGED_IN_TAG;
-	[_scrollView addSubview:_cardBackView];
-
 	_payButton = [UIButton buttonWithType:UIButtonTypeSystem];
 	[_payButton setTitle:@"PAY" forState:UIControlStateNormal];
 	[_payButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -118,6 +98,26 @@
 	_manageButton.layer.cornerRadius = 8.0f;
 	_manageButton.tag = LOGGED_IN_TAG;
 	[self addSubview:_manageButton];
+
+	_scrollView = [[UIScrollView alloc] init];
+	_scrollView.pagingEnabled = YES;
+	_scrollView.showsHorizontalScrollIndicator = NO;
+	_scrollView.showsVerticalScrollIndicator = NO;
+	[self addSubview:_scrollView];
+
+	_pageControl = [[UIPageControl alloc] init];
+	_pageControl.numberOfPages = 2;
+	[self addSubview:_pageControl];
+
+	_cardFrontView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CardFront"]];
+	_cardFrontView.contentMode = UIViewContentModeScaleAspectFit;
+	_cardFrontView.tag = LOGGED_IN_TAG;
+	[_scrollView addSubview:_cardFrontView];
+
+	_cardBackView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CardBack"]];
+	_cardBackView.contentMode = UIViewContentModeScaleAspectFit;
+	_cardBackView.tag = LOGGED_IN_TAG;
+	[_scrollView addSubview:_cardBackView];
 }
 
 - (void)addViewsForLoggedOutUser
