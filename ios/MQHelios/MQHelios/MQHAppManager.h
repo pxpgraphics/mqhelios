@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "LocationManager.h"
 #import "MQColor.h"
+#import "UserManager.h"
 
 extern NSString * const kParseApplicationIDKey;
 extern NSString * const kParseClientKey;

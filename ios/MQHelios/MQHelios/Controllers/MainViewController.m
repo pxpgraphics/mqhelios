@@ -42,6 +42,17 @@
 	[self setNeedsStatusBarAppearanceUpdate];
 }
 
+- (void)viewWillLayoutSubviews
+{
+	[super viewWillLayoutSubviews];
+
+	if ([UserManager sharedManager].user) {
+		self.profileView.hidden = NO;
+	} else {
+//		self.profileView.hidden = YES;
+	}
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -58,33 +69,47 @@
 #pragma mark - Scroll view delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-	if (![scrollView isEqual:self.storesView.tableView] || storesIsDismissing) {
+	if (storesIsDismissing) {
 		return;
 	}
 
-	CGFloat minYPosition = -scrollView.contentOffset.y;
-	CGFloat offsetHeight = 100.0f;
-	if (-minYPosition > 200) {
-		// Make storesView fullscreen.
-		
-	} else if (minYPosition > 0) {
-		// Retain mask and rounded edges on top.
-		self.storesView.center = CGPointMake(self.storesView.center.x, self.view.center.y + minYPosition + (offsetHeight / 2.0f));
-		[self addMaskLayerToPopoverView:self.storesView];
-	} else {
-		// Reset to origin frames.
-		self.storesView.center = CGPointMake(self.storesView.center.x, self.view.center.y + (offsetHeight / 2.0f));
-		[self addMaskLayerToPopoverView:self.storesView];
+	if ([scrollView isEqual:self.storesView.tableView]) {
+		// StoresView
+		CGFloat minYPosition = -scrollView.contentOffset.y;
+		CGFloat offsetHeight = 100.0f;
+		if (-minYPosition > 200) {
+			// Make storesView fullscreen.
+
+		} else if (minYPosition > 0) {
+			// Retain mask and rounded edges on top.
+			self.storesView.center = CGPointMake(self.storesView.center.x, self.view.center.y + minYPosition + (offsetHeight / 2.0f));
+			[self addMaskLayerToPopoverView:self.storesView];
+		} else {
+			// Reset to origin frames.
+			self.storesView.center = CGPointMake(self.storesView.center.x, self.view.center.y + (offsetHeight / 2.0f));
+			[self addMaskLayerToPopoverView:self.storesView];
+		}
+	}
+
+	if ([scrollView isEqual:self.payView.scrollView]) {
+		self.payView.pageControl.currentPage = scrollView.frame.size.width /scrollView.contentOffset.x;
 	}
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-	CGFloat minYPosition = -scrollView.contentOffset.y;
-	CGFloat dragHeight = 60.0f;
-	if (minYPosition > dragHeight) {
-		[self dismissPopoverView:self.storesView forSender:self.storesButton];
-		storesIsDismissing = YES;
+	if (storesIsDismissing) {
+		return;
+	}
+
+	if ([scrollView isEqual:self.storesView.tableView]) {
+		// StoresView
+		CGFloat minYPosition = -scrollView.contentOffset.y;
+		CGFloat dragHeight = 60.0f;
+		if (minYPosition > dragHeight) {
+			[self dismissPopoverView:self.storesView forSender:self.storesButton];
+			storesIsDismissing = YES;
+		}
 	}
 }
 
@@ -146,6 +171,9 @@
 {
 	if (!self.payView) {
 		self.payView = [[PayView alloc] init];
+		self.payView.scrollView.delegate = self;
+		[self.payView.pageControl addTarget:self
+									 action:@selector(cardViewDidChange) forControlEvents:UIControlEventValueChanged];
 	}
 	[self presentPopoverView:self.payView forSender:sender];
 }
@@ -355,6 +383,7 @@
 						options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
 					 animations:^{
 						 popoverView.frame = offScreenFrame;
+
 					 } completion:^(BOOL finished) {
 						 [popoverView removeFromSuperview];
 						 [self deallocPopoverView:popoverView];
@@ -367,6 +396,19 @@
 		storesIsDismissing = NO;
 	}
 	popoverView = nil;
+}
+
+- (void)cardViewDidChange
+{
+	CGFloat xOffset = self.payView.scrollView.frame.size.width * self.payView.pageControl.currentPage;
+	[UIView animateWithDuration:0.6
+						  delay:0.0
+		 usingSpringWithDamping:0.5f
+		  initialSpringVelocity:1.2f
+						options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
+					 animations:^{
+						 self.payView.scrollView.contentOffset = CGPointMake(xOffset, self.payView.scrollView.contentOffset.y);
+					 } completion:nil];
 }
 
 @end

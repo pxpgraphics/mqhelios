@@ -10,11 +10,21 @@
 
 @interface PayView ()
 
+// Logged out.
 @property (nonatomic, readwrite, strong) UIButton *signInButton;
 @property (nonatomic, readwrite, strong) UIButton *signUpButton;
 @property (nonatomic, readwrite, strong) UIImageView *imageView;
 @property (nonatomic, readwrite, strong) UILabel *bodyLabel;
 @property (nonatomic, readwrite, strong) UILabel *headlineLabel;
+
+// Logged in.
+@property (nonatomic, readwrite, strong) UIScrollView *scrollView;
+@property (nonatomic, readwrite, strong) UIPageControl *pageControl;
+@property (nonatomic, readwrite, strong) UIImageView *cardBackView;
+@property (nonatomic, readwrite, strong) UIImageView *cardFrontView;
+@property (nonatomic, readwrite, strong) UIButton *payButton;
+@property (nonatomic, readwrite, strong) UIButton *reloadButton;
+@property (nonatomic, readwrite, strong) UIButton *manageButton;
 
 @end
 
@@ -26,49 +36,19 @@
 - (instancetype)init
 {
 	if (self = [super init]) {
+		self.backgroundColor = [UIColor colorWithWhite:0.1f alpha:1.0f];
+
 		_padding = 5.0f;
 		_buttonHeight = 50.0f;
+		_cardHeight = 162.0f;
 
-		_imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pay"]];
-		_imageView.contentMode = UIViewContentModeScaleAspectFill;
-		[self addSubview:_imageView];
+		[UserManager sharedManager].user = [MQPUser new];
 
-		backgroundView = [[UIView alloc] init];
-		backgroundView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-		[self addSubview:backgroundView];
-
-		_headlineLabel = [[UILabel alloc] init];
-		_headlineLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:22.0];
-		_headlineLabel.text = @"Pay With Your Phone";
-		_headlineLabel.textColor = [UIColor colorWithRed:0.904 green:0.798 blue:0.495 alpha:1.000];
-		[self addSubview:_headlineLabel];
-
-		_bodyLabel = [[UILabel alloc] init];
-		_bodyLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:14.0];
-		_bodyLabel.numberOfLines = 0;
-		_bodyLabel.text = @"Check your balances and transactions, reload your Marqeta Card, take more offers, and get reward dollars.";
-		_bodyLabel.textColor = [UIColor whiteColor];
-		[self addSubview:_bodyLabel];
-
-		_signUpButton = [UIButton buttonWithType:UIButtonTypeSystem];
-		[_signUpButton setTitle:@"SIGN UP" forState:UIControlStateNormal];
-		[_signUpButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-		[_signUpButton setBackgroundColor:[UIColor colorWithRed:0.904 green:0.798 blue:0.495 alpha:1.000]];
-		_signUpButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:22.0];
-		_signUpButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
-		_signUpButton.layer.cornerRadius = 8.0f;
-		_signUpButton.layer.masksToBounds = YES;
-		[self addSubview:_signUpButton];
-
-		_signInButton = [UIButton buttonWithType:UIButtonTypeSystem];
-		[_signInButton setTitle:@"SIGN IN" forState:UIControlStateNormal];
-		[_signInButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
-		[_signInButton setBackgroundColor:[UIColor whiteColor]];
-		_signInButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:22.0];
-		_signInButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
-		_signInButton.layer.cornerRadius = 8.0f;
-		_signInButton.layer.masksToBounds = YES;
-		[self addSubview:_signInButton];
+		if ([UserManager sharedManager].user) {
+			[self addViewsForLoggedInUser];
+		} else {
+			[self addViewsForLoggedOutUser];
+		}
 	}
 	return self;
 }
@@ -82,35 +62,193 @@
     return self;
 }
 
-- (void)layoutSubviews
+- (void)addViewsForLoggedInUser
 {
-	[super layoutSubviews];
+	_payButton = [UIButton buttonWithType:UIButtonTypeSystem];
+	[_payButton setTitle:@"PAY" forState:UIControlStateNormal];
+	[_payButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	[_payButton setBackgroundColor:[UIColor greenColor]];
+	_payButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:22.0];
+	_payButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+	_payButton.layer.cornerRadius = 8.0f;
+	_payButton.layer.masksToBounds = YES;
+	_payButton.tag = LOGGED_IN_TAG;
+	[self addSubview:_payButton];
 
-	CGRect bounds = self.bounds;
+	_reloadButton = [UIButton buttonWithType:UIButtonTypeSystem];
+	[_reloadButton setTitle:@"RELOAD" forState:UIControlStateNormal];
+	[_reloadButton setTitleColor:[UIColor purpleColor] forState:UIControlStateNormal];
+	[_reloadButton setBackgroundColor:[UIColor whiteColor]];
+	_reloadButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:22.0];
+	_reloadButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+	_reloadButton.layer.borderColor = [UIColor purpleColor].CGColor;
+	_reloadButton.layer.borderWidth = 1.0f;
+	_reloadButton.layer.cornerRadius = 8.0f;
+	_reloadButton.tag = LOGGED_IN_TAG;
+	[self addSubview:_reloadButton];
 
+	_manageButton = [UIButton buttonWithType:UIButtonTypeSystem];
+	[_manageButton setTitle:@"MANAGE" forState:UIControlStateNormal];
+	[_manageButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+	[_manageButton setBackgroundColor:[UIColor whiteColor]];
+	_manageButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:22.0];
+	_manageButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+	_manageButton.layer.borderColor = [UIColor lightGrayColor].CGColor;
+	_manageButton.layer.borderWidth = 1.0f;
+	_manageButton.layer.cornerRadius = 8.0f;
+	_manageButton.tag = LOGGED_IN_TAG;
+	[self addSubview:_manageButton];
+
+	_scrollView = [[UIScrollView alloc] init];
+	_scrollView.pagingEnabled = YES;
+	_scrollView.showsHorizontalScrollIndicator = NO;
+	_scrollView.showsVerticalScrollIndicator = NO;
+	[self addSubview:_scrollView];
+
+	_pageControl = [[UIPageControl alloc] init];
+	_pageControl.numberOfPages = 2;
+	[self addSubview:_pageControl];
+
+	_cardFrontView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CardFront"]];
+	_cardFrontView.contentMode = UIViewContentModeScaleAspectFit;
+	_cardFrontView.tag = LOGGED_IN_TAG;
+	[_scrollView addSubview:_cardFrontView];
+
+	_cardBackView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CardBack"]];
+	_cardBackView.contentMode = UIViewContentModeScaleAspectFit;
+	_cardBackView.tag = LOGGED_IN_TAG;
+	[_scrollView addSubview:_cardBackView];
+}
+
+- (void)addViewsForLoggedOutUser
+{
+	_imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Pay"]];
+	_imageView.contentMode = UIViewContentModeScaleAspectFill;
+	_imageView.tag = LOGGED_OUT_TAG;
+	[self addSubview:_imageView];
+
+	backgroundView = [[UIView alloc] init];
+	backgroundView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+	backgroundView.tag = LOGGED_OUT_TAG;
+	[self addSubview:backgroundView];
+
+	_headlineLabel = [[UILabel alloc] init];
+	_headlineLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:22.0];
+	_headlineLabel.text = @"Pay With Your Phone";
+	_headlineLabel.textColor = [UIColor colorWithRed:0.904 green:0.798 blue:0.495 alpha:1.000];
+	_headlineLabel.tag = LOGGED_OUT_TAG;
+	[self addSubview:_headlineLabel];
+
+	_bodyLabel = [[UILabel alloc] init];
+	_bodyLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:14.0];
+	_bodyLabel.numberOfLines = 0;
+	_bodyLabel.text = @"Check your balances and transactions, reload your Marqeta Card, take more offers, and get reward dollars.";
+	_bodyLabel.textColor = [UIColor whiteColor];
+	_bodyLabel.tag = LOGGED_OUT_TAG;
+	[self addSubview:_bodyLabel];
+
+	_signUpButton = [UIButton buttonWithType:UIButtonTypeSystem];
+	[_signUpButton setTitle:@"SIGN UP" forState:UIControlStateNormal];
+	[_signUpButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+	[_signUpButton setBackgroundColor:[UIColor colorWithRed:0.904 green:0.798 blue:0.495 alpha:1.000]];
+	_signUpButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-DemiBold" size:22.0];
+	_signUpButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+	_signUpButton.layer.cornerRadius = 8.0f;
+	_signUpButton.tag = LOGGED_OUT_TAG;
+	[self addSubview:_signUpButton];
+
+	_signInButton = [UIButton buttonWithType:UIButtonTypeSystem];
+	[_signInButton setTitle:@"SIGN IN" forState:UIControlStateNormal];
+	[_signInButton setTitleColor:[UIColor lightGrayColor] forState:UIControlStateNormal];
+	[_signInButton setBackgroundColor:[UIColor whiteColor]];
+	_signInButton.titleLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:22.0];
+	_signInButton.contentVerticalAlignment = UIControlContentVerticalAlignmentFill;
+	_signInButton.layer.cornerRadius = 8.0f;
+	_signInButton.tag = LOGGED_OUT_TAG;
+	[self addSubview:_signInButton];
+}
+
+- (void)layoutSubviewsForLoggedInUser:(CGRect)bounds
+{
+	CGFloat xOrigin = bounds.origin.x;
+	CGFloat yOrigin = bounds.origin.y;
+
+	CGFloat halfWidth = (bounds.size.width - (_padding * 2.0f)) / 2.0f;
+
+	_scrollView.frame = CGRectMake(self.bounds.origin.x, yOrigin, self.bounds.size.width, _cardHeight);
+
+	_scrollView.contentSize = CGSizeMake(_scrollView.frame.size.width * 2.0f, _scrollView.frame.size.height);
+
+	_cardFrontView.frame = CGRectMake(xOrigin, yOrigin, bounds.size.width, _cardHeight);
+
+	CGFloat cardOffset = _scrollView.frame.size.width + (_padding * 4.0f);
+	_cardBackView.frame = CGRectOffset(_cardFrontView.bounds, cardOffset, 0.0f);
+
+	yOrigin += _scrollView.frame.size.height + (_padding * 2.0f);
+
+	CGFloat pageControlHeight = 20.0f;
+	_pageControl.frame = CGRectMake(xOrigin, yOrigin, bounds.size.width, pageControlHeight);
+
+	yOrigin += _pageControl.frame.size.height + (_padding * 12.0f);
+
+	_payButton.frame = CGRectMake(xOrigin, yOrigin, bounds.size.width, _buttonHeight);
+
+	yOrigin += _buttonHeight + (_padding * 2.0f);
+
+	_reloadButton.frame = CGRectMake(xOrigin, yOrigin, halfWidth, _buttonHeight);
+
+	xOrigin += _reloadButton.frame.size.width + (_padding * 2.0f);
+
+	_manageButton.frame = CGRectMake(xOrigin, yOrigin, halfWidth, _buttonHeight);
+}
+
+- (void)layoutSubviewsForLoggedOutUser:(CGRect)bounds
+{
 	_imageView.frame = self.layer.mask.bounds;
 	backgroundView.frame = self.layer.mask.bounds;
 
-	CGRect insetBounds = CGRectInset(bounds, (_padding * 4.0), (_padding * 8.0));
-
-	CGFloat xOrigin = insetBounds.origin.x;
-	CGFloat yOrigin = insetBounds.origin.y;
+	CGFloat xOrigin = bounds.origin.x;
+	CGFloat yOrigin = bounds.origin.y;
 
 	CGFloat headlineLabelHeight = [_headlineLabel.text sizeWithAttributes:@{ NSFontAttributeName: _headlineLabel.font }].height;
-	_headlineLabel.frame = CGRectMake(xOrigin, yOrigin, insetBounds.size.width, headlineLabelHeight);
+	_headlineLabel.frame = CGRectMake(xOrigin, yOrigin, bounds.size.width, headlineLabelHeight);
 
 	yOrigin += _headlineLabel.frame.size.height + (_padding * 2.0);
 
 	CGFloat bodyLabelHeight = [_bodyLabel.text sizeWithAttributes:@{ NSFontAttributeName: _bodyLabel.font }].height * 4.0f;
-	_bodyLabel.frame = CGRectMake(xOrigin, yOrigin, insetBounds.size.width, bodyLabelHeight);
+	_bodyLabel.frame = CGRectMake(xOrigin, yOrigin, bounds.size.width, bodyLabelHeight);
 
-	yOrigin = insetBounds.origin.y + insetBounds.size.height - (_buttonHeight * 2.0f) - (_padding * 2.0f);
+	yOrigin = bounds.origin.y + bounds.size.height - (_buttonHeight * 2.0f) - (_padding * 2.0f);
 
-	_signUpButton.frame = CGRectMake(xOrigin, yOrigin, insetBounds.size.width, _buttonHeight);
+	_signUpButton.frame = CGRectMake(xOrigin, yOrigin, bounds.size.width, _buttonHeight);
 
 	yOrigin += _buttonHeight + (_padding * 2.0f);
 
-	_signInButton.frame = CGRectMake(xOrigin, yOrigin, insetBounds.size.width, _buttonHeight);
+	_signInButton.frame = CGRectMake(xOrigin, yOrigin, bounds.size.width, _buttonHeight);
+}
+
+- (void)layoutSubviews
+{
+	[super layoutSubviews];
+
+	CGRect insetBounds;
+	if ([UserManager sharedManager].user) {
+		insetBounds = CGRectInset(self.bounds, (_padding * 4.0), 0.0f);
+		[self layoutSubviewsForLoggedInUser:insetBounds];
+		for (UIView *subview in self.subviews) {
+			if (subview.tag == LOGGED_OUT_TAG) {
+				subview.hidden = YES;
+			}
+		}
+	} else {
+		insetBounds = CGRectInset(self.bounds, (_padding * 4.0), (_padding * 8.0));
+		[self layoutSubviewsForLoggedOutUser:insetBounds];
+		for (UIView *subview in self.subviews) {
+			if (subview.tag == LOGGED_IN_TAG) {
+				subview.hidden = YES;
+			}
+		}
+	}
 }
 
 @end

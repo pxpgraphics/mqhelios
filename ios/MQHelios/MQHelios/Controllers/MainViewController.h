@@ -24,6 +24,7 @@
 @property (nonatomic, weak) IBOutlet UILabel * aboutLabel;
 @property (nonatomic, weak) IBOutlet UILabel * notificationLabel;
 @property (nonatomic, weak) IBOutlet UILabel * welcomeLabel;
+@property (nonatomic, weak) IBOutlet UIView *profileView;
 
 @property (nonatomic, weak) SignInViewController * signInVC;
 @property (nonatomic, weak) UINavigationController *signUpNavController;

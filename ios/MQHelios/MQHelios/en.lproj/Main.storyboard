@@ -146,6 +146,44 @@
                                     <action selector="presentStoresPopoverController:" destination="KyI-la-lE6" eventType="touchUpInside" id="ebn-nB-rWZ"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="vrW-vr-n0E">
+                                <rect key="frame" x="110" y="80" width="100" height="100"/>
+                            </imageView>
+                            <view hidden="YES" tag="900" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dz5-KW-gkE">
+                                <rect key="frame" x="0.0" y="88" width="320" height="480"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8mi-un-c0o">
+                                        <rect key="frame" x="0.0" y="20" width="320" height="80"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gnj-OJ-NJa">
+                                                <rect key="frame" x="30" y="10" width="60" height="60"/>
+                                                <color key="backgroundColor" red="0.1574785786" green="0.53802293349999997" blue="0.84976688509999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="30"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="contentMode" value="UIViewContentModeScaleAspectFill"/>
+                                                </userDefinedRuntimeAttributes>
+                                            </imageView>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Paris Pinkney" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rnl-lF-68e">
+                                                <rect key="frame" x="108" y="22" width="192" height="21"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="22"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Account &amp; Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nxc-Jd-J16">
+                                                <rect key="frame" x="108" y="44" width="192" height="21"/>
+                                                <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.098039215690000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.098039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -156,6 +194,7 @@
                         <outlet property="notificationLabel" destination="Dmo-wd-mbP" id="1bT-C9-t82"/>
                         <outlet property="notificationsButton" destination="cZe-Ze-hmP" id="qkR-RY-Mer"/>
                         <outlet property="payButton" destination="sgR-jh-v9b" id="mRs-FH-RQG"/>
+                        <outlet property="profileView" destination="dz5-KW-gkE" id="X3a-bO-7Y7"/>
                         <outlet property="settingsButton" destination="AqO-xx-7YX" id="aSF-3L-0r8"/>
                         <outlet property="signInButton" destination="btR-Sk-aEB" id="6b6-fv-yT0"/>
                         <outlet property="signUpButton" destination="lJi-gA-oMb" id="45n-CU-xnm"/>
@@ -386,6 +425,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Logo" width="200" height="200"/>
         <image name="Sign In" width="640" height="1136"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
