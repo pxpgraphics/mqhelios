@@ -146,7 +146,10 @@
                                     <action selector="presentStoresPopoverController:" destination="KyI-la-lE6" eventType="touchUpInside" id="ebn-nB-rWZ"/>
                                 </connections>
                             </button>
-                            <view tag="900" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dz5-KW-gkE">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="vrW-vr-n0E">
+                                <rect key="frame" x="110" y="80" width="100" height="100"/>
+                            </imageView>
+                            <view hidden="YES" tag="900" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dz5-KW-gkE">
                                 <rect key="frame" x="0.0" y="88" width="320" height="480"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8mi-un-c0o">
@@ -422,6 +425,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Logo" width="200" height="200"/>
         <image name="Sign In" width="640" height="1136"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
