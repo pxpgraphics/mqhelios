@@ -14,6 +14,7 @@
 		AD42CA02196122AD00648EE3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD42CA01196122AD00648EE3 /* libPods.a */; };
 		AD4CAD01195BA75A00E0AC85 /* MQMerchantCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4CAD00195BA75A00E0AC85 /* MQMerchantCell.m */; };
 		AD4CAD04195BA78A00E0AC85 /* UILabel+CustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4CAD03195BA78A00E0AC85 /* UILabel+CustomLabel.m */; };
+		AD88EC3D1961509900F61EF9 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD88EC3C1961509900F61EF9 /* SettingsViewController.m */; };
 		ADA5493C195A23C800ECD0F5 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA5493B195A23C800ECD0F5 /* UserManager.m */; };
 		ADA5493E195A23F400ECD0F5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA5493D195A23F400ECD0F5 /* MapKit.framework */; };
 		ADBB80F1195B4CFE00B436C0 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB80F0195B4CFE00B436C0 /* LocationManager.m */; };
@@ -59,6 +60,8 @@
 		AD4CAD00195BA75A00E0AC85 /* MQMerchantCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQMerchantCell.m; sourceTree = "<group>"; };
 		AD4CAD02195BA78A00E0AC85 /* UILabel+CustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+CustomLabel.h"; sourceTree = "<group>"; };
 		AD4CAD03195BA78A00E0AC85 /* UILabel+CustomLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UILabel+CustomLabel.m"; sourceTree = "<group>"; };
+		AD88EC3B1961509900F61EF9 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = Controllers/SettingsViewController.h; sourceTree = "<group>"; };
+		AD88EC3C1961509900F61EF9 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = Controllers/SettingsViewController.m; sourceTree = "<group>"; };
 		ADA5493A195A23C800ECD0F5 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserManager.h; path = Models/UserManager.h; sourceTree = "<group>"; };
 		ADA5493B195A23C800ECD0F5 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserManager.m; path = Models/UserManager.m; sourceTree = "<group>"; };
 		ADA5493D195A23F400ECD0F5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
@@ -135,6 +138,8 @@
 				AD16AC35195A555A00FAD7F0 /* MainViewController.m */,
 				ADC00C5F195DF1B7002D921E /* PayViewController.h */,
 				ADC00C60195DF1B7002D921E /* PayViewController.m */,
+				AD88EC3B1961509900F61EF9 /* SettingsViewController.h */,
+				AD88EC3C1961509900F61EF9 /* SettingsViewController.m */,
 				ADBB80F5195B5EEF00B436C0 /* SignInViewController.h */,
 				ADBB80F6195B5EEF00B436C0 /* SignInViewController.m */,
 				ADBB80F2195B5EE300B436C0 /* SignUpViewController.h */,
@@ -405,6 +410,7 @@
 				AD0659DC195DF5CB00FFE03C /* DismissWithoutAnimationSegue.m in Sources */,
 				ADBB80F1195B4CFE00B436C0 /* LocationManager.m in Sources */,
 				AD16AC36195A555A00FAD7F0 /* MainViewController.m in Sources */,
+				AD88EC3D1961509900F61EF9 /* SettingsViewController.m in Sources */,
 				ADEB42DE1958D0960095AB50 /* AppDelegate.m in Sources */,
 				ADBB80FA195B66A000B436C0 /* DimissSegue.m in Sources */,
 				ADFBC5EA195AA16100B6C126 /* GiftView.m in Sources */,

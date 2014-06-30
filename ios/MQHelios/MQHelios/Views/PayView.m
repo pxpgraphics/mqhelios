@@ -42,13 +42,8 @@
 		_buttonHeight = 50.0f;
 		_cardHeight = 162.0f;
 
-		[UserManager sharedManager].user = [MQPUser new];
-
-		if ([UserManager sharedManager].user) {
-			[self addViewsForLoggedInUser];
-		} else {
-			[self addViewsForLoggedOutUser];
-		}
+		[self addViewsForLoggedInUser];
+		[self addViewsForLoggedOutUser];
 	}
 	return self;
 }
