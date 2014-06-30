@@ -16,6 +16,7 @@
 @property (nonatomic, strong, readwrite) PayView * payView;
 @property (nonatomic, strong, readwrite) StoresView * storesView;
 @property (nonatomic, strong, readwrite) UIView *previousPopoverView;
+@property (nonatomic, strong) PKPass *userPass;
 
 @end
 
@@ -183,16 +184,16 @@
         
         NSData *passData = [NSData dataWithContentsOfFile:passFile];
         NSError* error = nil;
-        PKPass *newPass = [[PKPass alloc] initWithData:passData
+        self.userPass = [[PKPass alloc] initWithData:passData
                                                  error:&error];
         
         PKPassLibrary *passLibrary = [[PKPassLibrary alloc] init];
         NSLog(@"passes = %@",[passLibrary passes]);
-        if ([passLibrary containsPass:newPass]) {
+        if ([passLibrary containsPass:self.userPass]) {
             NSLog(@"Contains pass!!!");
         }
         
-        NSLog(@"newpass %@ error %@", newPass, error);
+        NSLog(@"newpass %@ error %@", self.userPass, error);
         
         if (error!=nil) {
             [[[UIAlertView alloc] initWithTitle:@"Error"
@@ -204,9 +205,9 @@
             return;
         }
         
-        NSLog(@"newpass = %@", newPass);
+        NSLog(@"newpass = %@", self.userPass);
         PKAddPassesViewController *addController =
-        [[PKAddPassesViewController alloc] initWithPass:newPass];
+        [[PKAddPassesViewController alloc] initWithPass:self.userPass];
         
         [self presentViewController:addController
                            animated:YES
@@ -221,7 +222,36 @@
 
 - (IBAction)pushToNotificationsViewController:(id)sender
 {
+    [[UserManager sharedManager] passUpdateForPassWithPassSerialID:self.userPass.serialNumber successBlock:^{
+        NSLog(@"SUCCESS updating!!!");
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *documentsDirectory = [paths objectAtIndex:0];
+        
+        NSString* passFile = [documentsDirectory stringByAppendingPathComponent:@"test.pkpass"];
+        
+        NSData *passData = [NSData dataWithContentsOfFile:passFile];
+        NSError* error = nil;
 
+        self.userPass = [[PKPass alloc] initWithData:passData
+                                               error:&error];
+        
+        PKPassLibrary *passLibrary = [[PKPassLibrary alloc] init];
+        NSLog(@"passes = %@",[passLibrary passes]);
+        if ([passLibrary containsPass:self.userPass]) {
+            NSLog(@"Contains pass!!!");
+            [passLibrary replacePassWithPass:self.userPass];
+            [[[UIAlertView alloc] initWithTitle:@"Pass updated!"
+                                        message:@"Pass updated with balance: $15.00"
+                                       delegate:nil
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil] show];
+        } else {
+            NSLog(@"Doesn't contain pass =(");
+        }
+    } failureBlock:^(NSError *error) {
+
+        
+    }];
 }
 
 - (void)presentPopoverView:(UIView *)popoverView forSender:(id)sender

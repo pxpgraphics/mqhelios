@@ -28,6 +28,7 @@ NSString * const kParseMasterKey = @"Pc5WlcXgXToIYfienQNfGdcJ3zpiwWxg6KATtd5g";
         _gpaFundsPOSTURLString = @"http://localhost:3000/api/mqhelios/marqeta_cards";
         _purchaseOrdersPOSTURLString = @"http://localhost:3000/api/mqhelios/purchase_orders";
         _passCreatePOSTURLString = @"https://staging.marqeta.com/api/mqhelios/passes";
+        _passUpdateGETURLString = @"https://staging.marqeta.com/api/mqhelios/get_updated_pass/";
     }
     return self;
 }

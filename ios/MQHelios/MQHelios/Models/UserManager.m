@@ -310,17 +310,74 @@
         return;
     }
     
-    successBlock();
-//    self.loading = YES;
-//    
-//    __typeof__(self) __weak weakSelf = self;
-//    
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-//    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-////    NSDictionary *parameters = @{ @"customer_id" : self.user.userID };
-//    NSDictionary *parameters = @{ @"customer_id" : @"1" };
-//
+    self.loading = YES;
+    
+    __typeof__(self) __weak weakSelf = self;
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    NSDictionary *parameters = @{ @"customer_id" : self.user.userID };
+    NSDictionary *parameters = @{ @"customer_id" : @"1" };
+
+    [manager POST:[MQHAppManager sharedManager].passCreatePOSTURLString
+       parameters:parameters
+          success:^(AFHTTPRequestOperation *operation, id responseObject) {
+              NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+              NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"test.pkpass"];
+              NSError *error;
+              NSLog(@"path = %@", path);
+              [responseObject writeToFile:path options:NSDataWritingAtomic error:&error];
+              weakSelf.loading = NO;
+              successBlock();
+          }
+          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+              weakSelf.loading = NO;
+              NSLog(@"Failure = %@", error);
+              if (failureBlock) {
+                  failureBlock(error);
+              }
+          }];
+}
+
+- (void)passUpdateForPassWithPassSerialID:(NSString *)passSerialID
+                             successBlock:(MQHUserManagerSuccessBlock)successBlock
+                             failureBlock:(MQHUserManagerFailureBlock)failureBlock
+{
+    if (self.loading) {
+        NSLog(@"Operation is already in progress!");
+        return;
+    }
+    
+    self.loading = YES;
+    
+    __typeof__(self) __weak weakSelf = self;
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    //    NSDictionary *parameters = @{ @"customer_id" : self.user.userID };
+    
+    NSString *urlString = [[MQHAppManager sharedManager].passUpdateGETURLString stringByAppendingString:passSerialID];
+    [manager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *path = [[paths objectAtIndex:0] stringByAppendingPathComponent:@"test.pkpass"];
+        NSError *error;
+        NSLog(@"path = %@", path);
+        [responseObject writeToFile:path options:NSDataWritingAtomic error:&error];
+        weakSelf.loading = NO;
+        successBlock();
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        weakSelf.loading = NO;
+        NSLog(@"Failure = %@", error);
+        if (failureBlock) {
+            failureBlock(error);
+        }
+
+        
+    }];
+    
 //    [manager POST:[MQHAppManager sharedManager].passCreatePOSTURLString
 //       parameters:parameters
 //          success:^(AFHTTPRequestOperation *operation, id responseObject) {

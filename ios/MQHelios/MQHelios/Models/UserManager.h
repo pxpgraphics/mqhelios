@@ -38,6 +38,10 @@ typedef void (^MQHUserManagerFailureBlock)(NSError *error);
 - (void)createPassWithSuccessBlock:(MQHUserManagerSuccessBlock)successBlock
                       failureBlock:(MQHUserManagerFailureBlock)failureBlock;
 
+- (void)passUpdateForPassWithPassSerialID:(NSString *)passSerialID
+                       successBlock:(MQHUserManagerSuccessBlock)successBlock
+                       failureBlock:(MQHUserManagerFailureBlock)failureBlock;
+
 + (UserManager *)sharedManager;
 
 @end
