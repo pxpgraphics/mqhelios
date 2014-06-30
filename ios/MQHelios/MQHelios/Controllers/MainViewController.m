@@ -492,4 +492,13 @@
 					 } completion:nil];
 }
 
+- (IBAction)logOut:(id)sender
+{
+	NSString *domainName = [[NSBundle mainBundle] bundleIdentifier];
+	[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:domainName];
+	[UserManager sharedManager].user = nil;
+	[self presentPayPopoverController:nil];
+	[self dismissPopoverView:self.payView forSender:self.payButton];
+}
+
 @end
