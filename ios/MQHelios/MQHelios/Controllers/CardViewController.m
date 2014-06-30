@@ -7,6 +7,7 @@
 //
 
 #import "CardViewController.h"
+#import "UserManager.h"
 
 @interface CardViewController ()
 
@@ -197,9 +198,58 @@
 {
 	[self.view endEditing:YES];
 
-	if (self.dataSource.count < 4) {
-		return;
-	}
+    [[UserManager sharedManager] createPassWithSuccessBlock:^{
+        
+        [self dismissViewControllerAnimated:YES completion:^{
+           
+            [self.delegate createPass];
+            
+        }];
+//        self.navigationItem.rig
+//        
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSString *documentsDirectory = [paths objectAtIndex:0];
+//        
+//        NSString* passFile = [documentsDirectory stringByAppendingPathComponent:@"test.pkpass"];
+//        
+//        NSData *passData = [NSData dataWithContentsOfFile:passFile];
+//        NSError* error = nil;
+//        [UserManager sharedManager].userPass = [[PKPass alloc] initWithData:passData
+//                                                                      error:&error];
+//        
+//        PKPassLibrary *passLibrary = [[PKPassLibrary alloc] init];
+//        NSLog(@"passes = %@",[passLibrary passes]);
+//        if ([passLibrary containsPass:[UserManager sharedManager].userPass]) {
+//            NSLog(@"Contains pass!!!");
+//        }
+//        
+//        NSLog(@"newpass %@ error %@", [UserManager sharedManager].userPass, error);
+//        
+//        if (error!=nil) {
+//            [[[UIAlertView alloc] initWithTitle:@"Error"
+//                                        message:[error
+//                                                 localizedDescription]
+//                                       delegate:nil
+//                              cancelButtonTitle:@"Okay"
+//                              otherButtonTitles: nil] show];
+//            return;
+//        }
+//        
+//        NSLog(@"newpass = %@", [UserManager sharedManager].userPass);
+//        PKAddPassesViewController *addController =
+//        [[PKAddPassesViewController alloc] initWithPass:[UserManager sharedManager].userPass];
+//        
+//        [self presentViewController:addController
+//                           animated:YES
+//                         completion:nil];
+        
+    } failureBlock:^(NSError *error) {
+        
+        
+    }];
+//	if (self.dataSource.count < 4) {
+//		return;
+//	}
 
 	/* Real call.
 	MQPUser *user = [UserManager sharedManager].user;
