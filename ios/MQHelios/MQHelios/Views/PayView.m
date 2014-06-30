@@ -7,6 +7,7 @@
 //
 
 #import "PayView.h"
+#import "ZxingObjc.h"
 
 @interface PayView ()
 
@@ -134,8 +135,31 @@
 
 	_cardBackView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CardBack"]];
 	_cardBackView.contentMode = UIViewContentModeScaleAspectFit;
+    _cardBackView.backgroundColor = [UIColor grayColor];
 	_cardBackView.tag = LOGGED_IN_TAG;
+    
+    NSError *error = nil;
+    ZXMultiFormatWriter *writer = [ZXMultiFormatWriter writer];
+    ZXBitMatrix* result = [writer encode:@"6051864458403629"
+                                  format:kBarcodeFormatPDF417
+                                   width:200
+                                  height:200
+                                   error:&error];
+    if (result) {
+        CGImageRef image = [[ZXImage imageWithMatrix:result] cgimage];
+        _cardBackView.image = [UIImage imageWithCGImage:image];
+        // This CGImageRef image can be placed in a UIImage, NSImage, or written to a file.
+    } else {
+        NSString *errorMessage = [error localizedDescription];
+    }
+    
 	[_scrollView addSubview:_cardBackView];
+    
+    _cardBackLabel = [[UILabel alloc] init];
+    _cardBackLabel.backgroundColor = [UIColor clearColor];
+    _cardBackLabel.textAlignment = NSTextAlignmentCenter;
+    _cardBackLabel.text = @"6051-8644-5840-3629";
+    [_scrollView addSubview:_cardBackLabel];
 }
 
 - (void)addViewsForLoggedOutUser
@@ -203,6 +227,8 @@
 
 	CGFloat cardOffset = _scrollView.frame.size.width + (_padding * 4.0f);
 	_cardBackView.frame = CGRectOffset(_cardFrontView.bounds, cardOffset, 0.0f);
+    
+    _cardBackLabel.frame = CGRectOffset(_cardFrontView.bounds, cardOffset, 40.0f);
 
 	yOrigin += _scrollView.frame.size.height + (_padding * 2.0f);
 

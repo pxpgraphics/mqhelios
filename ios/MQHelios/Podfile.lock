@@ -59,6 +59,9 @@ PODS:
   - SDWebImage/Core (3.6)
   - SVProgressHUD (1.0)
   - TestFlightSDK (3.0.0)
+  - ZXingObjC (3.0.1):
+    - ZXingObjC/All
+  - ZXingObjC/All (3.0.1)
 
 DEPENDENCIES:
   - AFNetworking (= 2.0)
@@ -67,6 +70,7 @@ DEPENDENCIES:
   - Parse-iOS-SDK (~> 1.2)
   - SDWebImage (~> 3.6)
   - SVProgressHUD (~> 1.0)
+  - ZXingObjC (~> 3.0)
 
 EXTERNAL SOURCES:
   MQApollo:
@@ -85,5 +89,6 @@ SPEC CHECKSUMS:
   SDWebImage: c6989652c1cdf27cbdf3f56957e2030f825af5bc
   SVProgressHUD: 5034c6e22b8c2ca3e09402e48d41ed0340aa1c50
   TestFlightSDK: 36b8a207c5a119a3144aa2e6d24973eb9d5e0d0a
+  ZXingObjC: e21ba2d24fdb226d4c6c8484aa901c0381bdf633
 
 COCOAPODS: 0.33.1
