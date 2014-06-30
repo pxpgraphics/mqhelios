@@ -22,6 +22,7 @@
 // Logged in.
 @property (nonatomic, readwrite, strong) UIScrollView *scrollView;
 @property (nonatomic, readwrite, strong) UIPageControl *pageControl;
+@property (nonatomic, readwrite, strong) UIImageView *cardBarcodeView;
 @property (nonatomic, readwrite, strong) UIImageView *cardBackView;
 @property (nonatomic, readwrite, strong) UIImageView *cardFrontView;
 @property (nonatomic, readwrite, strong) UIButton *payButton;
@@ -136,28 +137,34 @@
 	[_scrollView addSubview:_cardFrontView];
 
 	_cardBackView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CardBack"]];
-	_cardBackView.backgroundColor = [UIColor darkGrayColor];
 	_cardBackView.contentMode = UIViewContentModeScaleAspectFit;
 	_cardBackView.layer.cornerRadius = 12.0f;
 	_cardBackView.layer.masksToBounds = YES;
 	_cardBackView.tag = LOGGED_IN_TAG;
+	[_scrollView addSubview:_cardBackView];
+
+	_cardBarcodeView = [[UIImageView alloc] init];
+	_cardBarcodeView.contentMode = UIViewContentModeScaleAspectFit;
+	_cardBarcodeView.layer.cornerRadius = 12.0f;
+	_cardBarcodeView.layer.masksToBounds = YES;
+	_cardBarcodeView.tag = LOGGED_IN_TAG;
     
 	NSError *error = nil;
 	ZXMultiFormatWriter *writer = [ZXMultiFormatWriter writer];
 	ZXBitMatrix *result = [writer encode:@"6051864458403629"
 								  format:kBarcodeFormatPDF417
-								   width:_cardWidth - (_padding * 2.0f)
-								  height:_cardHeight - (_padding * 2.0f)
+								   width:_cardWidth
+								  height:_cardHeight
 								   hints:[ZXEncodeHints hints]
 								   error:&error];
 	if (result) {
 		UIImage *image = [UIImage imageWithCGImage:[[ZXImage imageWithMatrix:result] cgimage]];
-		_cardBackView.image = image;
+		_cardBarcodeView.image = image;
     } else {
 		NSLog(@"Error: %@", error.localizedDescription);
     }
     
-	[_scrollView addSubview:_cardBackView];
+	[_scrollView addSubview:_cardBarcodeView];
     
     _cardBackLabel = [[UILabel alloc] init];
     _cardBackLabel.backgroundColor = [UIColor clearColor];
@@ -231,6 +238,8 @@
 
 	CGFloat cardOffset = _scrollView.frame.size.width + (_padding * 4.0f);
 	_cardBackView.frame = CGRectOffset(_cardFrontView.bounds, cardOffset, 0.0f);
+
+	_cardBarcodeView.frame = _cardBackView.frame;
     
     _cardBackLabel.frame = CGRectOffset(_cardFrontView.bounds, cardOffset, 40.0f);
 
