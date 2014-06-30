@@ -517,6 +517,49 @@
             </objects>
             <point key="canvasLocation" x="601" y="1288"/>
         </scene>
+        <!--Deal View Controller - Select A Deal-->
+        <scene sceneID="ysL-Pe-QhU">
+            <objects>
+                <tableViewController id="zUh-4B-OMM" customClass="DealViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="88" sectionHeaderHeight="22" sectionFooterHeight="22" id="Phx-MR-mhJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" rowHeight="88" id="bqb-Le-mVc" customClass="MQDealCell">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bqb-Le-mVc" id="AjQ-gV-eDT">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="zUh-4B-OMM" id="qKD-lK-9zl"/>
+                            <outlet property="delegate" destination="zUh-4B-OMM" id="XOR-e7-QR6"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Select A Deal" id="Ttj-e9-h7g"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="4z2-Ya-6uD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1312" y="1289"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="MNh-Cm-PJg">
+            <objects>
+                <navigationController storyboardIdentifier="DealNavControllerIdentifier" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zN5-D0-VHl" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Mwz-Ue-XiG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="zUh-4B-OMM" kind="relationship" relationship="rootViewController" id="bZu-UM-ymG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="n9p-qu-9tb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="957" y="1289"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="3Mz-4q-hXi">
             <objects>
