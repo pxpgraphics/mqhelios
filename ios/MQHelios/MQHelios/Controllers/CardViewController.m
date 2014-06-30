@@ -108,7 +108,7 @@
 			textView = (UITextView *)[textCell viewWithTag:100];
 			textView.editable = NO;
 			MQPUser *user = [UserManager sharedManager].user;
-			textView.text = [NSString stringWithFormat:@"%@ %@\n%@\n%@\n%@\n%@\n%@", user.firstName, user.lastName, user.email, user.addressLineOne, user.city, user.state, user.zip];
+			textView.text = [NSString stringWithFormat:@"%@ %@\n158 Brighton Avenue\nOakland\nCA\n94602", user.firstName, user.lastName];
 			// Billing address.
 			cell = textCell;
 			break;
@@ -201,15 +201,21 @@
 		return;
 	}
 
+	/* Real call.
 	MQPUser *user = [UserManager sharedManager].user;
 	NSMutableDictionary *userInfo =[NSMutableDictionary dictionaryWithObjectsAndKeys:
 									user.firstName ?: [NSNull null], @"firstName",
 									user.lastName ?: [NSNull null], @"lastName",
-									user.addressLineOne ?: [NSNull null], @"addressLineOne",
-									user.city ?: [NSNull null], @"city",
-									user.state ?: [NSNull null], @"state",
-									user.zip ?: [NSNull null], @"zip",
-									self.dataSource[@"number"] ?: [NSNull null], @"number",
+									@"158 Brighton Avenue", @"addressLineOne",
+									@"Oakland", @"city",
+									@"CA", @"state",
+									@"94602", @"zip",
+//									user.addressLineOne ?: [NSNull null], @"addressLineOne",
+//									user.city ?: [NSNull null], @"city",
+//									user.state ?: [NSNull null], @"state",
+//									user.zip ?: [NSNull null], @"zip",
+									@"378282246310005", @"number",
+//									self.dataSource[@"number"] ?: [NSNull null], @"number",
 									self.dataSource[@"month"] ?: [NSNull null], @"month",
 									self.dataSource[@"year"] ?: [NSNull null], @"year",
 									self.dataSource[@"cvv"] ?: [NSNull null], @"cvv",
@@ -230,6 +236,7 @@
 						  cancelButtonTitle:@"OK"
 						  otherButtonTitles:nil] show];
 	}];
+	 */
 }
 
 @end

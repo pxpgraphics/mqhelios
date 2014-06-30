@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SignInViewController.h"
 #import "CardViewController.h"
+#import "DealViewController.h"
 #import "GiftView.h"
 #import "PayView.h"
 #import "StoresView.h"
@@ -30,8 +31,10 @@
 @property (nonatomic, weak) IBOutlet UILabel * nameLabel;
 @property (nonatomic, weak) IBOutlet UIImageView * profileImage;
 
+@property (nonatomic, weak) DealViewController *dealVC;
 @property (nonatomic, weak) CardViewController *cardVC;
 @property (nonatomic, weak) SignInViewController * signInVC;
+@property (nonatomic, weak) UINavigationController *dealNavController;
 @property (nonatomic, weak) UINavigationController *cardNavController;
 @property (nonatomic, weak) UINavigationController *signUpNavController;
 @property (nonatomic, weak) UINavigationController *payNavController;

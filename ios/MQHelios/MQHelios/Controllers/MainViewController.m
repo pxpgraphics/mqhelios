@@ -9,6 +9,7 @@
 #import "MainViewController.h"
 #import "UserManager.h"
 #import "MQMerchantCell.h"
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #define BLANK_VIEW_TAG 10000
 
@@ -18,6 +19,7 @@
 @property (nonatomic, strong, readwrite) PayView * payView;
 @property (nonatomic, strong, readwrite) StoresView * storesView;
 @property (nonatomic, strong, readwrite) UIView *previousPopoverView;
+@property (nonatomic, strong, readwrite) NSMutableDictionary *dataSource;
 @property (nonatomic, strong) PKPass *userPass;
 
 @end
@@ -43,7 +45,7 @@
     // Do any additional setup after loading the view.
 
 	PFInstallation *currentInstallation = [PFInstallation currentInstallation];
-	self.notificationLabel.text = [NSString stringWithFormat:@"%i", currentInstallation.badge];
+	self.notificationLabel.text = [NSString stringWithFormat:@"%li", (long)currentInstallation.badge];
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([defaults valueForKey:@"email"] && [defaults valueForKey:@"password"]) {
@@ -110,6 +112,15 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+#pragma mark - Lazy loading
+- (NSMutableDictionary *)dataSource
+{
+	if (!_dataSource) {
+		_dataSource = [[NSMutableDictionary alloc] initWithCapacity:2];
+	}
+	return _dataSource;
+}
+
 #pragma mark - Status bar
 - (UIStatusBarStyle)preferredStatusBarStyle
 {
@@ -174,12 +185,13 @@
 {
 	MQMerchantCell *cell = [tableView dequeueReusableCellWithIdentifier:@"merchantCell" forIndexPath:indexPath];
 
-	cell.brandNameLabel.text = @"Farley's Coffee"; // self.merchant.name;
-	cell.storeAddressLabel.text = @"123 Easy Street"; // self.store.address ?: @"";
-	cell.dealCountLabel.attributedText = [[NSAttributedString alloc] initWithString:@"3 offers"]; // dealCountStr;
+	cell.brandNameLabel.text = @"Subway"; // self.merchant.name;
+	cell.storeAddressLabel.text = @"6472 Hollis Street"; // self.store.address ?: @"";
+	cell.dealCountLabel.attributedText = [[NSAttributedString alloc] initWithString:@"2 offers"]; // dealCountStr;
 	cell.storeCountLabel.attributedText = [[NSAttributedString alloc] initWithString:@"3 stores"];  // storeCountStr;
 	cell.categoryLabel.text = @"Dining"; // self.merchant.category;
-	cell.distanceLabel.text = @"0.4 mi"; // distanceStr ?: @"";
+	cell.distanceLabel.text = @"0.2 mi"; // distanceStr ?: @"";
+	[cell.brandLogoImageView setImageWithURL:[NSURL URLWithString:@"https://c15043012.ssl.cf2.rackcdn.com/system/brand/mobile_icon/357.png"]];
 
 	return cell;
 }
@@ -187,6 +199,17 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	return [MQMerchantCell height];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (!self.dealNavController) {
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		self.dealNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"DealNavControllerIdentifier"];
+	}
+
+	[self.navigationController presentViewController:self.dealNavController animated:YES completion:nil];
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 #pragma mark - Navigation
