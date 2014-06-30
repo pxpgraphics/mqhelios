@@ -380,7 +380,7 @@
                                     <segue destination="z6u-LW-1tO" kind="custom" customClass="DismissWithoutAnimationSegue" id="Pyd-as-BTX"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="CardBack" translatesAutoresizingMaskIntoConstraints="NO" id="zxV-W6-AM8">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Barcode" translatesAutoresizingMaskIntoConstraints="NO" id="zxV-W6-AM8">
                                 <rect key="frame" x="30" y="120" width="260" height="162"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -508,7 +508,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="CardBack" width="600" height="364"/>
+        <image name="Barcode" width="562" height="324"/>
         <image name="Logo" width="200" height="200"/>
         <image name="Sign In" width="640" height="1136"/>
     </resources>

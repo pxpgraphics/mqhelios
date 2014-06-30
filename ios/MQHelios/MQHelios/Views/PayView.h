@@ -30,6 +30,7 @@
 @property (nonatomic, readonly, strong) UIScrollView *scrollView;
 @property (nonatomic, readonly, strong) UIPageControl *pageControl;
 @property (nonatomic, readonly, strong) UIImageView *cardBackView;
+@property (nonatomic, readonly, strong) UILabel *cardBackLabel;
 @property (nonatomic, readonly, strong) UIImageView *cardFrontView;
 @property (nonatomic, readonly, strong) UIButton *payButton;
 @property (nonatomic, readonly, strong) UIButton *reloadButton;
