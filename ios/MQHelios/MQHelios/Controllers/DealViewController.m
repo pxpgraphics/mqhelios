@@ -7,6 +7,7 @@
 //
 
 #import "DealViewController.h"
+#import "MQDealCell.h"
 
 @interface DealViewController ()
 
@@ -60,10 +61,9 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	UITableViewCell *cell;
+	MQDealCell *cell = [tableView dequeueReusableCellWithIdentifier:@"dealCell" forIndexPath:indexPath];
 	NSUInteger row = indexPath.row;
 	NSUInteger section = indexPath.section;
-
 	
 	return cell;
 }

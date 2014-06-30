@@ -20,6 +20,7 @@
 @property (nonatomic, strong, readwrite) StoresView * storesView;
 @property (nonatomic, strong, readwrite) UIView *previousPopoverView;
 @property (nonatomic, strong, readwrite) NSMutableDictionary *dataSource;
+@property (nonatomic, strong) PKPass *userPass;
 
 @end
 
@@ -200,6 +201,17 @@
 	return [MQMerchantCell height];
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if (!self.dealNavController) {
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		self.dealNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"DealNavControllerIdentifier"];
+	}
+
+	[self.navigationController presentViewController:self.dealNavController animated:YES completion:nil];
+	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
 #pragma mark - Navigation
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -292,19 +304,12 @@
 
 - (void)presentCardViewController:(id)sender
 {
-	if (!self.dealNavController) {
+	if (!self.cardNavController) {
 		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-		self.dealNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"DealNavControllerIdentifier"];
+		self.cardNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"CardNavControllerIdentifier"];
 	}
 
-	[self.navigationController presentViewController:self.dealNavController animated:YES completion:nil];
-
-//	if (!self.cardNavController) {
-//		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//		self.cardNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"CardNavControllerIdentifier"];
-//	}
-//
-//	[self.navigationController presentViewController:self.cardNavController animated:YES completion:nil];
+	[self.navigationController presentViewController:self.cardNavController animated:YES completion:nil];
 }
 
 - (IBAction)pushToSettingsViewController:(id)sender

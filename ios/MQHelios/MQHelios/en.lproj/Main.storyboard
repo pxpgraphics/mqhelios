@@ -526,7 +526,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" rowHeight="88" id="bqb-Le-mVc" customClass="MQDealCell">
+                            <tableViewCell contentMode="scaleToFill" ambiguous="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="dealCell" rowHeight="88" id="bqb-Le-mVc" customClass="MQDealCell">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bqb-Le-mVc" id="AjQ-gV-eDT">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -538,7 +538,14 @@
                             <outlet property="delegate" destination="zUh-4B-OMM" id="XOR-e7-QR6"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Select A Deal" id="Ttj-e9-h7g"/>
+                    <navigationItem key="navigationItem" title="Select A Deal" id="Ttj-e9-h7g">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="bLL-ly-Jdx">
+                            <color key="tintColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="zUh-4B-OMM" kind="custom" customClass="DimissSegue" id="KjI-ki-MXA"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4z2-Ya-6uD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -661,5 +668,6 @@
         <segue reference="Nwz-mH-rFp"/>
         <segue reference="h1k-c4-yyY"/>
         <segue reference="3Im-bb-e9q"/>
+        <segue reference="bZu-UM-ymG"/>
     </inferredMetricsTieBreakers>
 </document>
