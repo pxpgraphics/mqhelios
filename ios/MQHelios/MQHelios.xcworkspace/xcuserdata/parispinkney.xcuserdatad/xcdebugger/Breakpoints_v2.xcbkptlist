@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MQHelios/Controllers/CardViewController.m"
-            timestampString = "425846773.092242"
+            filePath = "Pods/MQApollo/Code/Models/MQUser.m"
+            timestampString = "425847188.330167"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
-            landmarkName = "-addCard:"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "-initWithJSONData:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

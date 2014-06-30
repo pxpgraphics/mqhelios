@@ -195,6 +195,12 @@
 
 - (IBAction)addCard:(id)sender
 {
+	[self.view endEditing:YES];
+
+	if (self.dataSource.count < 4) {
+		return;
+	}
+
 	MQPUser *user = [UserManager sharedManager].user;
 	NSMutableDictionary *userInfo =[NSMutableDictionary dictionaryWithObjectsAndKeys:
 									user.firstName ?: [NSNull null], @"firstName",
@@ -203,10 +209,6 @@
 									user.city ?: [NSNull null], @"city",
 									user.state ?: [NSNull null], @"state",
 									user.zip ?: [NSNull null], @"zip",
-									self.dataSource[@"addressLineOne"] ?: [NSNull null], @"addressLineOne",
-									self.dataSource[@"city"] ?: [NSNull null], @"city",
-									self.dataSource[@"state"] ?: [NSNull null], @"state",
-									self.dataSource[@"zip"] ?: [NSNull null], @"zip",
 									self.dataSource[@"number"] ?: [NSNull null], @"number",
 									self.dataSource[@"month"] ?: [NSNull null], @"month",
 									self.dataSource[@"year"] ?: [NSNull null], @"year",
@@ -222,7 +224,11 @@
 	[[UserManager sharedManager] createPaymentProfileWithUserInfo:[userInfo copy] successBlock:^{
 		NSLog(@"Sucess!!!!");
 	} failureBlock:^(NSError *error) {
-
+		[[[UIAlertView alloc] initWithTitle:@"Card Failed"
+									message:error.localizedDescription
+								   delegate:nil
+						  cancelButtonTitle:@"OK"
+						  otherButtonTitles:nil] show];
 	}];
 }
 
