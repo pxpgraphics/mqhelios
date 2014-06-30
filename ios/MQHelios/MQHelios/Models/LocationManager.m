@@ -38,7 +38,7 @@
 		_locationManager.distanceFilter = kCLDistanceFilterNone;
 		_locationManager.headingFilter = kCLHeadingFilterNone;
 		_locationManager.pausesLocationUpdatesAutomatically = YES;
-		[_locationManager requestAlwaysAuthorization];
+//		[_locationManager requestAlwaysAuthorization];
 		[_locationManager startUpdatingLocation];
 	}
 	return self;

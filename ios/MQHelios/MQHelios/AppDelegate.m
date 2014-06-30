@@ -81,10 +81,10 @@
 
 - (void)setupParsePushNotificationsForApplication:(UIApplication *)application
 {
-	UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
-	UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
-	[application registerUserNotificationSettings:notificationSettings];
-	[application registerForRemoteNotifications];
+//	UIUserNotificationType notificationTypes = UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound;
+//	UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:notificationTypes categories:nil];
+//	[application registerUserNotificationSettings:notificationSettings];
+//	[application registerForRemoteNotifications];
 }
 
 - (void)resetBadgeNumberForCurrentInstallation
