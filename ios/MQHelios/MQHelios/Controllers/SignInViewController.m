@@ -7,6 +7,7 @@
 //
 
 #import "SignInViewController.h"
+#import "UserManager.h"
 
 @interface SignInViewController () <UITextFieldDelegate>
 
@@ -50,6 +51,35 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 	
+}
+
+- (IBAction)signInUser:(id)sender
+{
+	if (!self.usernameTextField.text || !self.passwordTextField.text) {
+		return;
+	}
+
+	[self.view endEditing:YES];
+
+	NSDictionary *userInfo = @{ @"email": [self.usernameTextField.text copy],
+								@"password": [self.passwordTextField.text copy] };
+
+	__typeof__(self) __weak weakSelf = self;
+	[[UserManager sharedManager] loginUserWithUserInfo:userInfo successBlock:^{
+		MQPUser *user = [UserManager sharedManager].user;
+		NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+		[defaults setObject:user.authenticationToken forKey:@"authenticationToken"];
+		[defaults setObject:user.email forKey:@"email"];
+		[defaults setObject:userInfo[@"password"] forKey:@"password"];
+		[defaults synchronize];
+		[weakSelf dismissViewControllerAnimated:YES completion:nil];
+	} failureBlock:^(NSError *error) {
+		[[[UIAlertView alloc] initWithTitle:@"Log In Failed"
+									message:error.localizedDescription
+								   delegate:nil
+						  cancelButtonTitle:@"OK"
+						  otherButtonTitles:nil] show];
+	}];
 }
 
 @end

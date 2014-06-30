@@ -25,6 +25,8 @@
 @property (nonatomic, readonly, strong) UILabel *headlineLabel;
 
 // Logged in.
+@property (nonatomic, readonly, strong) UILabel *balanceLabel;
+@property (nonatomic, readonly, strong) UILabel *dateLabel;
 @property (nonatomic, readonly, strong) UIScrollView *scrollView;
 @property (nonatomic, readonly, strong) UIPageControl *pageControl;
 @property (nonatomic, readonly, strong) UIImageView *cardBackView;
@@ -32,5 +34,7 @@
 @property (nonatomic, readonly, strong) UIButton *payButton;
 @property (nonatomic, readonly, strong) UIButton *reloadButton;
 @property (nonatomic, readonly, strong) UIButton *manageButton;
+@property (nonatomic, readonly, strong) UIButton *cancelButton;
+@property (nonatomic, readonly, strong) UIButton *confirmButton;
 
 @end

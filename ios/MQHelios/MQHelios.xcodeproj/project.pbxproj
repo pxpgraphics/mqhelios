@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		761080EF195A4EE2009BBDE3 /* MQPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 761080EE195A4EE2009BBDE3 /* MQPUser.m */; };
-		7D602B211EA94C3FB15DCC8C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 626538F3CA1E493B83A012D0 /* libPods.a */; };
+		AD0659DC195DF5CB00FFE03C /* DismissWithoutAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0659DB195DF5CB00FFE03C /* DismissWithoutAnimationSegue.m */; };
 		AD16AC31195A536C00FAD7F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD16AC33195A536C00FAD7F0 /* Main.storyboard */; };
 		AD16AC36195A555A00FAD7F0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD16AC35195A555A00FAD7F0 /* MainViewController.m */; };
+		AD42CA02196122AD00648EE3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD42CA01196122AD00648EE3 /* libPods.a */; };
 		AD4CAD01195BA75A00E0AC85 /* MQMerchantCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4CAD00195BA75A00E0AC85 /* MQMerchantCell.m */; };
 		AD4CAD04195BA78A00E0AC85 /* UILabel+CustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4CAD03195BA78A00E0AC85 /* UILabel+CustomLabel.m */; };
 		ADA5493C195A23C800ECD0F5 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA5493B195A23C800ECD0F5 /* UserManager.m */; };
@@ -19,6 +20,7 @@
 		ADBB80F4195B5EE300B436C0 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB80F3195B5EE300B436C0 /* SignUpViewController.m */; };
 		ADBB80F7195B5EEF00B436C0 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB80F6195B5EEF00B436C0 /* SignInViewController.m */; };
 		ADBB80FA195B66A000B436C0 /* DimissSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB80F9195B66A000B436C0 /* DimissSegue.m */; };
+		ADC00C61195DF1B7002D921E /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC00C60195DF1B7002D921E /* PayViewController.m */; };
 		ADEB42DB1958D0960095AB50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42DA1958D0960095AB50 /* main.m */; };
 		ADEB42DE1958D0960095AB50 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42DD1958D0960095AB50 /* AppDelegate.m */; };
 		ADEB42E01958D0960095AB50 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADEB42DF1958D0960095AB50 /* Images.xcassets */; };
@@ -47,9 +49,12 @@
 		626538F3CA1E493B83A012D0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		761080ED195A4EE2009BBDE3 /* MQPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQPUser.h; sourceTree = "<group>"; };
 		761080EE195A4EE2009BBDE3 /* MQPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQPUser.m; sourceTree = "<group>"; };
+		AD0659DA195DF5CB00FFE03C /* DismissWithoutAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissWithoutAnimationSegue.h; sourceTree = "<group>"; };
+		AD0659DB195DF5CB00FFE03C /* DismissWithoutAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissWithoutAnimationSegue.m; sourceTree = "<group>"; };
 		AD16AC32195A536C00FAD7F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AD16AC34195A555A00FAD7F0 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Controllers/MainViewController.h; sourceTree = "<group>"; };
 		AD16AC35195A555A00FAD7F0 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Controllers/MainViewController.m; sourceTree = "<group>"; };
+		AD42CA01196122AD00648EE3 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD4CACFF195BA75A00E0AC85 /* MQMerchantCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQMerchantCell.h; sourceTree = "<group>"; };
 		AD4CAD00195BA75A00E0AC85 /* MQMerchantCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQMerchantCell.m; sourceTree = "<group>"; };
 		AD4CAD02195BA78A00E0AC85 /* UILabel+CustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+CustomLabel.h"; sourceTree = "<group>"; };
@@ -65,6 +70,8 @@
 		ADBB80F6195B5EEF00B436C0 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignInViewController.m; path = Controllers/SignInViewController.m; sourceTree = "<group>"; };
 		ADBB80F8195B66A000B436C0 /* DimissSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DimissSegue.h; sourceTree = "<group>"; };
 		ADBB80F9195B66A000B436C0 /* DimissSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DimissSegue.m; sourceTree = "<group>"; };
+		ADC00C5F195DF1B7002D921E /* PayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PayViewController.h; path = Controllers/PayViewController.h; sourceTree = "<group>"; };
+		ADC00C60195DF1B7002D921E /* PayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PayViewController.m; path = Controllers/PayViewController.m; sourceTree = "<group>"; };
 		ADEB42D51958D0960095AB50 /* MQHelios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MQHelios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADEB42D91958D0960095AB50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADEB42DA1958D0960095AB50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -94,9 +101,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD42CA02196122AD00648EE3 /* libPods.a in Frameworks */,
 				ADA5493E195A23F400ECD0F5 /* MapKit.framework in Frameworks */,
 				ADEB42F71958D0E00095AB50 /* PassKit.framework in Frameworks */,
-				7D602B211EA94C3FB15DCC8C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,10 +133,12 @@
 			children = (
 				AD16AC34195A555A00FAD7F0 /* MainViewController.h */,
 				AD16AC35195A555A00FAD7F0 /* MainViewController.m */,
-				ADBB80F2195B5EE300B436C0 /* SignUpViewController.h */,
-				ADBB80F3195B5EE300B436C0 /* SignUpViewController.m */,
+				ADC00C5F195DF1B7002D921E /* PayViewController.h */,
+				ADC00C60195DF1B7002D921E /* PayViewController.m */,
 				ADBB80F5195B5EEF00B436C0 /* SignInViewController.h */,
 				ADBB80F6195B5EEF00B436C0 /* SignInViewController.m */,
+				ADBB80F2195B5EE300B436C0 /* SignUpViewController.h */,
+				ADBB80F3195B5EE300B436C0 /* SignUpViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -196,6 +205,8 @@
 				ADA54935195A233900ECD0F5 /* Views */,
 				ADBB80F8195B66A000B436C0 /* DimissSegue.h */,
 				ADBB80F9195B66A000B436C0 /* DimissSegue.m */,
+				AD0659DA195DF5CB00FFE03C /* DismissWithoutAnimationSegue.h */,
+				AD0659DB195DF5CB00FFE03C /* DismissWithoutAnimationSegue.m */,
 			);
 			path = MQHelios;
 			sourceTree = "<group>";
@@ -233,6 +244,7 @@
 		ADEB42F81958D1330095AB50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD42CA01196122AD00648EE3 /* libPods.a */,
 				ADA5493D195A23F400ECD0F5 /* MapKit.framework */,
 				ADEB42F61958D0E00095AB50 /* PassKit.framework */,
 				626538F3CA1E493B83A012D0 /* libPods.a */,
@@ -385,10 +397,12 @@
 				AD4CAD01195BA75A00E0AC85 /* MQMerchantCell.m in Sources */,
 				ADFBC5DB195A852900B6C126 /* NSObject+UIPopoverAdditions.m in Sources */,
 				ADFBC5E7195AA15800B6C126 /* PayView.m in Sources */,
+				ADC00C61195DF1B7002D921E /* PayViewController.m in Sources */,
 				ADBB80F4195B5EE300B436C0 /* SignUpViewController.m in Sources */,
 				AD4CAD04195BA78A00E0AC85 /* UILabel+CustomLabel.m in Sources */,
 				ADEB42FB1958D1E70095AB50 /* MQHAppManager.m in Sources */,
 				ADBB80F7195B5EEF00B436C0 /* SignInViewController.m in Sources */,
+				AD0659DC195DF5CB00FFE03C /* DismissWithoutAnimationSegue.m in Sources */,
 				ADBB80F1195B4CFE00B436C0 /* LocationManager.m in Sources */,
 				AD16AC36195A555A00FAD7F0 /* MainViewController.m in Sources */,
 				ADEB42DE1958D0960095AB50 /* AppDelegate.m in Sources */,
@@ -516,6 +530,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46616DFC0047448A8DBD776F /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
@@ -526,6 +541,10 @@
 				INFOPLIST_FILE = MQHelios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "935A2B33-9C26-439A-BA0B-BC69ABD13A29";
 			};
@@ -535,6 +554,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46616DFC0047448A8DBD776F /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
@@ -545,6 +565,10 @@
 				INFOPLIST_FILE = MQHelios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "935A2B33-9C26-439A-BA0B-BC69ABD13A29";
 			};

@@ -11,6 +11,9 @@
 #import <AFNetworkActivityIndicatorManager.h>
 #import "AFHTTPRequestOperation.h"
 
+NSString * const kUserManagerUserDidFinishLoadingNotification = @"kUserManagerUserDidFinishLoadingNotification";
+NSString * const kUserManagerUserDidFailLoadingNotification = @"kUserManagerUserDidFailLoadingNotification";
+
 @interface UserManager ()
 
 @property (nonatomic) BOOL loading;
@@ -21,25 +24,81 @@
 #pragma mark User Registration
 - (NSDictionary *)preparedParametersForUserRegistrationWithUserInfo:(NSDictionary *)userInfo
 {
-    NSDictionary *parameters = @{ @"customer" :
-                                      @{ @"salutation" : userInfo[@"gender"],
-                                         @"addresses_attributes" :
-                                             @[ @{ @"state" : userInfo[@"state"],
-                                                   @"city" : userInfo[@"city"],
-                                                   @"line_one": userInfo[@"addressLineOne"],
-                                                   @"zip": userInfo[@"zip"]
-                                                   }
-                                                ],
-                                         @"first_name" : userInfo[@"firstName"],
-                                         @"phone" : userInfo[@"phone"],
-                                         @"mobile_phone" : userInfo[@"mobilePhone"],
-                                         @"last_name" : userInfo[@"lastName"],
-                                         @"email" : userInfo[@"email"]
-                                         }
-                                  };
-    
-    NSLog(@"Parameters: %@", parameters);
-    return parameters;
+	NSMutableDictionary *parameters = [NSMutableDictionary dictionaryWithDictionary:
+									   @{ @"customer" :
+											  @{ @"salutation" : userInfo[@"gender"] ?: [NSNull null],
+												 @"addresses_attributes" :
+													 @[ @{ @"state" : userInfo[@"state"] ?: [NSNull null],
+														   @"city" : userInfo[@"city"] ?: [NSNull null],
+														   @"line_one": userInfo[@"addressLineOne"] ?: [NSNull null],
+														   @"zip": userInfo[@"zip" ] ?: [NSNull null]
+														   }
+														],
+												 @"first_name" : userInfo[@"firstName"] ?: [NSNull null],
+												 @"phone" : userInfo[@"phone"] ?: [NSNull null],
+												 @"mobile_phone" : userInfo[@"mobilePhone"] ?: [NSNull null],
+												 @"last_name" : userInfo[@"lastName"] ?: [NSNull null],
+												 @"email" : userInfo[@"email"] ?: [NSNull null],
+												 @"birthday" : userInfo[@"birthday"] ?: [NSNull null],
+												 @"password" : userInfo[@"password"] ?: [NSNull null]
+												 }
+										  } ];
+
+	NSArray *keys = [[parameters copy] allKeysForObject:[NSNull null]];
+	for (id key in keys) {
+		[parameters removeObjectForKey:key];
+	}
+
+    return [parameters copy];
+}
+
+- (void)loginUserWithUserInfo:(NSDictionary *)userInfo
+				 successBlock:(MQHUserManagerSuccessBlock)successBlock
+				 failureBlock:(MQHUserManagerFailureBlock)failureBlock
+{
+	if (self.loading) {
+		NSLog(@"Operation is already in progress!");
+		return;
+	}
+	self.loading = YES;
+
+	__typeof__(self) __weak weakSelf = self;
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	manager.requestSerializer = [AFJSONRequestSerializer serializer];
+	manager.responseSerializer = [AFJSONResponseSerializer serializer];
+	manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"text/html", @"application/json", nil];
+	manager.credential = [NSURLCredential credentialWithUser:userInfo[@"email"]
+													password:userInfo[@"password"]
+												 persistence:NSURLCredentialPersistencePermanent];
+	[manager GET:[MQHAppManager sharedManager].userAuthGETURLString
+	  parameters:nil
+		 success:^(AFHTTPRequestOperation *operation, id responseObject) {
+			 weakSelf.loading = NO;
+			 NSLog(@"Success: %@", responseObject);
+			 if (responseObject) {
+				 weakSelf.user = [MQPUser initWithJSONData:responseObject];
+				 [[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFinishLoadingNotification object:nil];
+				 if (successBlock) {
+					 successBlock();
+				 }
+			 } else {
+				 NSError *error = [NSError errorWithDomain:@"com.marqeta.MQPegasus.errorDomain"
+													  code:0
+												  userInfo:@{ NSLocalizedDescriptionKey: @"Response object not found!" }];
+				 [[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFailLoadingNotification object:nil];
+				 if (failureBlock) {
+					 failureBlock(error);
+				 }
+			 }
+		 }
+		 failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+			 weakSelf.loading = NO;
+			 NSLog(@"Error: %@", error.localizedDescription);
+			 [[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFailLoadingNotification object:nil];
+			 if (failureBlock) {
+				 failureBlock(error);
+			 }
+		 }];
 }
 
 - (void)registerUserWithUserInfo:(NSDictionary *)userInfo
@@ -62,14 +121,16 @@
               weakSelf.loading = NO;
               NSLog(@"Success = %@", responseObject);
               if (responseObject) {
-                  weakSelf.user = [MQPUser initWithJSONData:responseObject];
+				  weakSelf.user = [MQPUser initWithJSONData:responseObject];
+				  [[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFinishLoadingNotification object:nil];
                   if (successBlock) {
                       successBlock();
                   }
               } else {
                   NSError *error = [NSError errorWithDomain:@"com.marqeta.MQPegasus.errorDomain"
                                                        code:0
-                                                   userInfo:@{ NSLocalizedDescriptionKey: @"Response object not found!" }];
+												   userInfo:@{ NSLocalizedDescriptionKey: @"Response object not found!" }];
+				  [[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFailLoadingNotification object:nil];
                   if (failureBlock) {
                       failureBlock(error);
                   }
@@ -77,7 +138,8 @@
           }
           failure:^(AFHTTPRequestOperation *operation, NSError *error) {
               weakSelf.loading = NO;
-              NSLog(@"Failure = %@", error);
+			  NSLog(@"Failure = %@", error);
+			 [[NSNotificationCenter defaultCenter] postNotificationName:kUserManagerUserDidFailLoadingNotification object:nil];
               if (failureBlock) {
                   failureBlock(error);
               }

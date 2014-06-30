@@ -39,7 +39,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if ([defaults valueForKey:@"email"] && [defaults valueForKey:@"password"]) {
+		NSDictionary *userInfo = @{ @"email": [defaults valueForKey:@"email"],
+									@"password": [defaults valueForKey:@"password"] };
+		__typeof__(self) __weak weakSelf = self;
+		[[UserManager sharedManager] loginUserWithUserInfo:userInfo successBlock:^{
+			[UIView animateWithDuration:0.6 animations:^{
+				[self.view viewWithTag:10000].alpha = 0.0f;
+				weakSelf.profileView.hidden = NO;
+			}];
+		} failureBlock:^(NSError *error) {
+			[UIView animateWithDuration:0.6 animations:^{
+				[self.view viewWithTag:10000].alpha = 0.0f;
+				weakSelf.profileView.hidden = YES;
+			}];
+		}];
+	} else {
+		[UIView animateWithDuration:0.6 animations:^{
+			[self.view viewWithTag:10000].alpha = 0.0f;
+			self.profileView.hidden = YES;
+		}];
+	}
+
 	[self setNeedsStatusBarAppearanceUpdate];
+
+	__typeof__(self) __weak weakSelf = self;
+	[[NSNotificationCenter defaultCenter] addObserverForName:kUserManagerUserDidFinishLoadingNotification
+													  object:nil
+													   queue:[NSOperationQueue mainQueue]
+												  usingBlock:^(NSNotification *note) {
+													  MQPUser *user = [UserManager sharedManager].user;
+													  weakSelf.nameLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
+												  }];
 }
 
 - (void)viewWillLayoutSubviews
@@ -49,7 +81,7 @@
 	if ([UserManager sharedManager].user) {
 		self.profileView.hidden = NO;
 	} else {
-//		self.profileView.hidden = YES;
+		self.profileView.hidden = YES;
 	}
 }
 
@@ -173,7 +205,12 @@
 		self.payView = [[PayView alloc] init];
 		self.payView.scrollView.delegate = self;
 		[self.payView.pageControl addTarget:self
-									 action:@selector(cardViewDidChange) forControlEvents:UIControlEventValueChanged];
+									 action:@selector(cardViewDidChange)
+						   forControlEvents:UIControlEventValueChanged];
+
+		[self.payView.payButton addTarget:self
+								   action:@selector(presentPayViewController:)
+						 forControlEvents:UIControlEventTouchUpInside];
 	}
 	[self presentPopoverView:self.payView forSender:sender];
 }
@@ -198,6 +235,26 @@
         self.giftView = [[GiftView alloc] init];
     }
     [self presentPopoverView:self.giftView forSender:sender];
+}
+
+- (void)presentPayViewController:(id)sender
+{
+	if (!self.payNavController) {
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		self.payNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"PayNavControllerIdentifier"];
+	}
+
+	if (self.payView.pageControl.currentPage == 0) {
+		self.payView.pageControl.currentPage = 1;
+		[self cardViewDidChange];
+	}
+
+	[self.navigationController presentViewController:self.payNavController animated:NO completion:^{
+		self.payNavController.view.alpha = 0.0f;
+		[UIView animateWithDuration:0.6 animations:^{
+			self.payNavController.view.alpha = 1.0f;
+		}];
+	}];
 }
 
 - (IBAction)pushToSettingsViewController:(id)sender
