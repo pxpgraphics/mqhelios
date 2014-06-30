@@ -45,6 +45,10 @@ extern NSString * const kUserManagerUserDidFailLoadingNotification;
 - (void)createPassWithSuccessBlock:(MQHUserManagerSuccessBlock)successBlock
                       failureBlock:(MQHUserManagerFailureBlock)failureBlock;
 
+- (void)passUpdateForPassWithPassSerialID:(NSString *)passSerialID
+                       successBlock:(MQHUserManagerSuccessBlock)successBlock
+                       failureBlock:(MQHUserManagerFailureBlock)failureBlock;
+
 + (UserManager *)sharedManager;
 
 @end
