@@ -7,6 +7,15 @@
 //
 
 #import "SignUpViewController.h"
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
+
+static NSString *googleMapsResultsKey = @"results";
+static NSString *googleMapsAddressComponentsKey = @"address_components";
+static NSString *googleMapsAdministrativeAreaKey = @"administrative_area_level_1";
+static NSString *googleMapsLocalityKey = @"locality";
+static NSString *googleMapsLongNameKey = @"long_name";
+static NSString *googleMapsShortNameKey = @"short_name";
+static NSString *googleMapsTypesKey = @"types";
 
 @interface SignUpViewController () <UITextFieldDelegate>
 
@@ -195,23 +204,25 @@
 		case 0:
 			if (row == 0) {
 				// First name.
-
+				[self.dataSource setValue:textField.text forKey:@"firstName"];
 			} else {
 				// Last name.
-
+				[self.dataSource setValue:textField.text forKey:@"lastName"];
 			}
 			break;
 		case 1:
 			// Email.
-
+			[self.dataSource setValue:textField.text forKey:@"email"];
 			break;
 		case 2:
 			if (row == 0) {
 				// Password.
-
-			} else {
+				[self.dataSource setValue:textField.text forKey:@"password"];
+			} else if (row == 1) {
 				// Confirm password.
-
+				if (![self.dataSource[@"password"] isEqualToString:textField.text]) {
+					[self.dataSource removeObjectForKey:@"password"];
+				}
 			}
 			break;
 		case 3:
@@ -232,18 +243,28 @@
 		case 4:
 			if (row == 0) {
 				// Street address.
-
+				[self.dataSource setValue:textField.text forKey:@"addressLineOne"];
 			} else {
 				// Zip code.
-
+				[self.dataSource setValue:textField.text forKey:@"zip"];
 			}
 			break;
 	}
-	[textField becomeFirstResponder];
+	NSLog(@"%@", textField.text);
 }
 
 #pragma mark - Text field delegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+	[self selectTableViewCellWithTextfield:textField];
+	return YES;
+}
 
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+{
+	[self selectTableViewCellWithTextfield:textField];
+	return YES;
+}
 
 #pragma mark - Navigation
 
@@ -253,6 +274,92 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
 	
+}
+
+- (void)selectTableViewCellWithTextfield:(UITextField *)textField
+{
+	if ([textField.superview.superview isKindOfClass:[UITableViewCell class]]) {
+		UITableViewCell *cell = (UITableViewCell *)textField.superview.superview;
+		NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+		[self tableView:self.tableView didSelectRowAtIndexPath:indexPath];
+	}
+}
+
+- (IBAction)signUpUser:(id)sender
+{
+	[self.view endEditing:YES];
+
+	if (self.dataSource.count < 6) {
+		return;
+	}
+
+	__typeof__(self) __weak weakSelf = self;
+	[self fetchFullAddressFromGoogleMapsWithSuccessBlock:^(NSArray *response) {
+		[weakSelf.dataSource setValue:response[0][@"short_name"] forKey:@"zip"];
+		[weakSelf.dataSource setValue:response[1][@"short_name"] forKey:@"city"];
+		[weakSelf.dataSource setValue:response[3][@"short_name"] forKey:@"state"];
+
+		NSDictionary *userInfo = @{ @"firstName": weakSelf.dataSource[@"firstName"] ?: [NSNull null],
+									@"lastName": weakSelf.dataSource[@"lastName"] ?: [NSNull null],
+									@"gender": weakSelf.dataSource[@"gender"] ?: [NSNull null],
+									@"email": weakSelf.dataSource[@"email"] ?: [NSNull null],
+									@"phone": weakSelf.dataSource[@"phone"] ?: [NSNull null],
+									@"mobile_phone": weakSelf.dataSource[@"mobile_phone"] ?: [NSNull null],
+									@"addressLineOne": weakSelf.dataSource[@"addressLineOne"] ?: [NSNull null],
+									@"city": weakSelf.dataSource[@"city"] ?: [NSNull null],
+									@"state": weakSelf.dataSource[@"state"] ?: [NSNull null],
+									@"zip": weakSelf.dataSource[@"zip"] ?: [NSNull null] };
+
+		[[UserManager sharedManager] registerUserWithUserInfo:userInfo successBlock:^{
+			NSLog(@"Registration complete!");
+		} failureBlock:^(NSError *error) {
+			NSLog(@"Registration failed with error: %@", error.localizedDescription);
+		}];
+	} failureBlock:^(NSError *error) {
+		return;
+	}];
+}
+
+- (void)fetchFullAddressFromGoogleMapsWithSuccessBlock:(GoogleMapsSuccessBlock)successBlock
+										  failureBlock:(GoogleMapsFailureBlock)failureBlock
+{
+	NSString *googleMapsURL = [[NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/geocode/json?address=%@&sensor=true", self.dataSource[@"zip"]] stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+	manager.requestSerializer = [AFJSONRequestSerializer serializer];
+	manager.responseSerializer = [AFJSONResponseSerializer serializer];
+	[manager GET:googleMapsURL parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+		NSArray *response = [responseObject objectForKey:googleMapsResultsKey];
+		if (response.count == 0) {
+			if (failureBlock) failureBlock(nil);
+		}
+
+		NSArray *addressComponents = [[responseObject[@"results"] firstObject] objectForKey:googleMapsAddressComponentsKey];
+		if (addressComponents.count > 0) {
+			if (successBlock) successBlock([addressComponents copy]);
+		} else {
+			if (failureBlock) failureBlock(nil);
+		}
+	} failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+		NSLog(@"Error: %@", error.localizedDescription);
+		failureBlock(error);
+	}];
+}
+
++ (NSDictionary *)abbreviatedStateInfo
+{
+	return [NSDictionary dictionaryWithObjects:@[ @"AL", @"AK", @"AZ", @"AR", @"CA", @"CO", @"CT", @"DE", @"FL", @"GA", @"HI", @"ID", @"IL", @"IN", @"IA", @"KS", @"KY", @"LA", @"ME", @"MD", @"MA", @"MI", @"MN", @"MS", @"MO", @"MT", @"NE", @"NV", @"NH", @"NJ", @"NM", @"NY", @"NC", @"ND", @"OH", @"OK", @"OR", @"PA", @"RI", @"SC", @"SD", @"TN", @"TX", @"UT", @"VT", @"VA", @"WA", @"WV", @"WI", @"WY" ]
+									   forKeys:@[ @"Alabama", @"Alaska", @"Arizona", @"Arkansas", @"California", @"Colorado", @"Connecticut", @"Delaware", @"Florida", @"Georgia", @"Hawaii", @"Idaho", @"Illinois", @"Indiana", @"Iowa", @"Kansas", @"Kentucky", @"Louisiana", @"Maine", @"Maryland", @"Massachusetts", @"Michigan", @"Minnesota", @"Mississippi", @"Missouri", @"Montana", @"Nebraska", @"Nevada", @"New Hampshire", @"New Jersey", @"New Mexico", @"New York", @"North Carolina", @"North Dakota", @"Ohio", @"Oklahoma", @"Oregon", @"Pennsylvania", @"Rhode Island", @"South Carolina", @"South Dakota", @"Tennessee", @"Texas", @"Utah", @"Vermont", @"Virginia", @"Washington", @"West Virginia", @"Wisconsin", @"Wyoming" ]];
+}
+
++ (BOOL)abbreviatedStateInfoAllValuesContainsString:(NSString *)string
+{
+	return [[[self abbreviatedStateInfo] allValues] containsObject:string];
+}
+
++ (BOOL)abbreviatedStateInfoAllKeyesContainsString:(NSString *)string
+{
+	return [[[self abbreviatedStateInfo] allKeys] containsObject:string];
 }
 
 @end

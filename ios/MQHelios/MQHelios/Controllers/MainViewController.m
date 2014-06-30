@@ -173,7 +173,12 @@
 		self.payView = [[PayView alloc] init];
 		self.payView.scrollView.delegate = self;
 		[self.payView.pageControl addTarget:self
-									 action:@selector(cardViewDidChange) forControlEvents:UIControlEventValueChanged];
+									 action:@selector(cardViewDidChange)
+						   forControlEvents:UIControlEventValueChanged];
+
+		[self.payView.payButton addTarget:self
+								   action:@selector(presentPayViewController:)
+						 forControlEvents:UIControlEventTouchUpInside];
 	}
 	[self presentPopoverView:self.payView forSender:sender];
 }
@@ -198,6 +203,26 @@
         self.giftView = [[GiftView alloc] init];
     }
     [self presentPopoverView:self.giftView forSender:sender];
+}
+
+- (void)presentPayViewController:(id)sender
+{
+	if (!self.payNavController) {
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		self.payNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"PayNavControllerIdentifier"];
+	}
+
+	if (self.payView.pageControl.currentPage == 0) {
+		self.payView.pageControl.currentPage = 1;
+		[self cardViewDidChange];
+	}
+
+	[self.navigationController presentViewController:self.payNavController animated:NO completion:^{
+		self.payNavController.view.alpha = 0.0f;
+		[UIView animateWithDuration:0.6 animations:^{
+			self.payNavController.view.alpha = 1.0f;
+		}];
+	}];
 }
 
 - (IBAction)pushToSettingsViewController:(id)sender

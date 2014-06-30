@@ -34,5 +34,7 @@
 @property (nonatomic, readonly, strong) UIButton *payButton;
 @property (nonatomic, readonly, strong) UIButton *reloadButton;
 @property (nonatomic, readonly, strong) UIButton *manageButton;
+@property (nonatomic, readonly, strong) UIButton *cancelButton;
+@property (nonatomic, readonly, strong) UIButton *confirmButton;
 
 @end

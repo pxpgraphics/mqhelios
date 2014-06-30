@@ -28,6 +28,7 @@
 
 @property (nonatomic, weak) SignInViewController * signInVC;
 @property (nonatomic, weak) UINavigationController *signUpNavController;
+@property (nonatomic, weak) UINavigationController *payNavController;
 @property (nonatomic, strong, readonly) GiftView * giftView;
 @property (nonatomic, strong, readonly) PayView * payView;
 @property (nonatomic, strong, readonly) StoresView * storesView;

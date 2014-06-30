@@ -1,19 +1,18 @@
 //
-//  SignInViewController.m
+//  PayViewController.m
 //  MQHelios
 //
-//  Created by Paris Pinkney on 6/25/14.
+//  Created by Paris Pinkney on 6/27/14.
 //  Copyright (c) 2014 Marqeta, Inc. All rights reserved.
 //
 
-#import "SignInViewController.h"
-#import "UserManager.h"
+#import "PayViewController.h"
 
-@interface SignInViewController () <UITextFieldDelegate>
+@interface PayViewController ()
 
 @end
 
-@implementation SignInViewController
+@implementation PayViewController
 
 - (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -30,13 +29,6 @@
     // Do any additional setup after loading the view.
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-	[super viewWillDisappear:animated];
-
-	[[self view] endEditing:YES];
-}
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -50,14 +42,11 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-	
 }
 
-- (IBAction)signInUser:(id)sender
+- (IBAction)dismissViewController:(id)sender
 {
-	if (!self.usernameTextField.text || !self.passwordTextField.text) {
-		return;
-	}
+	[self.navigationController dismissViewControllerAnimated:NO completion:nil];
 }
 
 @end

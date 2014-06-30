@@ -22,7 +22,7 @@
 - (NSDictionary *)preparedParametersForUserRegistrationWithUserInfo:(NSDictionary *)userInfo
 {
     NSDictionary *parameters = @{ @"customer" :
-                                      @{ @"salutation" : userInfo[@"gender"],
+                                      @{ // @"salutation" : userInfo[@"gender"],
                                          @"addresses_attributes" :
                                              @[ @{ @"state" : userInfo[@"state"],
                                                    @"city" : userInfo[@"city"],
@@ -31,8 +31,8 @@
                                                    }
                                                 ],
                                          @"first_name" : userInfo[@"firstName"],
-                                         @"phone" : userInfo[@"phone"],
-                                         @"mobile_phone" : userInfo[@"mobilePhone"],
+//                                         @"phone" : userInfo[@"phone"],
+//                                         @"mobile_phone" : userInfo[@"mobilePhone"],
                                          @"last_name" : userInfo[@"lastName"],
                                          @"email" : userInfo[@"email"]
                                          }
@@ -55,7 +55,7 @@
     __typeof__(self) __weak weakSelf = self;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
     [manager POST:[MQHAppManager sharedManager].userCreatePOSTURLString
        parameters:[self preparedParametersForUserRegistrationWithUserInfo:userInfo]
           success:^(AFHTTPRequestOperation *operation, id responseObject) {
