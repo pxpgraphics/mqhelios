@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		761080EF195A4EE2009BBDE3 /* MQPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 761080EE195A4EE2009BBDE3 /* MQPUser.m */; };
-		7D602B211EA94C3FB15DCC8C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 626538F3CA1E493B83A012D0 /* libPods.a */; };
 		AD0659DC195DF5CB00FFE03C /* DismissWithoutAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0659DB195DF5CB00FFE03C /* DismissWithoutAnimationSegue.m */; };
 		AD16AC31195A536C00FAD7F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD16AC33195A536C00FAD7F0 /* Main.storyboard */; };
 		AD16AC36195A555A00FAD7F0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD16AC35195A555A00FAD7F0 /* MainViewController.m */; };
+		AD42CA02196122AD00648EE3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AD42CA01196122AD00648EE3 /* libPods.a */; };
 		AD4CAD01195BA75A00E0AC85 /* MQMerchantCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4CAD00195BA75A00E0AC85 /* MQMerchantCell.m */; };
 		AD4CAD04195BA78A00E0AC85 /* UILabel+CustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4CAD03195BA78A00E0AC85 /* UILabel+CustomLabel.m */; };
 		ADA5493C195A23C800ECD0F5 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA5493B195A23C800ECD0F5 /* UserManager.m */; };
@@ -54,6 +54,7 @@
 		AD16AC32195A536C00FAD7F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AD16AC34195A555A00FAD7F0 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainViewController.h; path = Controllers/MainViewController.h; sourceTree = "<group>"; };
 		AD16AC35195A555A00FAD7F0 /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainViewController.m; path = Controllers/MainViewController.m; sourceTree = "<group>"; };
+		AD42CA01196122AD00648EE3 /* libPods.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libPods.a; path = "Pods/build/Debug-iphoneos/libPods.a"; sourceTree = "<group>"; };
 		AD4CACFF195BA75A00E0AC85 /* MQMerchantCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQMerchantCell.h; sourceTree = "<group>"; };
 		AD4CAD00195BA75A00E0AC85 /* MQMerchantCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQMerchantCell.m; sourceTree = "<group>"; };
 		AD4CAD02195BA78A00E0AC85 /* UILabel+CustomLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UILabel+CustomLabel.h"; sourceTree = "<group>"; };
@@ -100,9 +101,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD42CA02196122AD00648EE3 /* libPods.a in Frameworks */,
 				ADA5493E195A23F400ECD0F5 /* MapKit.framework in Frameworks */,
 				ADEB42F71958D0E00095AB50 /* PassKit.framework in Frameworks */,
-				7D602B211EA94C3FB15DCC8C /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,12 +133,12 @@
 			children = (
 				AD16AC34195A555A00FAD7F0 /* MainViewController.h */,
 				AD16AC35195A555A00FAD7F0 /* MainViewController.m */,
-				ADBB80F2195B5EE300B436C0 /* SignUpViewController.h */,
-				ADBB80F3195B5EE300B436C0 /* SignUpViewController.m */,
-				ADBB80F5195B5EEF00B436C0 /* SignInViewController.h */,
-				ADBB80F6195B5EEF00B436C0 /* SignInViewController.m */,
 				ADC00C5F195DF1B7002D921E /* PayViewController.h */,
 				ADC00C60195DF1B7002D921E /* PayViewController.m */,
+				ADBB80F5195B5EEF00B436C0 /* SignInViewController.h */,
+				ADBB80F6195B5EEF00B436C0 /* SignInViewController.m */,
+				ADBB80F2195B5EE300B436C0 /* SignUpViewController.h */,
+				ADBB80F3195B5EE300B436C0 /* SignUpViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -243,6 +244,7 @@
 		ADEB42F81958D1330095AB50 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AD42CA01196122AD00648EE3 /* libPods.a */,
 				ADA5493D195A23F400ECD0F5 /* MapKit.framework */,
 				ADEB42F61958D0E00095AB50 /* PassKit.framework */,
 				626538F3CA1E493B83A012D0 /* libPods.a */,
@@ -528,6 +530,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46616DFC0047448A8DBD776F /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
@@ -538,6 +541,10 @@
 				INFOPLIST_FILE = MQHelios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "935A2B33-9C26-439A-BA0B-BC69ABD13A29";
 			};
@@ -547,6 +554,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 46616DFC0047448A8DBD776F /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "";
@@ -557,6 +565,10 @@
 				INFOPLIST_FILE = MQHelios/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/build/Debug-iphoneos",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "935A2B33-9C26-439A-BA0B-BC69ABD13A29";
 			};

@@ -114,7 +114,7 @@
 	NSDictionary *regularAttributes = @{ NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-Regular" size:18.0],
 										 NSForegroundColorAttributeName: buttonColor};
 
-	NSMutableAttributedString *balance = [[NSMutableAttributedString alloc] initWithString:@"BALANCE  $888.88"];
+	NSMutableAttributedString *balance = [[NSMutableAttributedString alloc] initWithString:@"BALANCE  $0.00"];
 	[balance addAttributes:regularAttributes range:NSMakeRange(0, @"BALANCE".length)];
 	[balance addAttributes:boldAttributes range:NSMakeRange(@"BALANCE".length, balance.length - @"BALANCE".length)];
 

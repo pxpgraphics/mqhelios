@@ -39,7 +39,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if ([defaults valueForKey:@"email"] && [defaults valueForKey:@"password"]) {
+		NSDictionary *userInfo = @{ @"email": [defaults valueForKey:@"email"],
+									@"password": [defaults valueForKey:@"password"] };
+		__typeof__(self) __weak weakSelf = self;
+		[[UserManager sharedManager] loginUserWithUserInfo:userInfo successBlock:^{
+			[UIView animateWithDuration:0.6 animations:^{
+				[self.view viewWithTag:10000].alpha = 0.0f;
+				weakSelf.profileView.hidden = NO;
+			}];
+		} failureBlock:^(NSError *error) {
+			[UIView animateWithDuration:0.6 animations:^{
+				[self.view viewWithTag:10000].alpha = 0.0f;
+				weakSelf.profileView.hidden = YES;
+			}];
+		}];
+	} else {
+		[UIView animateWithDuration:0.6 animations:^{
+			[self.view viewWithTag:10000].alpha = 0.0f;
+			self.profileView.hidden = YES;
+		}];
+	}
+
 	[self setNeedsStatusBarAppearanceUpdate];
+
+	__typeof__(self) __weak weakSelf = self;
+	[[NSNotificationCenter defaultCenter] addObserverForName:kUserManagerUserDidFinishLoadingNotification
+													  object:nil
+													   queue:[NSOperationQueue mainQueue]
+												  usingBlock:^(NSNotification *note) {
+													  MQPUser *user = [UserManager sharedManager].user;
+													  weakSelf.nameLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
+												  }];
 }
 
 - (void)viewWillLayoutSubviews
@@ -49,7 +81,7 @@
 	if ([UserManager sharedManager].user) {
 		self.profileView.hidden = NO;
 	} else {
-//		self.profileView.hidden = YES;
+		self.profileView.hidden = YES;
 	}
 }
 

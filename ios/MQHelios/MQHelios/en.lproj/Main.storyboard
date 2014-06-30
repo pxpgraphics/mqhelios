@@ -184,6 +184,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.098039215690000001" green="0.098039215690000001" blue="0.098039215690000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
+                            <view tag="10000" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T9w-wH-xrj">
+                                <rect key="frame" x="0.0" y="88" width="320" height="480"/>
+                                <color key="backgroundColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.098039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.098039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -191,9 +195,11 @@
                     <connections>
                         <outlet property="aboutLabel" destination="Z0l-6F-eMc" id="KZs-Av-ZWq"/>
                         <outlet property="giftButton" destination="uky-WY-13h" id="xL3-Lh-Bbw"/>
+                        <outlet property="nameLabel" destination="rnl-lF-68e" id="mbF-b4-6zk"/>
                         <outlet property="notificationLabel" destination="Dmo-wd-mbP" id="1bT-C9-t82"/>
                         <outlet property="notificationsButton" destination="cZe-Ze-hmP" id="qkR-RY-Mer"/>
                         <outlet property="payButton" destination="sgR-jh-v9b" id="mRs-FH-RQG"/>
+                        <outlet property="profileImage" destination="gnj-OJ-NJa" id="CRs-Fv-CJf"/>
                         <outlet property="profileView" destination="dz5-KW-gkE" id="X3a-bO-7Y7"/>
                         <outlet property="settingsButton" destination="AqO-xx-7YX" id="aSF-3L-0r8"/>
                         <outlet property="signInButton" destination="btR-Sk-aEB" id="6b6-fv-yT0"/>
@@ -292,13 +298,13 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Iwl-bW-hHY" id="LcM-az-28k">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <datePicker tag="100" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epz-Ms-kBA">
+                                        <datePicker tag="100" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="epz-Ms-kBA">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="162"/>
-                                            <date key="date" timeIntervalSinceReferenceDate="425422991.36782098">
-                                                <!--<__NSDate Class=2014-06-25 21:03:11 +0000 timeInterval=425422991.367821 ISO8601=2014-06-25T14:03:11.368-0700>-->
+                                            <date key="date" timeIntervalSinceReferenceDate="430693391.36782098">
+                                                <!--<__NSDate Class=2014-08-25 21:03:11 +0000 timeInterval=430693391.367821 ISO8601=2014-08-25T14:03:11.368-0700>-->
                                             </date>
-                                            <date key="minimumDate" timeIntervalSinceReferenceDate="-174243600">
-                                                <!--<__NSTaggedDate Class=1995-06-25 07:00:00 +0000 timeInterval=-174243600 ISO8601=1995-06-25T00:00:00.000-0700>-->
+                                            <date key="maximumDate" timeIntervalSinceReferenceDate="-173811600">
+                                                <!--<__NSTaggedDate Class=1995-06-30 07:00:00 +0000 timeInterval=-173811600 ISO8601=1995-06-30T00:00:00.000-0700>-->
                                             </date>
                                             <locale key="locale" localeIdentifier="en_US"/>
                                         </datePicker>
@@ -472,8 +478,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="signInUser:" destination="u0b-13-bVc" eventType="touchUpInside" id="8Kn-yx-cV0"/>
-                                            <action selector="signUpUser:" destination="u0b-13-bVc" eventType="touchUpInside" id="bhV-qP-Tvd"/>
+                                            <action selector="signInUser:" destination="u0b-13-bVc" eventType="touchUpInside" id="eUR-U1-iJq"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Forgot Password?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Hl-F6-kTs">

@@ -8,6 +8,7 @@
 
 #import "SignUpViewController.h"
 #import <AFNetworking/AFHTTPRequestOperationManager.h>
+#import "UserManager.h"
 
 static NSString *googleMapsResultsKey = @"results";
 static NSString *googleMapsAddressComponentsKey = @"address_components";
@@ -156,13 +157,17 @@ static NSString *googleMapsTypesKey = @"types";
 				birthdayCell = [tableView dequeueReusableCellWithIdentifier:@"birthdayCell" forIndexPath:indexPath];
 				// Birthday.
 				birthdayCell.textLabel.font = [UIFont fontWithName:@"AvenirNext-Regular" size:14.0f];
-				birthdayCell.textLabel.text = @"birthday";
+				NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+				[dateFormatter setDateFormat:@"yyyy-MM-dd"];
+				NSDate *date = [dateFormatter dateFromString:self.dataSource[@"birthday"]];
+				[dateFormatter setDateStyle:NSDateFormatterLongStyle];
+				birthdayCell.textLabel.text = [dateFormatter stringFromDate:date] ?: @"birthday";
 				cell = birthdayCell;
 			} else {
 				pickerCell = [tableView dequeueReusableCellWithIdentifier:@"pickerCell" forIndexPath:indexPath];
 				datePicker = (UIDatePicker *)[pickerCell viewWithTag:100];
 				// Date picker.
-
+				[datePicker addTarget:self action:@selector(saveBirthday:) forControlEvents:UIControlEventValueChanged];
 				cell = pickerCell;
 			}
 			break;
@@ -285,6 +290,26 @@ static NSString *googleMapsTypesKey = @"types";
 	}
 }
 
+- (void)saveBirthday:(id)sender
+{
+	if (![sender isKindOfClass:[UIDatePicker class]]) {
+		return;
+	}
+	UIDatePicker *datePicker = (UIDatePicker *)sender;
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"yyyy-MM-dd"];
+	[self.dataSource setValue:[dateFormatter stringFromDate:datePicker.date] forKey:@"birthday"];
+	if ([datePicker.superview.superview isKindOfClass:[UITableViewCell class]]) {
+		UITableViewCell *cell = (UITableViewCell *)datePicker.superview.superview;
+		NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+		indexPath = [NSIndexPath indexPathForRow:indexPath.row - 1 inSection:indexPath.section];
+		cell = [self.tableView cellForRowAtIndexPath:indexPath];
+		[dateFormatter setDateStyle:NSDateFormatterLongStyle];
+		[dateFormatter setDateFormat:nil];
+		cell.textLabel.text = [dateFormatter stringFromDate:datePicker.date];
+	}
+}
+
 - (IBAction)signUpUser:(id)sender
 {
 	[self.view endEditing:YES];
@@ -299,21 +324,40 @@ static NSString *googleMapsTypesKey = @"types";
 		[weakSelf.dataSource setValue:response[1][@"short_name"] forKey:@"city"];
 		[weakSelf.dataSource setValue:response[3][@"short_name"] forKey:@"state"];
 
-		NSDictionary *userInfo = @{ @"firstName": weakSelf.dataSource[@"firstName"] ?: [NSNull null],
-									@"lastName": weakSelf.dataSource[@"lastName"] ?: [NSNull null],
-									@"gender": weakSelf.dataSource[@"gender"] ?: [NSNull null],
-									@"email": weakSelf.dataSource[@"email"] ?: [NSNull null],
-									@"phone": weakSelf.dataSource[@"phone"] ?: [NSNull null],
-									@"mobile_phone": weakSelf.dataSource[@"mobile_phone"] ?: [NSNull null],
-									@"addressLineOne": weakSelf.dataSource[@"addressLineOne"] ?: [NSNull null],
-									@"city": weakSelf.dataSource[@"city"] ?: [NSNull null],
-									@"state": weakSelf.dataSource[@"state"] ?: [NSNull null],
-									@"zip": weakSelf.dataSource[@"zip"] ?: [NSNull null] };
+		NSMutableDictionary *userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+										 weakSelf.dataSource[@"firstName"] ?: [NSNull null], @"firstName",
+										 weakSelf.dataSource[@"lastName"] ?: [NSNull null], @"lastName",
+										 weakSelf.dataSource[@"gender"] ?: [NSNull null], @"gender",
+										 weakSelf.dataSource[@"birthday"] ?: [NSNull null], @"birthday",
+										 weakSelf.dataSource[@"email"] ?: [NSNull null], @"email",
+										 weakSelf.dataSource[@"password"] ?: [NSNull null], @"password",
+										 weakSelf.dataSource[@"phone"] ?: [NSNull null], @"phone",
+										 weakSelf.dataSource[@"mobile_phone"] ?: [NSNull null], @"mobile_phone",
+										 weakSelf.dataSource[@"addressLineOne"] ?: [NSNull null], @"addressLineOne",
+										 weakSelf.dataSource[@"city"] ?: [NSNull null], @"city",
+										 weakSelf.dataSource[@"state"] ?: [NSNull null], @"state",
+										 weakSelf.dataSource[@"zip"] ?: [NSNull null], @"zip",
+										 nil];
 
-		[[UserManager sharedManager] registerUserWithUserInfo:userInfo successBlock:^{
-			NSLog(@"Registration complete!");
+		NSArray *keys = [[userInfo copy] allKeysForObject:[NSNull null]];
+		for (id key in keys) {
+			[userInfo removeObjectForKey:key];
+		}
+
+		[[UserManager sharedManager] registerUserWithUserInfo:[userInfo copy] successBlock:^{
+			MQPUser *user = [UserManager sharedManager].user;
+			NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+			[defaults setObject:user.authenticationToken forKey:@"authenticationToken"];
+			[defaults setObject:user.email forKey:@"email"];
+			[defaults setObject:weakSelf.dataSource[@"password"] forKey:@"password"];
+			[defaults synchronize];
+			[weakSelf.navigationController dismissViewControllerAnimated:YES completion:nil];
 		} failureBlock:^(NSError *error) {
-			NSLog(@"Registration failed with error: %@", error.localizedDescription);
+			[[[UIAlertView alloc] initWithTitle:@"Log In Failed"
+										message:error.localizedDescription
+									   delegate:nil
+							  cancelButtonTitle:@"OK"
+							  otherButtonTitles:nil] show];
 		}];
 	} failureBlock:^(NSError *error) {
 		return;
