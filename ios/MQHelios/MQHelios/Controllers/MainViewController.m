@@ -407,11 +407,10 @@
 		// GiftView.
 		[self dismissPopoverView:self.payView forSender:self.payButton];
 		[self dismissPopoverView:self.storesView forSender:self.storesButton];
-	} else {
+	} else if (!popoverView && [self.previousPopoverView isEqual:self.payView]) {
 		// All views.
-		[self dismissPopoverView:self.payView forSender:self.payButton];
-		[self dismissPopoverView:self.storesView forSender:self.storesButton];
-		[self dismissPopoverView:self.giftView forSender:self.giftButton];
+		if (self.storesView) [self dismissPopoverView:self.storesView forSender:self.storesButton];
+		if (self.giftView) [self dismissPopoverView:self.giftView forSender:self.giftButton];
 	}
 }
 

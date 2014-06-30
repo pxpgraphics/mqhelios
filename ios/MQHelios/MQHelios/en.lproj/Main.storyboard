@@ -557,7 +557,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Barcode" width="562" height="324"/>
+        <image name="Barcode" width="556" height="318"/>
         <image name="Logo" width="200" height="200"/>
         <image name="Sign In" width="640" height="1136"/>
     </resources>

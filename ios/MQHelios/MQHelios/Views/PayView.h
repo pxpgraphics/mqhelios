@@ -16,6 +16,7 @@
 @property (nonatomic, readwrite) CGFloat padding;
 @property (nonatomic, readwrite) CGFloat buttonHeight;
 @property (nonatomic, readwrite) CGFloat cardHeight;
+@property (nonatomic, readwrite) CGFloat cardWidth;
 
 // Logged out.
 @property (nonatomic, readonly, strong) UIButton *signInButton;
