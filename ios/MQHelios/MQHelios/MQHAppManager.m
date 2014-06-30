@@ -32,6 +32,7 @@ NSString * const VLNRDateFormatterDateToStringKey = @"VLNRDateFormatterDateToStr
         _gpaFundsPOSTURLString = @"https://staging.marqeta.com/api/mqhelios/marqeta_cards";
         _purchaseOrdersPOSTURLString = @"https://staging.marqeta.com/api/mqhelios/purchase_orders";
         _passCreatePOSTURLString = @"https://staging.marqeta.com/api/mqhelios/passes";
+        _passUpdateGETURLString = @"https://staging.marqeta.com/api/mqhelios/get_updated_pass/";
     }
     return self;
 }
