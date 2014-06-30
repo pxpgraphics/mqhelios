@@ -13,7 +13,7 @@
 
 #define BLANK_VIEW_TAG 10000
 
-@interface MainViewController () <MKMapViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface MainViewController () <MKMapViewDelegate,UIAlertViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong, readwrite) GiftView * giftView;
 @property (nonatomic, strong, readwrite) PayView * payView;
@@ -203,13 +203,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	if (!self.dealNavController) {
-		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-		self.dealNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"DealNavControllerIdentifier"];
-	}
+//	if (!self.dealNavController) {
+//		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//		self.dealNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"DealNavControllerIdentifier"];
+//	}
+//
+//	[self.navigationController presentViewController:self.dealNavController animated:YES completion:nil];
 
-	[self.navigationController presentViewController:self.dealNavController animated:YES completion:nil];
+	[[[UIAlertView alloc] initWithTitle:@"Confirm Purchase"
+								message:@"Your primary payment card will be charged for $15.00 for SUBWAY. Do you want to continue?"
+							   delegate:self
+					  cancelButtonTitle:@"Cancel"
+					  otherButtonTitles:@"Purchase", nil] show];
+
 	[tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - Alert delegate
+- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+	if (buttonIndex == 1) {
+		[self presentPopoverView:self.payView forSender:self.payButton];
+	}
 }
 
 #pragma mark - Navigation
