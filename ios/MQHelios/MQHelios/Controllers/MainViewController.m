@@ -228,6 +228,10 @@
 		[self.payView.payButton addTarget:self
 								   action:@selector(presentPayViewController:)
 						 forControlEvents:UIControlEventTouchUpInside];
+
+		[self.payView.manageButton addTarget:self
+								   action:@selector(presentCardViewController:)
+						 forControlEvents:UIControlEventTouchUpInside];
 	}
 	[self presentPopoverView:self.payView forSender:sender];
 }
@@ -272,6 +276,16 @@
 			self.payNavController.view.alpha = 1.0f;
 		}];
 	}];
+}
+
+- (void)presentCardViewController:(id)sender
+{
+	if (!self.cardNavController) {
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		self.cardNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"CardNavControllerIdentifier"];
+	}
+
+	[self.navigationController presentViewController:self.cardNavController animated:YES completion:nil];
 }
 
 - (IBAction)pushToSettingsViewController:(id)sender
