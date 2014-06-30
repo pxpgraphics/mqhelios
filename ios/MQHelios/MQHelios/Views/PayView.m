@@ -7,6 +7,7 @@
 //
 
 #import "PayView.h"
+#import <QuartzCore/QuartzCore.h>
 #import "ZxingObjc.h"
 
 @interface PayView ()
@@ -21,6 +22,7 @@
 // Logged in.
 @property (nonatomic, readwrite, strong) UIScrollView *scrollView;
 @property (nonatomic, readwrite, strong) UIPageControl *pageControl;
+@property (nonatomic, readwrite, strong) UIImageView *cardBarcodeView;
 @property (nonatomic, readwrite, strong) UIImageView *cardBackView;
 @property (nonatomic, readwrite, strong) UIImageView *cardFrontView;
 @property (nonatomic, readwrite, strong) UIButton *payButton;
@@ -42,14 +44,10 @@
 		_padding = 5.0f;
 		_buttonHeight = 50.0f;
 		_cardHeight = 162.0f;
+		_cardWidth = 260.0f;
 
-		[UserManager sharedManager].user = [MQPUser new];
-
-		if ([UserManager sharedManager].user) {
-			[self addViewsForLoggedInUser];
-		} else {
-			[self addViewsForLoggedOutUser];
-		}
+		[self addViewsForLoggedInUser];
+		[self addViewsForLoggedOutUser];
 	}
 	return self;
 }
@@ -140,25 +138,33 @@
 
 	_cardBackView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"CardBack"]];
 	_cardBackView.contentMode = UIViewContentModeScaleAspectFit;
-    _cardBackView.backgroundColor = [UIColor grayColor];
+	_cardBackView.layer.cornerRadius = 12.0f;
+	_cardBackView.layer.masksToBounds = YES;
 	_cardBackView.tag = LOGGED_IN_TAG;
+	[_scrollView addSubview:_cardBackView];
+
+	_cardBarcodeView = [[UIImageView alloc] init];
+	_cardBarcodeView.contentMode = UIViewContentModeScaleAspectFit;
+	_cardBarcodeView.layer.cornerRadius = 12.0f;
+	_cardBarcodeView.layer.masksToBounds = YES;
+	_cardBarcodeView.tag = LOGGED_IN_TAG;
     
-    NSError *error = nil;
-    ZXMultiFormatWriter *writer = [ZXMultiFormatWriter writer];
-    ZXBitMatrix* result = [writer encode:@"6051864458403629"
-                                  format:kBarcodeFormatPDF417
-                                   width:200
-                                  height:200
-                                   error:&error];
-    if (result) {
-        CGImageRef image = [[ZXImage imageWithMatrix:result] cgimage];
-        _cardBackView.image = [UIImage imageWithCGImage:image];
-        // This CGImageRef image can be placed in a UIImage, NSImage, or written to a file.
+	NSError *error = nil;
+	ZXMultiFormatWriter *writer = [ZXMultiFormatWriter writer];
+	ZXBitMatrix *result = [writer encode:@"6051864458403629"
+								  format:kBarcodeFormatPDF417
+								   width:_cardWidth
+								  height:_cardHeight
+								   hints:[ZXEncodeHints hints]
+								   error:&error];
+	if (result) {
+		UIImage *image = [UIImage imageWithCGImage:[[ZXImage imageWithMatrix:result] cgimage]];
+		_cardBarcodeView.image = image;
     } else {
-        NSString *errorMessage = [error localizedDescription];
+		NSLog(@"Error: %@", error.localizedDescription);
     }
     
-	[_scrollView addSubview:_cardBackView];
+	[_scrollView addSubview:_cardBarcodeView];
     
     _cardBackLabel = [[UILabel alloc] init];
     _cardBackLabel.backgroundColor = [UIColor clearColor];
@@ -232,6 +238,8 @@
 
 	CGFloat cardOffset = _scrollView.frame.size.width + (_padding * 4.0f);
 	_cardBackView.frame = CGRectOffset(_cardFrontView.bounds, cardOffset, 0.0f);
+
+	_cardBarcodeView.frame = _cardBackView.frame;
     
     _cardBackLabel.frame = CGRectOffset(_cardFrontView.bounds, cardOffset, 40.0f);
 

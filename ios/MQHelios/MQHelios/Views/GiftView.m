@@ -86,6 +86,14 @@
 {
 	[super layoutSubviews];
 
+	if ([UserManager sharedManager].user) {
+		_signUpButton.hidden = YES;
+		_signInButton.hidden = YES;
+	} else {
+		_signUpButton.hidden = NO;
+		_signInButton.hidden = NO;
+	}
+
 	CGRect bounds = self.bounds;
 
 	_imageView.frame = self.layer.mask.bounds;

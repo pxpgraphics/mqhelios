@@ -17,6 +17,7 @@
 		AD4CAD04195BA78A00E0AC85 /* UILabel+CustomLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4CAD03195BA78A00E0AC85 /* UILabel+CustomLabel.m */; };
 		ADA5493C195A23C800ECD0F5 /* UserManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA5493B195A23C800ECD0F5 /* UserManager.m */; };
 		ADA5493E195A23F400ECD0F5 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADA5493D195A23F400ECD0F5 /* MapKit.framework */; };
+		ADA73D361961DC0A0056FB35 /* CardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA73D351961DC0A0056FB35 /* CardViewController.m */; };
 		ADBB80F1195B4CFE00B436C0 /* LocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB80F0195B4CFE00B436C0 /* LocationManager.m */; };
 		ADBB80F4195B5EE300B436C0 /* SignUpViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB80F3195B5EE300B436C0 /* SignUpViewController.m */; };
 		ADBB80F7195B5EEF00B436C0 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADBB80F6195B5EEF00B436C0 /* SignInViewController.m */; };
@@ -63,6 +64,8 @@
 		ADA5493A195A23C800ECD0F5 /* UserManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UserManager.h; path = Models/UserManager.h; sourceTree = "<group>"; };
 		ADA5493B195A23C800ECD0F5 /* UserManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UserManager.m; path = Models/UserManager.m; sourceTree = "<group>"; };
 		ADA5493D195A23F400ECD0F5 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		ADA73D341961DC0A0056FB35 /* CardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CardViewController.h; path = Controllers/CardViewController.h; sourceTree = "<group>"; };
+		ADA73D351961DC0A0056FB35 /* CardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CardViewController.m; path = Controllers/CardViewController.m; sourceTree = "<group>"; };
 		ADBB80EF195B4CFE00B436C0 /* LocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationManager.h; path = Models/LocationManager.h; sourceTree = "<group>"; };
 		ADBB80F0195B4CFE00B436C0 /* LocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationManager.m; path = Models/LocationManager.m; sourceTree = "<group>"; };
 		ADBB80F2195B5EE300B436C0 /* SignUpViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignUpViewController.h; path = Controllers/SignUpViewController.h; sourceTree = "<group>"; };
@@ -131,6 +134,8 @@
 		ADA54934195A232E00ECD0F5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				ADA73D341961DC0A0056FB35 /* CardViewController.h */,
+				ADA73D351961DC0A0056FB35 /* CardViewController.m */,
 				AD16AC34195A555A00FAD7F0 /* MainViewController.h */,
 				AD16AC35195A555A00FAD7F0 /* MainViewController.m */,
 				ADC00C5F195DF1B7002D921E /* PayViewController.h */,
@@ -394,6 +399,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA73D361961DC0A0056FB35 /* CardViewController.m in Sources */,
 				AD4CAD01195BA75A00E0AC85 /* MQMerchantCell.m in Sources */,
 				ADFBC5DB195A852900B6C126 /* NSObject+UIPopoverAdditions.m in Sources */,
 				ADFBC5E7195AA15800B6C126 /* PayView.m in Sources */,

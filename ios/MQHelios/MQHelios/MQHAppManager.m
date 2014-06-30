@@ -27,7 +27,7 @@ NSString * const VLNRDateFormatterDateToStringKey = @"VLNRDateFormatterDateToStr
     if (self) {
 		_userAuthGETURLString = @"https://staging.marqeta.com/api/v1/customer_auth_token";
         _userCreatePOSTURLString = @"https://staging.marqeta.com/api/mqhelios/customers";
-        _paymentProfilePOSTURLString = @"https://staging.marqeta.com/api/mqhelios/paryment_profiles";
+        _paymentProfilePOSTURLString = @"https://staging.marqeta.com/api/mqhelios/payment_profiles";
         _marqetaCardPOSTURLString = @"https://staging.marqeta.com/api/mqhelios/marqeta_cards";
         _gpaFundsPOSTURLString = @"https://staging.marqeta.com/api/mqhelios/marqeta_cards";
         _purchaseOrdersPOSTURLString = @"https://staging.marqeta.com/api/mqhelios/purchase_orders";

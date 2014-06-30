@@ -10,6 +10,8 @@
 #import "UserManager.h"
 #import "MQMerchantCell.h"
 
+#define BLANK_VIEW_TAG 10000
+
 @interface MainViewController () <MKMapViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong, readwrite) GiftView * giftView;
@@ -39,6 +41,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+	PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+	self.notificationLabel.text = [NSString stringWithFormat:@"%i", currentInstallation.badge];
+
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 	if ([defaults valueForKey:@"email"] && [defaults valueForKey:@"password"]) {
 		NSDictionary *userInfo = @{ @"email": [defaults valueForKey:@"email"],
@@ -46,18 +51,18 @@
 		__typeof__(self) __weak weakSelf = self;
 		[[UserManager sharedManager] loginUserWithUserInfo:userInfo successBlock:^{
 			[UIView animateWithDuration:0.6 animations:^{
-				[self.view viewWithTag:10000].alpha = 0.0f;
+				[self.view viewWithTag:BLANK_VIEW_TAG].alpha = 0.0f;
 				weakSelf.profileView.hidden = NO;
 			}];
 		} failureBlock:^(NSError *error) {
 			[UIView animateWithDuration:0.6 animations:^{
-				[self.view viewWithTag:10000].alpha = 0.0f;
+				[self.view viewWithTag:BLANK_VIEW_TAG].alpha = 0.0f;
 				weakSelf.profileView.hidden = YES;
 			}];
 		}];
 	} else {
 		[UIView animateWithDuration:0.6 animations:^{
-			[self.view viewWithTag:10000].alpha = 0.0f;
+			[self.view viewWithTag:BLANK_VIEW_TAG].alpha = 0.0f;
 			self.profileView.hidden = YES;
 		}];
 	}
@@ -72,6 +77,13 @@
 													  MQPUser *user = [UserManager sharedManager].user;
 													  weakSelf.nameLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
 												  }];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+
+	[self dismissViewsForPresentedPopoverView:nil];
 }
 
 - (void)viewWillLayoutSubviews
@@ -90,6 +102,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Status bar
@@ -211,6 +228,10 @@
 		[self.payView.payButton addTarget:self
 								   action:@selector(presentPayViewController:)
 						 forControlEvents:UIControlEventTouchUpInside];
+
+		[self.payView.manageButton addTarget:self
+								   action:@selector(presentCardViewController:)
+						 forControlEvents:UIControlEventTouchUpInside];
 	}
 	[self presentPopoverView:self.payView forSender:sender];
 }
@@ -255,6 +276,16 @@
 			self.payNavController.view.alpha = 1.0f;
 		}];
 	}];
+}
+
+- (void)presentCardViewController:(id)sender
+{
+	if (!self.cardNavController) {
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		self.cardNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"CardNavControllerIdentifier"];
+	}
+
+	[self.navigationController presentViewController:self.cardNavController animated:YES completion:nil];
 }
 
 - (IBAction)pushToSettingsViewController:(id)sender
@@ -340,6 +371,9 @@
 						 popoverView.alpha = 1.0f;
 						 popoverView.center = CGPointMake(popoverView.center.x, self.view.center.y + (offsetHeight / 2.0f));
 						 self.previousPopoverView = popoverView;
+						 [UIView animateWithDuration:0.6 animations:^{
+							 [self.view viewWithTag:BLANK_VIEW_TAG].alpha = 1.0f;
+						 }];
 					 } completion:^(BOOL finished) {
 						 [self addActionsForButtonsInPopoverView:popoverView];
 					 }];
@@ -387,6 +421,10 @@
 		// GiftView.
 		[self dismissPopoverView:self.payView forSender:self.payButton];
 		[self dismissPopoverView:self.storesView forSender:self.storesButton];
+	} else if (!popoverView && [self.previousPopoverView isEqual:self.payView]) {
+		// All views.
+		if (self.storesView) [self dismissPopoverView:self.storesView forSender:self.storesButton];
+		if (self.giftView) [self dismissPopoverView:self.giftView forSender:self.giftButton];
 	}
 }
 
@@ -440,7 +478,7 @@
 						options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
 					 animations:^{
 						 popoverView.frame = offScreenFrame;
-
+						 [self.view viewWithTag:BLANK_VIEW_TAG].alpha = 0.0f;
 					 } completion:^(BOOL finished) {
 						 [popoverView removeFromSuperview];
 						 [self deallocPopoverView:popoverView];
@@ -466,6 +504,15 @@
 					 animations:^{
 						 self.payView.scrollView.contentOffset = CGPointMake(xOffset, self.payView.scrollView.contentOffset.y);
 					 } completion:nil];
+}
+
+- (IBAction)logOut:(id)sender
+{
+	NSString *domainName = [[NSBundle mainBundle] bundleIdentifier];
+	[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:domainName];
+	[UserManager sharedManager].user = nil;
+	[self presentPayPopoverController:nil];
+	[self dismissPopoverView:self.payView forSender:self.payButton];
 }
 
 @end
