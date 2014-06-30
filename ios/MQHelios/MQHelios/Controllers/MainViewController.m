@@ -224,6 +224,18 @@
 {
 	if (buttonIndex == 1) {
 		[self presentPopoverView:self.payView forSender:self.payButton];
+
+		NSDictionary *boldAttributes = @{ NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-DemiBold" size:18.0],
+										  NSForegroundColorAttributeName: [UIColor colorWithRed:0.076 green:0.194 blue:0.456 alpha:1.000].lighterColor };
+		NSDictionary *regularAttributes = @{ NSFontAttributeName: [UIFont fontWithName:@"AvenirNext-Regular" size:18.0],
+											 NSForegroundColorAttributeName: [UIColor colorWithRed:0.076 green:0.194 blue:0.456 alpha:1.000]};
+
+		NSMutableAttributedString *balance = [[NSMutableAttributedString alloc] initWithString:@"BALANCE  $15.00"];
+		[balance addAttributes:regularAttributes range:NSMakeRange(0, @"BALANCE".length)];
+		[balance addAttributes:boldAttributes range:NSMakeRange(@"BALANCE".length, balance.length - @"BALANCE".length)];
+		self.payView.balanceLabel.attributedText = balance;
+		[self.payView setNeedsLayout];
+		[self.payView layoutIfNeeded];
 	}
 }
 
