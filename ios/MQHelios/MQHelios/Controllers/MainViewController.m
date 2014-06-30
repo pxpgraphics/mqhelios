@@ -10,6 +10,8 @@
 #import "UserManager.h"
 #import "MQMerchantCell.h"
 
+#define BLANK_VIEW_TAG 10000
+
 @interface MainViewController () <MKMapViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong, readwrite) GiftView * giftView;
@@ -40,7 +42,60 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 
+	PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+	self.notificationLabel.text = [NSString stringWithFormat:@"%i", currentInstallation.badge];
+
+	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+	if ([defaults valueForKey:@"email"] && [defaults valueForKey:@"password"]) {
+		NSDictionary *userInfo = @{ @"email": [defaults valueForKey:@"email"],
+									@"password": [defaults valueForKey:@"password"] };
+		__typeof__(self) __weak weakSelf = self;
+		[[UserManager sharedManager] loginUserWithUserInfo:userInfo successBlock:^{
+			[UIView animateWithDuration:0.6 animations:^{
+				[self.view viewWithTag:BLANK_VIEW_TAG].alpha = 0.0f;
+				weakSelf.profileView.hidden = NO;
+			}];
+		} failureBlock:^(NSError *error) {
+			[UIView animateWithDuration:0.6 animations:^{
+				[self.view viewWithTag:BLANK_VIEW_TAG].alpha = 0.0f;
+				weakSelf.profileView.hidden = YES;
+			}];
+		}];
+	} else {
+		[UIView animateWithDuration:0.6 animations:^{
+			[self.view viewWithTag:BLANK_VIEW_TAG].alpha = 0.0f;
+			self.profileView.hidden = YES;
+		}];
+	}
+
 	[self setNeedsStatusBarAppearanceUpdate];
+
+	__typeof__(self) __weak weakSelf = self;
+	[[NSNotificationCenter defaultCenter] addObserverForName:kUserManagerUserDidFinishLoadingNotification
+													  object:nil
+													   queue:[NSOperationQueue mainQueue]
+												  usingBlock:^(NSNotification *note) {
+													  MQPUser *user = [UserManager sharedManager].user;
+													  weakSelf.nameLabel.text = [NSString stringWithFormat:@"%@ %@", user.firstName, user.lastName];
+												  }];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+
+	[self dismissViewsForPresentedPopoverView:nil];
+}
+
+- (void)viewWillLayoutSubviews
+{
+	[super viewWillLayoutSubviews];
+
+	if ([UserManager sharedManager].user) {
+		self.profileView.hidden = NO;
+	} else {
+		self.profileView.hidden = YES;
+	}
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,6 +103,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Status bar
@@ -59,33 +119,47 @@
 #pragma mark - Scroll view delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-	if (![scrollView isEqual:self.storesView.tableView] || storesIsDismissing) {
+	if (storesIsDismissing) {
 		return;
 	}
 
-	CGFloat minYPosition = -scrollView.contentOffset.y;
-	CGFloat offsetHeight = 100.0f;
-	if (-minYPosition > 200) {
-		// Make storesView fullscreen.
-		
-	} else if (minYPosition > 0) {
-		// Retain mask and rounded edges on top.
-		self.storesView.center = CGPointMake(self.storesView.center.x, self.view.center.y + minYPosition + (offsetHeight / 2.0f));
-		[self addMaskLayerToPopoverView:self.storesView];
-	} else {
-		// Reset to origin frames.
-		self.storesView.center = CGPointMake(self.storesView.center.x, self.view.center.y + (offsetHeight / 2.0f));
-		[self addMaskLayerToPopoverView:self.storesView];
+	if ([scrollView isEqual:self.storesView.tableView]) {
+		// StoresView
+		CGFloat minYPosition = -scrollView.contentOffset.y;
+		CGFloat offsetHeight = 100.0f;
+		if (-minYPosition > 200) {
+			// Make storesView fullscreen.
+
+		} else if (minYPosition > 0) {
+			// Retain mask and rounded edges on top.
+			self.storesView.center = CGPointMake(self.storesView.center.x, self.view.center.y + minYPosition + (offsetHeight / 2.0f));
+			[self addMaskLayerToPopoverView:self.storesView];
+		} else {
+			// Reset to origin frames.
+			self.storesView.center = CGPointMake(self.storesView.center.x, self.view.center.y + (offsetHeight / 2.0f));
+			[self addMaskLayerToPopoverView:self.storesView];
+		}
+	}
+
+	if ([scrollView isEqual:self.payView.scrollView]) {
+		self.payView.pageControl.currentPage = scrollView.frame.size.width /scrollView.contentOffset.x;
 	}
 }
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
-	CGFloat minYPosition = -scrollView.contentOffset.y;
-	CGFloat dragHeight = 60.0f;
-	if (minYPosition > dragHeight) {
-		[self dismissPopoverView:self.storesView forSender:self.storesButton];
-		storesIsDismissing = YES;
+	if (storesIsDismissing) {
+		return;
+	}
+
+	if ([scrollView isEqual:self.storesView.tableView]) {
+		// StoresView
+		CGFloat minYPosition = -scrollView.contentOffset.y;
+		CGFloat dragHeight = 60.0f;
+		if (minYPosition > dragHeight) {
+			[self dismissPopoverView:self.storesView forSender:self.storesButton];
+			storesIsDismissing = YES;
+		}
 	}
 }
 
@@ -147,6 +221,18 @@
 {
 	if (!self.payView) {
 		self.payView = [[PayView alloc] init];
+		self.payView.scrollView.delegate = self;
+		[self.payView.pageControl addTarget:self
+									 action:@selector(cardViewDidChange)
+						   forControlEvents:UIControlEventValueChanged];
+
+		[self.payView.payButton addTarget:self
+								   action:@selector(presentPayViewController:)
+						 forControlEvents:UIControlEventTouchUpInside];
+
+		[self.payView.manageButton addTarget:self
+								   action:@selector(presentCardViewController:)
+						 forControlEvents:UIControlEventTouchUpInside];
 	}
 	[self presentPopoverView:self.payView forSender:sender];
 }
@@ -171,6 +257,36 @@
         self.giftView = [[GiftView alloc] init];
     }
     [self presentPopoverView:self.giftView forSender:sender];
+}
+
+- (void)presentPayViewController:(id)sender
+{
+	if (!self.payNavController) {
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		self.payNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"PayNavControllerIdentifier"];
+	}
+
+	if (self.payView.pageControl.currentPage == 0) {
+		self.payView.pageControl.currentPage = 1;
+		[self cardViewDidChange];
+	}
+
+	[self.navigationController presentViewController:self.payNavController animated:NO completion:^{
+		self.payNavController.view.alpha = 0.0f;
+		[UIView animateWithDuration:0.6 animations:^{
+			self.payNavController.view.alpha = 1.0f;
+		}];
+	}];
+}
+
+- (void)presentCardViewController:(id)sender
+{
+	if (!self.cardNavController) {
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		self.cardNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"CardNavControllerIdentifier"];
+	}
+
+	[self.navigationController presentViewController:self.cardNavController animated:YES completion:nil];
 }
 
 - (IBAction)pushToSettingsViewController:(id)sender
@@ -286,6 +402,9 @@
 						 popoverView.alpha = 1.0f;
 						 popoverView.center = CGPointMake(popoverView.center.x, self.view.center.y + (offsetHeight / 2.0f));
 						 self.previousPopoverView = popoverView;
+						 [UIView animateWithDuration:0.6 animations:^{
+							 [self.view viewWithTag:BLANK_VIEW_TAG].alpha = 1.0f;
+						 }];
 					 } completion:^(BOOL finished) {
 						 [self addActionsForButtonsInPopoverView:popoverView];
 					 }];
@@ -333,6 +452,10 @@
 		// GiftView.
 		[self dismissPopoverView:self.payView forSender:self.payButton];
 		[self dismissPopoverView:self.storesView forSender:self.storesButton];
+	} else if (!popoverView && [self.previousPopoverView isEqual:self.payView]) {
+		// All views.
+		if (self.storesView) [self dismissPopoverView:self.storesView forSender:self.storesButton];
+		if (self.giftView) [self dismissPopoverView:self.giftView forSender:self.giftButton];
 	}
 }
 
@@ -386,6 +509,7 @@
 						options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
 					 animations:^{
 						 popoverView.frame = offScreenFrame;
+						 [self.view viewWithTag:BLANK_VIEW_TAG].alpha = 0.0f;
 					 } completion:^(BOOL finished) {
 						 [popoverView removeFromSuperview];
 						 [self deallocPopoverView:popoverView];
@@ -398,6 +522,28 @@
 		storesIsDismissing = NO;
 	}
 	popoverView = nil;
+}
+
+- (void)cardViewDidChange
+{
+	CGFloat xOffset = self.payView.scrollView.frame.size.width * self.payView.pageControl.currentPage;
+	[UIView animateWithDuration:0.6
+						  delay:0.0
+		 usingSpringWithDamping:0.5f
+		  initialSpringVelocity:1.2f
+						options:UIViewAnimationOptionAllowUserInteraction | UIViewAnimationOptionBeginFromCurrentState
+					 animations:^{
+						 self.payView.scrollView.contentOffset = CGPointMake(xOffset, self.payView.scrollView.contentOffset.y);
+					 } completion:nil];
+}
+
+- (IBAction)logOut:(id)sender
+{
+	NSString *domainName = [[NSBundle mainBundle] bundleIdentifier];
+	[[NSUserDefaults standardUserDefaults] removePersistentDomainForName:domainName];
+	[UserManager sharedManager].user = nil;
+	[self presentPayPopoverController:nil];
+	[self dismissPopoverView:self.payView forSender:self.payButton];
 }
 
 @end

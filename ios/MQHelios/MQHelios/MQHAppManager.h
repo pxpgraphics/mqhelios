@@ -11,6 +11,7 @@
 #import <Parse/Parse.h>
 #import "LocationManager.h"
 #import "MQColor.h"
+#import "UserManager.h"
 
 extern NSString * const kParseApplicationIDKey;
 extern NSString * const kParseClientKey;
@@ -21,6 +22,7 @@ extern NSString * const kParseMasterKey;
 
 @interface MQHAppManager : NSObject
 
+@property (nonatomic, strong) NSString *userAuthGETURLString;
 @property (nonatomic, strong) NSString *userCreatePOSTURLString;
 @property (nonatomic, strong) NSString *paymentProfilePOSTURLString;
 @property (nonatomic, strong) NSString *marqetaCardPOSTURLString;
@@ -30,5 +32,8 @@ extern NSString * const kParseMasterKey;
 @property (nonatomic, strong) NSString *passUpdateGETURLString;
 
 + (MQHAppManager *)sharedManager;
++ (NSDateFormatter *)dateToStringFormatterWithDateStyle:(NSDateFormatterStyle)dateStyle;
++ (NSDateFormatter *)stringToDateFormatter;
++ (NSDateFormatter *)stringToDateFormatterWithDateFormat:(NSString *)dateFormat;
 
 @end

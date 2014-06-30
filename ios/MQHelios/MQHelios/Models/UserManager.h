@@ -12,9 +12,16 @@
 typedef void (^MQHUserManagerSuccessBlock)();
 typedef void (^MQHUserManagerFailureBlock)(NSError *error);
 
+extern NSString * const kUserManagerUserDidFinishLoadingNotification;
+extern NSString * const kUserManagerUserDidFailLoadingNotification;
+
 @interface UserManager : NSObject
 
 @property (nonatomic, strong) MQPUser *user;
+
+- (void)loginUserWithUserInfo:(NSDictionary *)userInfo
+				 successBlock:(MQHUserManagerSuccessBlock)successBlock
+				 failureBlock:(MQHUserManagerFailureBlock)failureBlock;
 
 - (void)registerUserWithUserInfo:(NSDictionary *)userInfo
                     successBlock:(MQHUserManagerSuccessBlock)successBlock

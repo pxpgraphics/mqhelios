@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^GoogleMapsSuccessBlock)(NSArray *response);
+typedef void (^GoogleMapsFailureBlock)(NSError *error);
+
 @interface SignUpViewController : UITableViewController
 
 @property (nonatomic, weak, readwrite) IBOutlet UIBarButtonItem *cancelButton;
