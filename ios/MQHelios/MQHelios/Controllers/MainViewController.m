@@ -13,7 +13,7 @@
 
 #define BLANK_VIEW_TAG 10000
 
-@interface MainViewController () <MKMapViewDelegate,UIAlertViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface MainViewController () <MKMapViewDelegate, UIAlertViewDelegate, UIScrollViewDelegate, UITableViewDataSource, UITableViewDelegate, CardViewControllerProtocol>
 
 @property (nonatomic, strong, readwrite) GiftView * giftView;
 @property (nonatomic, strong, readwrite) PayView * payView;
@@ -317,17 +317,7 @@
 	}];
 }
 
-- (void)presentCardViewController:(id)sender
-{
-	if (!self.cardNavController) {
-		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-		self.cardNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"CardNavControllerIdentifier"];
-	}
-
-	[self.navigationController presentViewController:self.cardNavController animated:YES completion:nil];
-}
-
-- (IBAction)pushToSettingsViewController:(id)sender
+- (void)createPass
 {
     [[UserManager sharedManager] createPassWithSuccessBlock:^{
         
@@ -339,7 +329,7 @@
         NSData *passData = [NSData dataWithContentsOfFile:passFile];
         NSError* error = nil;
         self.userPass = [[PKPass alloc] initWithData:passData
-                                                 error:&error];
+                                               error:&error];
         
         PKPassLibrary *passLibrary = [[PKPassLibrary alloc] init];
         NSLog(@"passes = %@",[passLibrary passes]);
@@ -372,6 +362,23 @@
         
         
     }];
+}
+
+- (void)presentCardViewController:(id)sender
+{
+	if (!self.cardNavController) {
+		UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+		self.cardNavController = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"CardNavControllerIdentifier"];
+        CardViewController *cardVC = (CardViewController *)self.cardNavController.topViewController;
+        cardVC.delegate = self;
+	}
+
+	[self.navigationController presentViewController:self.cardNavController animated:YES completion:nil];
+}
+
+- (IBAction)pushToSettingsViewController:(id)sender
+{
+    [self createPass];
 }
 
 - (IBAction)pushToNotificationsViewController:(id)sender
