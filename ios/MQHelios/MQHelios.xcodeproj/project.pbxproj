@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		761080EF195A4EE2009BBDE3 /* MQPUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 761080EE195A4EE2009BBDE3 /* MQPUser.m */; };
+		7634089919615F410053EB3C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7634089819615F410053EB3C /* Images.xcassets */; };
 		AD0659DC195DF5CB00FFE03C /* DismissWithoutAnimationSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = AD0659DB195DF5CB00FFE03C /* DismissWithoutAnimationSegue.m */; };
 		AD16AC31195A536C00FAD7F0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD16AC33195A536C00FAD7F0 /* Main.storyboard */; };
 		AD16AC36195A555A00FAD7F0 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD16AC35195A555A00FAD7F0 /* MainViewController.m */; };
@@ -23,7 +24,6 @@
 		ADC00C61195DF1B7002D921E /* PayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC00C60195DF1B7002D921E /* PayViewController.m */; };
 		ADEB42DB1958D0960095AB50 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42DA1958D0960095AB50 /* main.m */; };
 		ADEB42DE1958D0960095AB50 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42DD1958D0960095AB50 /* AppDelegate.m */; };
-		ADEB42E01958D0960095AB50 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ADEB42DF1958D0960095AB50 /* Images.xcassets */; };
 		ADEB42EC1958D0960095AB50 /* MQHeliosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42EB1958D0960095AB50 /* MQHeliosTests.m */; };
 		ADEB42F71958D0E00095AB50 /* PassKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADEB42F61958D0E00095AB50 /* PassKit.framework */; };
 		ADEB42FB1958D1E70095AB50 /* MQHAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB42FA1958D1E70095AB50 /* MQHAppManager.m */; };
@@ -49,6 +49,7 @@
 		626538F3CA1E493B83A012D0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		761080ED195A4EE2009BBDE3 /* MQPUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MQPUser.h; sourceTree = "<group>"; };
 		761080EE195A4EE2009BBDE3 /* MQPUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MQPUser.m; sourceTree = "<group>"; };
+		7634089819615F410053EB3C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AD0659DA195DF5CB00FFE03C /* DismissWithoutAnimationSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DismissWithoutAnimationSegue.h; sourceTree = "<group>"; };
 		AD0659DB195DF5CB00FFE03C /* DismissWithoutAnimationSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DismissWithoutAnimationSegue.m; sourceTree = "<group>"; };
 		AD16AC32195A536C00FAD7F0 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -77,7 +78,6 @@
 		ADEB42DA1958D0960095AB50 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ADEB42DC1958D0960095AB50 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ADEB42DD1958D0960095AB50 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ADEB42DF1958D0960095AB50 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		ADEB42E51958D0960095AB50 /* MQHeliosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MQHeliosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADEB42EA1958D0960095AB50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADEB42EB1958D0960095AB50 /* MQHeliosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MQHeliosTests.m; sourceTree = "<group>"; };
@@ -214,7 +214,7 @@
 		ADEB42D81958D0960095AB50 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				ADEB42DF1958D0960095AB50 /* Images.xcassets */,
+				7634089819615F410053EB3C /* Images.xcassets */,
 				ADEB42D91958D0960095AB50 /* Info.plist */,
 				ADEB42DA1958D0960095AB50 /* main.m */,
 				ADEB42FE1958DD440095AB50 /* MQHelios-Prefix.pch */,
@@ -342,8 +342,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADEB42E01958D0960095AB50 /* Images.xcassets in Resources */,
 				AD16AC31195A536C00FAD7F0 /* Main.storyboard in Resources */,
+				7634089919615F410053EB3C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
